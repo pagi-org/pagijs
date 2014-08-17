@@ -1,0 +1,21 @@
+{
+  "name": "pagi",
+  "version": "0.1.0",
+  "description": "A library for pagi manipulation.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jbunting/pagijs.git"
+  },
+  "scripts": {
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-jshint": "^1.8.4",
+    "require-dir": "^0.1.0"
+  },
+  "dependencies": {
+    "sax": "^0.6.0"
+  }
+}
