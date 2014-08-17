@@ -1,4 +1,4 @@
 var gulp = require('gulp');
 
-gulp.task('build', ['jshint']);
+gulp.task('build', ['jshint', 'test']);
 
