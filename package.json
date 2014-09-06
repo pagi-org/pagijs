@@ -13,7 +13,8 @@
   },
   "main": "src/js/pagi.js",
   "scripts": {
-    "test": "gulp"
+    "test": "gulp",
+    "watch": "gulp watch"
   },
   "devDependencies": {
     "gulp": "^3.8.7",
