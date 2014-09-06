@@ -13,11 +13,13 @@
   },
   "main": "src/js/pagi.js",
   "scripts": {
-    "test": "gulp",
+    "build": "gulp",
+    "test": "gulp test",
     "watch": "gulp watch"
   },
   "devDependencies": {
     "gulp": "^3.8.7",
+    "gulp-browserify": "^0.5.0",
     "gulp-jshint": "^1.8.4",
     "gulp-mocha": "^1.0.0",
     "jshint-stylish": "^0.4.0",
