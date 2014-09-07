@@ -2,4 +2,6 @@ node_modules
 npm-debug.log
 *.swp
 build/
+.idea
+*.iml
 

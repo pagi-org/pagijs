@@ -3,8 +3,7 @@ var assert = require('assert');
 
 describe("test test-schema utility", function () {
   for (var i = 0; i < testSchema.fullList.length; i++) {
-    var def = function() {
-      var schema = testSchema.fullList[i];
+    var def = function(schema) {
       describe("test schema " + schema.simpleName, function() {
         it("should have an id", function () {
           var str = schema.simpleName;
@@ -31,7 +30,7 @@ describe("test test-schema utility", function () {
         });
       });
     };
-    def();
+    def(testSchema.fullList[i]);
   }
 });
 
