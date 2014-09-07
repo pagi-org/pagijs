@@ -4,7 +4,7 @@ var schemaTestRoot = 'build/test-suite/schema/';
 
 function TestSchema(id, simpleName) {
   var xmlTestRoot = schemaTestRoot + 'def/';
-  var flatTestRoot = schemaTestRoot + 'flag/';
+  var flatTestRoot = schemaTestRoot + 'flat/';
 
   this.id = id;
   this.simpleName = simpleName;
