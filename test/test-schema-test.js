@@ -23,10 +23,11 @@ describe("test test-schema utility", function () {
             assert(size > 0, "no content in xml representation");
           });
         });
-        it("should throw unsupported on get schema", function() {
-          assert.throws(function() {
-            schema.getParsed();
-          }, "Unsupported Operation");
+        it("should return a promise with a schema on getParsed", function(done) {
+          schema.getParsed().then(function(schema) {
+            assert(schema);
+            done();
+          }, done).catch(done);
         });
       });
     };
