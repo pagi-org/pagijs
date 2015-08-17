@@ -13,11 +13,14 @@
   },
   "main": "src/js/pagi.js",
   "scripts": {
-    "build": "gulp",
+    "clean": "gulp clean",
+    "cleanBuild": "gulp",
+    "build": "gulp build",
     "test": "gulp test",
     "watch": "gulp watch"
   },
   "devDependencies": {
+    "del": "^1.2.0",
     "gulp": "^3.8.7",
     "gulp-browserify": "^0.5.0",
     "gulp-download": "0.0.1",
@@ -27,9 +30,12 @@
     "gulp-rename": "^1.2.0",
     "gulp-untar2": "0.0.6",
     "jshint-stylish": "^0.4.0",
-    "require-dir": "^0.1.0"
+    "require-dir": "^0.1.0",
+    "run-sequence": "^1.1.2",
+    "sprintf-js": "^1.0.3"
   },
   "dependencies": {
+    "q": "^1.4.1",
     "sax": "^0.6.0"
   }
 }
