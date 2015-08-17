@@ -2,15 +2,15 @@ var fs = require('fs');
 
 var streamTestRoot = 'build/test-suite/stream/';
 
-function TestStream(name) {
-  var xmlTestRoot = streamTestRoot + 'xml/';
-  var xmlPrefixedTestRoot = streamTestRoot + 'xml-prefixed/';
-  var xmlFeaturesTestRoot = streamTestRoot + 'xml-with-features/';
-  var txtTestRoot = streamTestRoot + 'txt/';
-  var pbfTestRoot = streamTestRoot + 'pbf/';
-  var pbfFeaturesTestRoot = streamTestRoot + 'pbf-with-features/';
-  var eventsTestRoot = streamTestRoot + 'events/';
+var xmlTestRoot = streamTestRoot + 'xml/';
+var xmlPrefixedTestRoot = streamTestRoot + 'xml-prefixed/';
+var xmlFeaturesTestRoot = streamTestRoot + 'xml-with-features/';
+var txtTestRoot = streamTestRoot + 'txt/';
+var pbfTestRoot = streamTestRoot + 'pbf/';
+var pbfFeaturesTestRoot = streamTestRoot + 'pbf-with-features/';
+var eventsTestRoot = streamTestRoot + 'events/';
 
+function TestStream(name) {
   this.name = name;
 
   /**

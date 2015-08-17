@@ -5,4 +5,6 @@ module.exports = function() {
 };
 
 module.exports.schema = require('./schema');
+module.exports.xml = require('./stream/xml');
+module.exports.pbf = require('./stream/pbf');
 
