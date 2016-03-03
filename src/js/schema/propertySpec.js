@@ -1,8 +1,9 @@
 var util = require("../util.js");
 var constants = require("./constants.js");
 
-function PropertySpec(name, description, valueType, minArity, maxArity, restrictions) {
+function PropertySpec(name, readableName, description, valueType, minArity, maxArity, restrictions) {
 	this.name = name;
+	this.readableName = readableName;
 	this.description = description;
 	this.valueType = valueType;
 	this.minArity = minArity;
@@ -35,6 +36,11 @@ function PropertySpecBuilder() {
 
 PropertySpecBuilder.prototype.withName = function(name) {
 	this.name = name;
+	return this;
+};
+
+PropertySpecBuilder.prototype.withReadableName = function(readableName) {
+	this.readableName = readableName;
 	return this;
 };
 
@@ -103,7 +109,7 @@ PropertySpecBuilder.prototype.build = function() {
 		}
 	}
 
-	return new PropertySpec(this.name, this.description, this.valueType, this.minArity, this.maxArity, this.restrictions);
+	return new PropertySpec(this.name, this.readableName, this.description, this.valueType, this.minArity, this.maxArity, this.restrictions);
 };
 
 module.exports.createBuilder = function() {

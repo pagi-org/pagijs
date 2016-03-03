@@ -63,10 +63,10 @@ function doParse(readableStream, locator) {
 				delegatePromises.push(p);
 				break;
 			case "nodeTypeExtension":
-				nodeBuilder = schemaBuilder.createNodeTypeBuilder().withName(tag.attributes.extends.value);
+				nodeBuilder = schemaBuilder.createNodeTypeBuilder().withName(tag.attributes.extends.value).withReadableName((tag.attributes.readableName || {}).value);
 				break;
 			case "nodeType":
-				nodeBuilder = schemaBuilder.createNodeTypeBuilder().withName(tag.attributes.name.value);
+				nodeBuilder = schemaBuilder.createNodeTypeBuilder().withName(tag.attributes.name.value).withReadableName((tag.attributes.readableName || {}).value);
 				break;
 			case "span":
 				nodeBuilder.asSpan();
@@ -90,7 +90,7 @@ function doParse(readableStream, locator) {
 
 				if (nodeBuilder)
 				{
-					propSpecBuilder = nodeBuilder.createPropertySpecBuilder().withName(tag.attributes.name.value).withValueType(valueType);
+					propSpecBuilder = nodeBuilder.createPropertySpecBuilder().withName(tag.attributes.name.value).withReadableName((tag.attributes.readableName || {}).value).withValueType(valueType);
 					if (tag.attributes.minArity)
 					{
 						propSpecBuilder.withMinArity(parseMinArity(tag.attributes.minArity.value));
@@ -125,7 +125,7 @@ function doParse(readableStream, locator) {
 			case "edgeType":
 				if (nodeBuilder)
 				{
-					edgeSpecBuilder = nodeBuilder.createEdgeSpecBuilder().withName(tag.attributes.name.value);
+					edgeSpecBuilder = nodeBuilder.createEdgeSpecBuilder().withName(tag.attributes.name.value).withReadableName((tag.attributes.readableName || {}).value);
 					if (tag.attributes.minArity)
 					{
 						edgeSpecBuilder.withMinArity(parseMinArity(tag.attributes.minArity.value));
