@@ -5,7 +5,7 @@ var untar = require('gulp-untar2');
 var rename = require('gulp-rename');
 var fs = require('fs');
 
-var url = "https://github.com/pagi-org/test-suite/archive/master.tar.gz";
+var url = "https://github.com/digitalreasoning/test-suite/archive/master.tar.gz";
 
 gulp.task('download-testdata', function() {
   var dest = 'build/test-suite';
@@ -16,7 +16,7 @@ gulp.task('download-testdata', function() {
            .pipe(gunzip())
            .pipe(untar())
            .pipe(rename(function (path) {
-             // removes the first directory from the dirname, accounting for dirs 
+             // removes the first directory from the dirname, accounting for dirs
              // that only consist of a single directory (and have no trailing slash)
   	   path.dirname = path.dirname.replace(/[^\/]*\/?/, "");
             }))
