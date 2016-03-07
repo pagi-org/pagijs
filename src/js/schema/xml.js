@@ -194,6 +194,8 @@ function doParse(readableStream, locator) {
 			case "description":
 				if (propSpecBuilder) {
 					propSpecBuilder.withDescription(textContent);
+				} else if (edgeSpecBuilder) {
+					edgeSpecBuilder.withDescription(textContent);
 				} else if (nodeBuilder) {
 					nodeBuilder.withDescription(textContent);
 				}
