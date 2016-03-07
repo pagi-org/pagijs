@@ -158,10 +158,6 @@ module.exports.mergeNodes = function(node1, node2) {
 
 	var nodeTypeBuilder = new NodeTypeBuilder();
 	nodeTypeBuilder.withName(node1.name);
-	if (node1.idGeneratorPattern.toString() != node2.idGeneratorPattern.toString()) {
-		throw Error("Failed to merge nodeType " + node1 + " due to different idGeneratorPatterns.");
-	}
-	nodeTypeBuilder.withIdGeneratorPattern(node1.idGeneratorPattern);
 	nodeTypeBuilder.withDescription(node1.description);
 	nodeTypeBuilder.traitSpan = node1.traitSpan;
 	nodeTypeBuilder.traitSequence = node1.traitSequence;

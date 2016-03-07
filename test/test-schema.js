@@ -81,7 +81,7 @@ function toFlatString(schema)
     var appendNodeType = function (nodeTypeName)
     {
         var nodeType = schema.nodeTypeMap[nodeTypeName];
-        sb.append("\n").append("NODETYPE ").append(nodeType.name).append(" ").append(nodeType.idGeneratorPattern);
+        sb.append("\n").append("NODETYPE ").append(nodeType.name);
         if (nodeType.traitSequence)
         {
             sb.append(" SEQUENCE");
