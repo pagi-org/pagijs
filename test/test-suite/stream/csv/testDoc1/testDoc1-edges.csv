@@ -1,0 +1,5 @@
+TOK	0:4	next	6:3
+TOK	6:3	next	10:1
+TOK	10:1	next	12:6
+TOK	12:6	next	19:4
+TOK	19:4	next	23:1

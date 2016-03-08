@@ -8,7 +8,7 @@ var sprintf = require('sprintf-js').sprintf;
 var q = require("q");
 
 
-var schemaTestRoot = 'build/test-suite/schema/';
+var schemaTestRoot = __dirname + '/test-suite/schema/';
 
 function TestSchema(id, simpleName) {
   var xmlTestRoot = schemaTestRoot + 'def/';

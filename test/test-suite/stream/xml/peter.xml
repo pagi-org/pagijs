@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://pagi.org/stream" id="peter"><schema uri="http://pagi.org/testSuite/extTokFull"></schema>
+	<asSpan nodeType="TOK">
+	</asSpan>
+	<asSequence nodeType="TOK">
+	</asSequence>
+	<asSequence nodeType="SB">
+	</asSequence>
+	<asSpanContainer spanType="TOK" nodeType="SB">
+	</asSpanContainer>
+	<content contentType="text/plain">PETER, Peter, pumpkin-eater;
+Had a wife, and couldn't keep her;
+He put her in a pumpkin shell,
+And there he kept her very well.
+
+Peter, Peter, pumpkin-eater;
+Had another and didn't love her;
+Peter learned to read and spell,
+And then he loved her very well.
+
+</content>
+
+	<node id="156:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="156" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="158:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="174:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="174" k="start"></intProp>
+		<strProp v="VBD" k="pos"></strProp>
+		<edge to="178:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="217:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="217" k="start"></intProp>
+		<strProp v="VB" k="pos"></strProp>
+		<edge to="222:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="191:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="191" k="start"></intProp>
+		<strProp v="NNP" k="pos"></strProp>
+		<edge to="197:7" toType="TOK" type="next"></edge>
+	</node>
+	<node id="122:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="122" k="start"></intProp>
+		<strProp v="RB" k="pos"></strProp>
+	</node>
+	<node id="54:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="54" k="start"></intProp>
+		<strProp v="VB" k="pos"></strProp>
+		<edge to="59:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="45:6" type="TOK">
+		<intProp v="6" k="length"></intProp>
+		<intProp v="45" k="start"></intProp>
+		<strProp v="MD" k="pos"></strProp>
+		<edge to="51:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="158:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="158" k="start"></intProp>
+		<strProp v="VBD" k="pos"></strProp>
+		<edge to="162:7" toType="TOK" type="next"></edge>
+	</node>
+	<node id="75:2" type="TOK">
+		<intProp v="2" k="length"></intProp>
+		<intProp v="75" k="start"></intProp>
+		<strProp v="IN" k="pos"></strProp>
+		<edge to="78:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="3" type="COREF">
+		<strProp v="peter" k="name"></strProp>
+		<edge to="129:5" toType="TOK" type="member"></edge>
+		<edge to="0:5" toType="TOK" type="member"></edge>
+		<edge to="191:5" toType="TOK" type="member"></edge>
+		<edge to="136:5" toType="TOK" type="member"></edge>
+		<edge to="7:5" toType="TOK" type="member"></edge>
+	</node>
+	<node id="4" type="COREF">
+		<strProp v="very" k="name"></strProp>
+		<edge to="246:4" toType="TOK" type="member"></edge>
+		<edge to="117:4" toType="TOK" type="member"></edge>
+	</node>
+	<node id="1" type="COREF">
+		<strProp v="eater" k="name"></strProp>
+		<edge to="151:5" toType="TOK" type="member"></edge>
+		<edge to="22:5" toType="TOK" type="member"></edge>
+	</node>
+	<node id="136:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="136" k="start"></intProp>
+		<strProp v="NNP" k="pos"></strProp>
+		<edge to="141:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="2" type="COREF">
+		<strProp v="pumpkin" k="name"></strProp>
+		<edge to="143:7" toType="TOK" type="member"></edge>
+		<edge to="14:7" toType="TOK" type="member"></edge>
+		<edge to="80:7" toType="TOK" type="member"></edge>
+	</node>
+	<node id="59:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="59" k="start"></intProp>
+		<strProp v="P3S" k="pos"></strProp>
+		<edge to="62:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="0" type="COREF">
+		<strProp v="well" k="name"></strProp>
+		<edge to="122:4" toType="TOK" type="member"></edge>
+		<edge to="251:4" toType="TOK" type="member"></edge>
+	</node>
+	<node id="170:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="170" k="start"></intProp>
+		<strProp v="CC" k="pos"></strProp>
+		<edge to="174:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="64:2" type="TOK">
+		<intProp v="2" k="length"></intProp>
+		<intProp v="64" k="start"></intProp>
+		<strProp v="P3S" k="pos"></strProp>
+		<edge to="67:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="129:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="129" k="start"></intProp>
+		<strProp v="NNP" k="pos"></strProp>
+		<edge to="134:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="62:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="62" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="64:2" toType="TOK" type="next"></edge>
+	</node>
+	<node id="78:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="78" k="start"></intProp>
+		<strProp v="DT" k="pos"></strProp>
+		<edge to="80:7" toType="TOK" type="next"></edge>
+	</node>
+	<node id="7:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="7" k="start"></intProp>
+		<strProp v="NNP" k="pos"></strProp>
+		<edge to="12:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="27:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="27" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="29:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="228:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="228" k="start"></intProp>
+		<strProp v="RB" k="pos"></strProp>
+		<edge to="233:2" toType="TOK" type="next"></edge>
+	</node>
+	<node id="242:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="242" k="start"></intProp>
+		<strProp v="P3S" k="pos"></strProp>
+		<edge to="246:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="224:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="224" k="start"></intProp>
+		<strProp v="CC" k="pos"></strProp>
+		<edge to="228:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="41:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="41" k="start"></intProp>
+		<strProp v="CC" k="pos"></strProp>
+		<edge to="45:6" toType="TOK" type="next"></edge>
+	</node>
+	<node id="178:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="178" k="start"></intProp>
+		<strProp v="'" k="pos"></strProp>
+		<edge to="179:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="39:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="39" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="41:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="179:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="179" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="181:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="29:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="29" k="start"></intProp>
+		<strProp v="VBD" k="pos"></strProp>
+		<edge to="33:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="222:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="222" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="224:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="186:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="186" k="start"></intProp>
+		<strProp v="P3S" k="pos"></strProp>
+		<edge to="189:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="22:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="22" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="27:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="35:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="35" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="39:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="205:2" type="TOK">
+		<intProp v="2" k="length"></intProp>
+		<intProp v="205" k="start"></intProp>
+		<strProp v="IN" k="pos"></strProp>
+		<edge to="208:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="21:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="21" k="start"></intProp>
+		<strProp v="SYM" k="pos"></strProp>
+		<edge to="22:5" toType="TOK" type="next"></edge>
+	</node>
+	<node id="0" type="SB">
+		<edge to="122:4" toType="TOK" type="last"></edge>
+		<edge to="0:5" toType="TOK" type="first"></edge>
+		<edge to="1" toType="SB" type="next"></edge>
+	</node>
+	<node id="208:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="208" k="start"></intProp>
+		<strProp v="VB" k="pos"></strProp>
+		<edge to="213:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="1" type="SB">
+		<edge to="251:4" toType="TOK" type="last"></edge>
+		<edge to="129:5" toType="TOK" type="first"></edge>
+	</node>
+	<node id="117:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="117" k="start"></intProp>
+		<strProp v="RB" k="pos"></strProp>
+		<edge to="122:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="14:7" type="TOK">
+		<intProp v="7" k="length"></intProp>
+		<intProp v="14" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="21:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="197:7" type="TOK">
+		<intProp v="7" k="length"></intProp>
+		<intProp v="197" k="start"></intProp>
+		<strProp v="VBD" k="pos"></strProp>
+		<edge to="205:2" toType="TOK" type="next"></edge>
+	</node>
+	<node id="181:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="181" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="186:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="113:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="113" k="start"></intProp>
+		<strProp v="P3S" k="pos"></strProp>
+		<edge to="117:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="162:7" type="TOK">
+		<intProp v="7" k="length"></intProp>
+		<intProp v="162" k="start"></intProp>
+		<strProp v="IN" k="pos"></strProp>
+		<edge to="170:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="246:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="246" k="start"></intProp>
+		<strProp v="RB" k="pos"></strProp>
+		<edge to="251:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="5:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="5" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="7:5" toType="TOK" type="next"></edge>
+	</node>
+	<node id="33:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="33" k="start"></intProp>
+		<strProp v="DT" k="pos"></strProp>
+		<edge to="35:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="80:7" type="TOK">
+		<intProp v="7" k="length"></intProp>
+		<intProp v="80" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="88:5" toType="TOK" type="next"></edge>
+	</node>
+	<node id="108:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="108" k="start"></intProp>
+		<strProp v="VBD" k="pos"></strProp>
+		<edge to="113:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="213:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="213" k="start"></intProp>
+		<strProp v="CC" k="pos"></strProp>
+		<edge to="217:5" toType="TOK" type="next"></edge>
+	</node>
+	<node id="93:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="93" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="95:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="67:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="67" k="start"></intProp>
+		<strProp v="VBD" k="pos"></strProp>
+		<edge to="71:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="150:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="150" k="start"></intProp>
+		<strProp v="SYM" k="pos"></strProp>
+		<edge to="151:5" toType="TOK" type="next"></edge>
+	</node>
+	<node id="134:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="134" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="136:5" toType="TOK" type="next"></edge>
+	</node>
+	<node id="151:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="151" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="156:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="233:2" type="TOK">
+		<intProp v="2" k="length"></intProp>
+		<intProp v="233" k="start"></intProp>
+		<strProp v="P3S" k="pos"></strProp>
+		<edge to="236:5" toType="TOK" type="next"></edge>
+	</node>
+	<node id="52:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="52" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="54:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="143:7" type="TOK">
+		<intProp v="7" k="length"></intProp>
+		<intProp v="143" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="150:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="236:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="236" k="start"></intProp>
+		<strProp v="VBD" k="pos"></strProp>
+		<edge to="242:3" toType="TOK" type="next"></edge>
+	</node>
+	<node id="0:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="0" k="start"></intProp>
+		<strProp v="NNP" k="pos"></strProp>
+		<edge to="5:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="88:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="88" k="start"></intProp>
+		<strProp v="NN" k="pos"></strProp>
+		<edge to="93:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="105:2" type="TOK">
+		<intProp v="2" k="length"></intProp>
+		<intProp v="105" k="start"></intProp>
+		<strProp v="P3S" k="pos"></strProp>
+		<edge to="108:4" toType="TOK" type="next"></edge>
+	</node>
+	<node id="251:4" type="TOK">
+		<intProp v="4" k="length"></intProp>
+		<intProp v="251" k="start"></intProp>
+		<strProp v="RB" k="pos"></strProp>
+	</node>
+	<node id="95:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="95" k="start"></intProp>
+		<strProp v="CC" k="pos"></strProp>
+		<edge to="99:5" toType="TOK" type="next"></edge>
+	</node>
+	<node id="51:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="51" k="start"></intProp>
+		<strProp v="'" k="pos"></strProp>
+		<edge to="52:1" toType="TOK" type="next"></edge>
+	</node>
+	<node id="12:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="12" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="14:7" toType="TOK" type="next"></edge>
+	</node>
+	<node id="71:3" type="TOK">
+		<intProp v="3" k="length"></intProp>
+		<intProp v="71" k="start"></intProp>
+		<strProp v="P3S" k="pos"></strProp>
+		<edge to="75:2" toType="TOK" type="next"></edge>
+	</node>
+	<node id="141:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="141" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="143:7" toType="TOK" type="next"></edge>
+	</node>
+	<node id="99:5" type="TOK">
+		<intProp v="5" k="length"></intProp>
+		<intProp v="99" k="start"></intProp>
+		<strProp v="RB" k="pos"></strProp>
+		<edge to="105:2" toType="TOK" type="next"></edge>
+	</node>
+	<node id="189:1" type="TOK">
+		<intProp v="1" k="length"></intProp>
+		<intProp v="189" k="start"></intProp>
+		<strProp v="," k="pos"></strProp>
+		<edge to="191:5" toType="TOK" type="next"></edge>
+	</node>
+</document>

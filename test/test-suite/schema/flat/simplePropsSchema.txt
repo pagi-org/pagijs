@@ -1,0 +1,10 @@
+http://pagi.org/testSuite/simpleProps
+
+NODETYPE MY_NODE
+PROP confidence 0 UNBOUNDED INTEGER 0 100
+PROP enabled 0 UNBOUNDED BOOLEAN
+PROP labeled 0 2 STRING
+PROP precision 0 UNBOUNDED FLOAT 0.0000000e+00 1.0000000e+00
+PROP selected 0 2 STRING value1 value2
+PROP value 1 1 STRING
+EDGE bff 0 4 0 UNBOUNDED MY_NODE

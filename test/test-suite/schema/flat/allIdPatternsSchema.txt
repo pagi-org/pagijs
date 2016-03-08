@@ -1,0 +1,49 @@
+http://pagi.org/testSuite/allIdPatterns
+
+NODETYPE nt1 The first node type.
+
+NODETYPE nt10
+
+NODETYPE nt11
+
+NODETYPE nt12
+PROP p1 1 1 STRING
+
+NODETYPE nt12e
+EDGE e1 0 UNBOUNDED 0 UNBOUNDED nt12
+
+NODETYPE nt14
+PROP p1 1 1 STRING
+
+NODETYPE nt14e
+EDGE e1 0 UNBOUNDED 0 UNBOUNDED nt14
+
+NODETYPE nt2
+
+NODETYPE nt3
+PROP p1 1 1 STRING A simple string property.
+
+NODETYPE nt3e
+EDGE e1 0 UNBOUNDED 0 UNBOUNDED nt3 The edge that links this to another doohicky.
+
+NODETYPE nt4
+
+NODETYPE nt5
+
+NODETYPE nt6
+
+NODETYPE nt7
+PROP p1 1 1 STRING
+
+NODETYPE nt7e
+EDGE e1 0 UNBOUNDED 0 UNBOUNDED nt7 The edge that links this to the other thing before it.
+
+NODETYPE nt8
+PROP p1 1 1 STRING
+PROP p2 1 1 STRING
+
+NODETYPE nt8e
+EDGE e1 0 UNBOUNDED 0 UNBOUNDED nt8
+EDGE e2 0 UNBOUNDED 0 UNBOUNDED nt7
+
+NODETYPE nt9

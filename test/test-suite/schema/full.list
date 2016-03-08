@@ -1,0 +1,8 @@
+http://pagi.org/testSuite/allIdPatterns allIdPatternsSchema
+http://pagi.org/testSuite/allRestrictions allRestrictionsSchema
+http://pagi.org/testSuite/extTokCoref extTokCorefSchema
+http://pagi.org/testSuite/extTokFull extTokFullSchema
+http://pagi.org/testSuite/extTok extTokSchema
+http://pagi.org/testSuite/simpleProps simplePropsSchema
+http://pagi.org/testSuite/simpleSpanSequence simpleSpanSequenceSchema
+http://pagi.org/testSuite/simpleTok simpleTokSchema
