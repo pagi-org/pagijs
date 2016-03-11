@@ -1,7 +1,7 @@
 var fs = require('fs');
-var util = require('../src/js/util.js');
+var util = require('../../src/js/util.js');
 var pagi = {
-    schema: require('../src/js/schema/schema.js')
+    schema: require('../../src/js/schema/schema.js')
 };
 var print = require('util').print;
 var sprintf = require('sprintf-js').sprintf;

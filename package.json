@@ -17,7 +17,8 @@
     "cleanBuild": "gulp",
     "build": "gulp build",
     "test": "gulp test",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "debug": "node debug $(which gulp) watch"
   },
   "devDependencies": {
     "del": "^1.2.0",
