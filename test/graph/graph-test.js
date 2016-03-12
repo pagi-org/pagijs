@@ -1,15 +1,25 @@
 var assert = require('assert');
 var print = require('util').print;
-var pagi = require('../../src/js/pagi');
+var graph = require('../../src/js/graph/graph');
+var testStream = require('../test-stream/test-stream');
 
-var testSchema = require('../test-schema/test-schema');
+describe("Checking graph properties and functions", function() {
+    var stream;
+    beforeEach(function() {
+        stream = testStream.shortList[0];
+    });
+    describe('graph index.js exports', function() {
+        it('provides a `createBuilder` function', function() {
+            assert(typeof graph.createBuilder === 'function');
+        });
+    });
+});
 
-describe("roundtrip schema parse", function () {
-    testSchema.fullList.forEach(function(schema) {
-        describe("test schema " + schema.simpleName, function() {
-            it('should exist', function() {
-                assert.equal('test', 'test');
-            });
+testStream.shortList.forEach(function(stream) {
+    describe("Test stream " + stream.simpleName, function() {
+        it('Returns a Pagi object', function() {
+            graph.createParser()(stream.getXmlStream());
+            assert.equal('test', 'test');
         });
     });
 });

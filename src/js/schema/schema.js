@@ -4,8 +4,6 @@ var nodeType = require("./nodeType.js");
 var constants = require("./constants.js");
 var xml = require("./xml.js");
 
-
-
 function PagiSchema(id, parentSchemas, nodeTypeMap) {
 	this.id = id;
 	this.parentSchemas = parentSchemas;
@@ -80,10 +78,6 @@ SchemaBuilder.prototype.build = function() {
 };
 
 SchemaBuilder.prototype.createNodeTypeBuilder = nodeType.createBuilder;
-
-function createSchemaBuilder() {
-	return new SchemaBuilder(false);
-}
 
 module.exports.createBuilder = function() {
 	return new SchemaBuilder(false);
