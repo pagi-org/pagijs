@@ -1,7 +1,6 @@
 var schema = require("./schema.js");
 var sax = require("sax");
 var print = require("util").print;
-var idGenerator = require("./idGenerator.js");
 var constants = require("./constants.js");
 var Q = require('q');
 
@@ -68,9 +67,6 @@ function doParse(readableStream, locator) {
 				break;
 			case "nodeType":
 				nodeBuilder = schemaBuilder.createNodeTypeBuilder().withName(tag.attributes.name.value);
-				var pattern = tag.attributes.idGenerator.value;
-				var nodeIdGenerator = idGenerator.parse(pattern);
-				nodeBuilder.withIdGeneratorPattern(nodeIdGenerator);
 				break;
 			case "span":
 				nodeBuilder.asSpan();

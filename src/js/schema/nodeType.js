@@ -3,9 +3,8 @@ var propertySpec = require("./propertySpec.js");
 var edgeSpec = require("./edgeSpec.js");
 var constants = require("./constants.js");
 
-function NodeType(name, idGeneratorPattern, description, propertySpecMap, edgeSpecMap, traitSpan, traitSequence, traitSpanContainer, spanType) {
+function NodeType(name, description, propertySpecMap, edgeSpecMap, traitSpan, traitSequence, traitSpanContainer, spanType) {
 	this.name = name;
-	this.idGeneratorPattern = idGeneratorPattern;
 	this.description = description;
 	this.propertySpecMap = propertySpecMap;
 	this.edgeSpecMap = edgeSpecMap;
@@ -26,7 +25,6 @@ function NodeTypeBuilder() {
 
 NodeTypeBuilder.prototype.withParent = function(parent) {
 	this.withName(parent.name);
-	this.withIdGeneratorPattern(parent.idGeneratorPattern);
 	this.withDescription(parent.description);
 	this.traitSpan = parent.traitSpan;
 	this.traitSequence = parent.traitSequence;
@@ -66,10 +64,6 @@ function mergeParentSpecs(thisMap, parentMap, callback) {
 NodeTypeBuilder.prototype.withName = function(name) {
 	this.name = name;
 	return this;
-};
-
-NodeTypeBuilder.prototype.withIdGeneratorPattern = function(pattern) {
-	this.idGeneratorPattern = pattern;
 };
 
 NodeTypeBuilder.prototype.withDescription = function(description) {
@@ -147,7 +141,7 @@ NodeTypeBuilder.prototype.build = function() {
 	if (this.name === undefined) {
 		throw Error("No name supplied for NodeType.");
 	}
-	return new NodeType(this.name, this.idGeneratorPattern, this.description, Object.freeze(this.propertySpecMap), Object.freeze(this.edgeSpecMap),
+	return new NodeType(this.name, this.description, Object.freeze(this.propertySpecMap), Object.freeze(this.edgeSpecMap),
 	                    this.traitSpan, this.traitSequence, this.traitSpanContainer, this.spanType);
 };
 
