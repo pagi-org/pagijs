@@ -36,6 +36,7 @@
     "sprintf-js": "^1.0.3"
   },
   "dependencies": {
+    "graphlib": "^2.1.0",
     "q": "^1.4.1",
     "sax": "^0.6.0"
   }
