@@ -216,8 +216,9 @@ function doParse(readableStream, locator) {
 		readableStream.unpipe(streamParser);
 		deferred.reject(err);
 	});
-	try {
-        readableStream.pipe(streamParser);
+	try
+	{
+		readableStream.pipe(streamParser);
 	} catch (e) {
 		throw Error("Could not parse stream " + readableStream.id + "..." + e);
 	}

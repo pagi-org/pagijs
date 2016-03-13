@@ -1,5 +1,5 @@
 var assert = require('assert');
-var testStreams = require('../test-stream/test-stream');
+var testStreams = require('../test-stream');
 var GraphParser = require('../../src/js/graph/parsers/graphParser');
 var maryStream = testStreams.fullList.filter(function(stream) {
     return stream.name === 'mary';

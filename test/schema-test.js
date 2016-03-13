@@ -1,10 +1,10 @@
 var assert = require('assert');
 var print = require('util').print;
 var pagi = {
-	schema: require('../../src/js/schema')
+	schema: require('../src/js/schema')
 };
 
-var testSchema = require('../test-schema/test-schema');
+var testSchema = require('./test-schema');
 
 describe("roundtrip schema parse", function () {
 	for (var i = 0; i < testSchema.fullList.length; i++) {
