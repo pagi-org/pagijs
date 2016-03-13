@@ -6,8 +6,9 @@ var xml = require("./xml.js");
 
 
 
-function PagiSchema(id, parentSchemas, nodeTypeMap) {
+function PagiSchema(id, description, parentSchemas, nodeTypeMap) {
 	this.id = id;
+    this.description = description;
 	this.parentSchemas = parentSchemas;
 	this.nodeTypeMap = nodeTypeMap;
 	util.doFreeze(this);
@@ -76,7 +77,7 @@ SchemaBuilder.prototype.build = function() {
 		}
 	})();
 
-	return new PagiSchema(this.id, this.parentSchemas, this.declaredNodeTypeMap);
+	return new PagiSchema(this.id, this.description, this.parentSchemas, this.declaredNodeTypeMap);
 };
 
 SchemaBuilder.prototype.createNodeTypeBuilder = nodeType.createBuilder;

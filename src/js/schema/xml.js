@@ -43,14 +43,12 @@ function callLocator(id, locator) {
 function doParse(readableStream, locator) {
 	var deferred = Q.defer();
 	var schemaBuilder = schema.createBuilder();
-	var nodeBuilder = null;
-	var propSpecBuilder = null;
-	var edgeSpecBuilder = null;
+	var nodeBuilder, propSpecBuilder, edgeSpecBuilder, currentTag, valueType;
 	var delegatePromises = [];
 
 	var streamParser = sax.createStream(true, {xmlns: true, position: true});
 	streamParser.on("opentag", function (tag) {
-		var valueType;
+        currentTag = tag;
 		switch(tag.name) {
 			case "pagis":
 				schemaBuilder.withId(tag.attributes.id.value);
@@ -162,6 +160,18 @@ function doParse(readableStream, locator) {
 				break;
 		}
 	});
+    streamParser.on('text', function(text) {
+        text = text.trim();
+        if (currentTag && currentTag.name === 'description' && text.length > 0) {
+            if (edgeSpecBuilder) {
+                edgeSpecBuilder.withDescription(text);
+            } else if (propSpecBuilder) {
+                propSpecBuilder.withDescription(text);
+            } else if (nodeBuilder) {
+                nodeBuilder.withDescription(text);
+            }
+        }
+    });
 	streamParser.on("closetag", function(tagName) {
 		switch(tagName) {
 			case "pagis":
@@ -199,6 +209,7 @@ function doParse(readableStream, locator) {
 				}
 				break;
 		}
+        valueType = null;
 	});
 	streamParser.on("end", function() {
 		Q.allSettled(delegatePromises).then(function() {
