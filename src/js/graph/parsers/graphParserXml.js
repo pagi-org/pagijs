@@ -82,7 +82,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
         }
 	});
     streamParser.on('text', function(text) {
-        if (!currentTag || !currentTag.name) { return; }
+        if (!currentTag || !currentTag.name || text.trim().length === 0) { return; }
         if (currentTag.name === 'content') {
             graph.setContent(text);
         }
