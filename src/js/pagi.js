@@ -1,7 +1,7 @@
 var GraphParser = require('./graph/parsers/graphParser');
 
-module.exports = function() {
-  return "I AM PAGI";
+module.exports.parse = function(data) {
+    return GraphParser.parse(data);
 };
 
 module.exports.schema = require('./schema');

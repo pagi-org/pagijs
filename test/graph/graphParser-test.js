@@ -24,6 +24,6 @@ describe('GraphParser', function() {
         GraphParser.parse(stream.getXmlStream()).then(function(graph) {
             assert(graph instanceof Graph);
             done();
-        }, done).catch(done);
+        });
     });
 });
