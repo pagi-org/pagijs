@@ -1,5 +1,5 @@
 var Edge = require('./edge');
-VALID_PROP_TYPES = ['str', 'float', 'int', 'bool'];
+VALID_PROP_TYPES = ['string', 'float', 'integer', 'boolean'];
 
 function Node(id, type) {
     this._id = id || null;
@@ -74,9 +74,17 @@ Node.prototype.hasNext = function() {
     if (!this.hasTraitSequence()) { throw Error("Calling `hasNext` on a Node that does not have the `sequence` trait."); }
     return this.getEdgeByType('next') instanceof Edge;
 };
+Node.prototype._getPreviousEdgeImpl = function() {
+    var graphImpl = this._graph._graphImpl;
+    return graphImpl.outEdges(this._id).find(function(edgeImpl) {
+        return graphImpl.edge(edgeImpl.v, edgeImpl.w) === 'previous';
+    });
+};
 Node.prototype.hasPrevious = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `hasPrevious` on a Node that does not have the `sequence` trait."); }
-    return this.getEdgeByType('previous') instanceof Edge;
+    // Special case, there will not be an explicit `previous` edge. It will only be accessible via the this._graph._graphImpl object.
+    var previousImplEdge = this._getPreviousEdgeImpl();
+    return !!previousImplEdge;
 };
 Node.prototype.next = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `next` on a Node that does not have the `sequence` trait."); }
@@ -86,10 +94,8 @@ Node.prototype.next = function() {
 Node.prototype.previous = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `previous` on a Node that does not have the `sequence` trait."); }
     // Special case, there will not be an explicit `previous` edge. It will only be accessible via the this._graph._graphImpl object.
-    var graphImpl = this._graph._graphImpl;
-    var previousImplEdge = graphImpl.outEdges(this._id).find(function(edgeImpl) {
-        return graphImpl.edge(edgeImpl.v, edgeImpl.w) === 'previous';
-    });
+    var previousImplEdge = this._getPreviousEdgeImpl();
+    if (!previousImplEdge) { return undefined; }
     return this._graph.getNodeById(previousImplEdge.w);
 };
 

@@ -13,6 +13,12 @@ GraphParserXml.prototype.parse = function(readableStream) {
         var graph = new Graph();
         var streamParser = sax.createStream(true, { xmlns: true, position: true });
         var currentTag, node, content = '';
+        var nodePropMap = {
+            'str': 'string',
+            'float': 'float',
+            'int': 'integer',
+            'bool': 'boolean'
+        };
         streamParser.on("opentag", function(tag) {
             currentTag = tag;
             switch (tag.name) {
@@ -72,7 +78,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
                             if (pAttrs.k && !pAttrs.v) {
                                 reject(new Error("Pagi.js does not support nested node property values at the moment. Create an issue here https://github.com/pagi-org/pagijs"));
                             }
-                            node.addProp(tag.name.replace('Prop', ''), pAttrs.k.value, pAttrs.v.value);
+                            node.addProp(nodePropMap[tag.name.replace('Prop', '')], pAttrs.k.value, pAttrs.v.value);
                         } catch (err) {
                             reject(new Error("Failed to parse property for node `" + node.id + "`. [" + err + "]"));
                         }

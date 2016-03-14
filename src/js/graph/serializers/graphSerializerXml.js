@@ -1,6 +1,12 @@
 var xmlEscape = require('xml-escape');
 var Graph = require('../graph');
 var TAB = "    ";
+var nodePropMap = {
+    'string': 'str',
+    'float': 'float',
+    'integer': 'int',
+    'boolean': 'bool'
+};
 var es = function(aVar) {
     return xmlEscape(aVar.toString());
 };
@@ -23,7 +29,7 @@ GraphSerializerXml.prototype.serializeNode = function(node) {
     var props = node.getProps();
     Object.keys(props).forEach(function(key) {
         var prop = props[key];
-        lines.push(TAB+TAB + '<' + prop.type + 'Prop v="' + es(prop.val) + '" k="' + es(prop.key) + '"/>');
+        lines.push(TAB+TAB + '<' + nodePropMap[prop.type] + 'Prop v="' + es(prop.val) + '" k="' + es(prop.key) + '"/>');
     });
     node.getEdges().forEach(function(edge) {
         lines.push(TAB+TAB + '<edge toType="' + es(edge.getTargetType()) + '" to="' + es(edge.getTargetId()) + '" type="' + es(edge.getEdgeType()) + '"/>');

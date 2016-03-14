@@ -47,8 +47,8 @@ describe('GraphSerializer', function() {
                     // fs.writeFileSync('/tmp/pre-serialize-' + stream.name + '.xml', preSerialized);
                     var serialized = PAGI_XSLT.apply(preSerialized);
                     var gold = PAGI_XSLT.apply(stream.getXml());
-                    fs.writeFileSync('/tmp/serialize-' + stream.name + '.xml', serialized);
-                    fs.writeFileSync('/tmp/serialize-' + stream.name + '-gold.xml', gold);
+                    // fs.writeFileSync('/tmp/serialize-' + stream.name + '.xml', serialized);
+                    // fs.writeFileSync('/tmp/serialize-' + stream.name + '-gold.xml', gold);
                     assert.equal(serialized, gold);
                 });
             }
