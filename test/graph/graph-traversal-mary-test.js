@@ -34,15 +34,35 @@ describe('Graph traversal for `mary` stream', function() {
         });
     });
     describe('sequence trait', function() {
+        it('`Node.hasNext` should return true', function() {
+            var node = graph.getNodeById('0');
+            assert(node.hasNext() === true);
+        });
         it('node should have a `next` edge', function() {
             var node = graph.getNodeById('0');
             var nextNode = graph.getNodeById('1');
             assert(node.next() === nextNode);
         });
+        it('`Node.hasPrevious` should return true', function() {
+            var node = graph.getNodeById('1');
+            assert(node.hasPrevious() === true);
+        });
         it('node should have a `previous` edge', function() {
             var node = graph.getNodeById('1');
             var prevNode = graph.getNodeById('0');
             assert(node.previous() === prevNode);
+        });
+        it('`Node.getFirstParentOfType` should return the parent node', function() {
+            var node = graph.getNodeById('83');
+            var parentNode = graph.getNodeById('68');
+            assert(node.getFirstParentOfType('SB') === parentNode);
+        });
+        it('`Node.getParentsOfType` should return the parent node', function() {
+            var node = graph.getNodeById('83');
+            var parentNode = graph.getNodeById('68');
+            var parents = node.getParentsOfType('SB');
+            assert.equal(parents.length, 1);
+            assert(parents[0] === parentNode);
         });
     });
     describe('span container trait', function() {
@@ -55,6 +75,10 @@ describe('Graph traversal for `mary` stream', function() {
             var node = graph.getNodeById('68');
             var lastEdge = graph.getNodeById('6');
             assert(node.getLast() === lastEdge);
+        });
+        it('should return the proper text from it\'s spans', function() {
+            var node = graph.getNodeById('68');
+            assert.equal(node.getText(), 'MARY had a little lamb with fleece as white as snow,\nAnd everywhere that Mary went the lamb was sure to go.');
         });
     });
 });

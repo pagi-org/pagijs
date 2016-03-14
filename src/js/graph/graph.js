@@ -75,16 +75,24 @@ Graph.prototype.connectEdges = function(nodes) {
         var node = self._graphImpl.node(nodeId);
         node.getEdges().forEach(function(edge) {
             self._graphImpl.setEdge(node.getId(), edge.getTargetId(), edge.getEdgeType()); 
-            // If we add a `next` edge then create a `previous` edge from the second node.
-            if (edge.getEdgeType() === 'next') {
-                self._graphImpl.setEdge(edge.getTargetId(), node.getId(), 'previous');
-            }
         });
+        // If node is a span container create edges to all it's children.
+        // This allows children to quickly reference their parent nodes.
+        // Child nodes may not have edges in the graphImpl yet so create edges
+        // based only on the edges array in the node.
+        if (node.hasTraitSpanContainer()) {
+            var linkNode = self.getNodeById(node.getEdgeByType('first').getTargetId());
+            var lastNode = self.getNodeById(node.getEdgeByType('last').getTargetId());
+            while (true) {
+                self._graphImpl.setEdge(node.getId(), linkNode.getId(), 'parent');
+                if (linkNode === lastNode) { break; }
+                linkNode = self.getNodeById(linkNode.getEdgeByType('next').getTargetId());
+            }
+        }
     });
 };
-Graph.prototype.getNodeById = function(nodeId) {
-    return this._graphImpl.node(nodeId);
-};
+Graph.prototype.getNodeById = function(nodeId) { return this._graphImpl.node(nodeId); };
+Graph.prototype.getNodeTypes = function() { return Object.keys(this._nodeTypes); };
 Graph.prototype.getNodesByType = function(nodeType) {
     return this._nodeTypes[nodeType].map(function(node) {
         return node;

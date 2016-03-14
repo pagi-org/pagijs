@@ -62,11 +62,32 @@ Node.prototype.setGraph = function(graph) {
     this._graph = graph;
 };
 
-// Span trait functions
+// Span/SpanContainer trait functions
 Node.prototype.getText = function() { 
-    if (!this.hasTraitSpan()) { throw Error("Calling `getText` on a Node that does not have the `span` trait."); }
-    var start = this.getProp('start'), length = this.getProp('length');
-    return this._graph.getContent().slice(start, start + length);
+    var isSpan = this.hasTraitSpan(), isSpanContainer = this.hasTraitSpanContainer();
+    if (!isSpan && !isSpanContainer) { 
+        throw Error("Calling `getText` on a Node that does not have the `span` or `spanContainer` trait.");
+    }
+    if (isSpan) {
+        var start = this.getProp('start'), length = this.getProp('length');
+        return this._graph.getContent().slice(start, start + length);
+    } else if (isSpanContainer) {
+        // Traverse the first and last edges until the nodes are no longer span containers.
+        var firstNode = this.getFirst(), lastNode = this.getLast();
+        while (true) {
+            var firstNodeIsSC = firstNode.hasTraitSpanContainer();
+            var lastNodeIsSC = lastNode.hasTraitSpanContainer();
+            if (!firstNodeIsSC && !lastNodeIsSC) { break; }
+            if (firstNodeIsSC) { firstNode = firstNode.getFirst(); }
+            if (lastNodeIsSC) { lastNode = lastNode.getFirst(); }
+        }
+        if (!firstNode.hasTraitSpan() || !lastNode.hasTraitSpan()) {
+            throw Error("Calling `getText` on a node [" + this._id + "] whose first or last edge does not resolve to a span.");
+        }
+        var endIdx = lastNode.getProp('start') + lastNode.getProp('length');
+        // JS String.slice(start, end) is start<inclusive> to end<exclusive>.
+        return this._graph.getContent().slice(firstNode.getProp('start'), endIdx + 1);
+    }
 };
 
 // Sequence trait functions
@@ -74,17 +95,12 @@ Node.prototype.hasNext = function() {
     if (!this.hasTraitSequence()) { throw Error("Calling `hasNext` on a Node that does not have the `sequence` trait."); }
     return this.getEdgeByType('next') instanceof Edge;
 };
-Node.prototype._getPreviousEdgeImpl = function() {
-    var graphImpl = this._graph._graphImpl;
-    return graphImpl.outEdges(this._id).find(function(edgeImpl) {
-        return graphImpl.edge(edgeImpl.v, edgeImpl.w) === 'previous';
-    });
-};
 Node.prototype.hasPrevious = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `hasPrevious` on a Node that does not have the `sequence` trait."); }
-    // Special case, there will not be an explicit `previous` edge. It will only be accessible via the this._graph._graphImpl object.
-    var previousImplEdge = this._getPreviousEdgeImpl();
-    return !!previousImplEdge;
+    // Special case, there will not be an explicit `previous` edge. 
+    // This library assumes a sequence node will only ever have one incoming `next` edge.
+    var previousImplEdges = this._getEdgesImplByLabel('in', 'next');
+    return previousImplEdges.length === 1;
 };
 Node.prototype.next = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `next` on a Node that does not have the `sequence` trait."); }
@@ -93,10 +109,51 @@ Node.prototype.next = function() {
 };
 Node.prototype.previous = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `previous` on a Node that does not have the `sequence` trait."); }
-    // Special case, there will not be an explicit `previous` edge. It will only be accessible via the this._graph._graphImpl object.
-    var previousImplEdge = this._getPreviousEdgeImpl();
-    if (!previousImplEdge) { return undefined; }
-    return this._graph.getNodeById(previousImplEdge.w);
+    // Special case, there will not be an explicit `previous` edge. 
+    // This library assumes a sequence node will only ever have one incoming `next` edge.
+    var previousImplEdges = this._getEdgesImplByLabel('in', 'next');
+    if (previousImplEdges.length !== 1) { return undefined; }
+    return this._graph.getNodeById(previousImplEdges[0].v);
+};
+Node.prototype._getEdgesImplByLabel = function(direction, label)  {
+    var graphImpl = this._graph._graphImpl;
+    return graphImpl[direction + 'Edges'](this._id).filter(function(edgeImpl) {
+        return graphImpl.edge(edgeImpl.v, edgeImpl.w) === label;        
+    });
+};
+// Breadth-first search for parents of a given node type.
+Node.prototype._getParentsOfType = function(fnName, nodeType, stopOnFirst) {
+    if (!this.hasTraitSequence()) { throw Error("Calling `" + fnName + "` on a Node that does not have the `sequence` trait."); }
+    if (this._graph.getNodeTypes().indexOf(nodeType) === -1) { 
+        throw Error("`Node." + fnName + "`: '" + nodeType + "' is not a node type available in the graph.");
+    }
+    var currentNode, parentEdges, i, matchingNodes = [], self = this;
+    // Store nodes that need to be visited in the currentNodes array.
+    var currentNodes = this._getEdgesImplByLabel('in', 'parent').map(function(edgeImpl) {
+        return self._graph.getNodeById(edgeImpl.v);
+    });
+    while (true) {
+        // If nothing is left in the array, we didn't find a parent node.
+        if (currentNodes.length === 0) { break; }
+        currentNode = currentNodes.pop();
+        // Found the parent, return it.
+        if (currentNode.getType() === nodeType) { 
+            if (stopOnFirst) { return currentNode; }
+            else { matchingNodes.push(currentNode); }
+        }
+        // Node was not the right type, check it's parents.
+        parentEdges = currentNode._getEdgesImplByLabel('in', 'parent');
+        for (i = 0; i < parentEdges.length; i++) {
+            currentNodes.push(self._graph.getNodeById(parentEdges[i].v));
+        }
+    }
+    return matchingNodes;
+};
+Node.prototype.getFirstParentOfType = function(nodeType) {
+    return this._getParentsOfType('getFirstParentOfType', nodeType, true);
+};
+Node.prototype.getParentsOfType = function(nodeType) {
+    return this._getParentsOfType('getParentsOfType', nodeType);
 };
 
 // SpanContainer trait functions
