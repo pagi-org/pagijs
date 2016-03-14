@@ -15,10 +15,10 @@ function Graph(id) {
 Graph.prototype.setId = function(id) { this._id = id; };
 Graph.prototype.getId = function() { return this._id; };
 
-Graph.prototype.addSchema = function(uri) {
+Graph.prototype.addSchemaUri = function(uri) {
     this._schemaUris.push(uri);
 };
-Graph.prototype.getSchemas = function() {
+Graph.prototype.getSchemaUris = function() {
     return this._schemaUris.map(function(schema) { return schema; });
 };
 Graph.prototype.setContent = function(content) {
@@ -33,23 +33,23 @@ Graph.prototype.setContentType = function(contentType) {
 Graph.prototype.getContentType = function() {
     return this._contentType;
 };
-Graph.prototype.setNodeTypeAsSpan = function(nodeType) {
-    this._spanNodeTypes[nodeType] = true;
+Graph.prototype.setNodeTypeAsSpan = function(nodeType, attrMap) {
+    this._spanNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSpan = function() {
-    return Object.keys(this._spanNodeTypes).map(function(nt) { return nt; });
+    return JSON.parse(JSON.stringify(this._spanNodeTypes));
 };
-Graph.prototype.setNodeTypeAsSequence = function(nodeType) {
-    this._sequenceNodeTypes[nodeType] = true;
+Graph.prototype.setNodeTypeAsSequence = function(nodeType, attrMap) {
+    this._sequenceNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSequence = function() {
-    return Object.keys(this._sequenceNodeTypes).map(function(nt) { return nt; });
+    return JSON.parse(JSON.stringify(this._sequenceNodeTypes));
 };
-Graph.prototype.setNodeTypeAsSpanContainer = function(nodeType) {
-    this._spanContainerNodeTypes[nodeType] = true;
+Graph.prototype.setNodeTypeAsSpanContainer = function(nodeType, attrMap) {
+    this._spanContainerNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSpanContainer = function() {
-    return Object.keys(this._spanContainerNodeTypes).map(function(nt) { return nt; });
+    return JSON.parse(JSON.stringify(this._spanContainerNodeTypes));
 };
 Graph.prototype.addNode = function(node, connectEdges) {
     if (!(node instanceof Node)) {

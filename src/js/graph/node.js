@@ -35,6 +35,9 @@ Node.prototype.addProp = function(type, key, val) {
 Node.prototype.getProp = function(key) {
     return this._properties[key] && this._properties[key].val;
 };
+Node.prototype.getProps = function() {
+    return JSON.parse(JSON.stringify(this._properties));
+};
 Node.prototype.addEdge = function(targetId, targetType, edgeType) {
     this._edges.push(new Edge(targetId, targetType, edgeType));
 };
@@ -47,13 +50,13 @@ Node.prototype.getEdgeByType = function(edgeType) {
     });
 };
 Node.prototype.hasTraitSpan = function() {
-    return this._graph.getNodeTypesAsSpan().indexOf(this.getType()) !== -1;
+    return this._graph.getNodeTypesAsSpan()[this.getType()] !== undefined;
 };
 Node.prototype.hasTraitSequence = function() {
-    return this._graph.getNodeTypesAsSequence().indexOf(this.getType()) !== -1;
+    return this._graph.getNodeTypesAsSequence()[this.getType()] !== undefined;
 };
 Node.prototype.hasTraitSpanContainer = function() {
-    return this._graph.getNodeTypesAsSpanContainer().indexOf(this.getType()) !== -1;
+    return this._graph.getNodeTypesAsSpanContainer()[this.getType()] !== undefined;
 };
 Node.prototype.setGraph = function(graph) {
     this._graph = graph;

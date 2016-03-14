@@ -1,4 +1,3 @@
-return;
 var assert = require('assert');
 var GraphParserXml = require('../../src/js/graph/parsers/graphParserXml');
 

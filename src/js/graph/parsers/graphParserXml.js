@@ -25,7 +25,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
                 break;
             case 'schema':
                 try {
-                    graph.addSchema(tag.attributes.uri.value);
+                    graph.addSchemaUri(tag.attributes.uri.value);
                 } catch (err) {
                     console.warn("Graph schema does not contain a uri. [" + err + "]");
                 }
@@ -35,7 +35,13 @@ GraphParserXml.prototype.parse = function(readableStream) {
             case 'asSpanContainer':
                 try {
                     var cap = (tag.name[0].toUpperCase()) + tag.name.slice(1, tag.name.length);
-                    graph['setNodeType' + cap](tag.attributes.nodeType.value);
+                    var traitAttrs = { };
+                    // Capture all the extra attributes for a trait.
+                    Object.keys(tag.attributes).forEach(function(attr) {
+                        if (attr === 'nodeType') { return; }
+                        traitAttrs[attr] = tag.attributes[attr].value; 
+                    });
+                    graph['setNodeType' + cap](tag.attributes.nodeType.value, traitAttrs);
                 } catch (err) {
                     console.warn("There was an error parsing " + tag.name + ". [" + err + "]");
                 }

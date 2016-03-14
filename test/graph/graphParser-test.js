@@ -1,6 +1,5 @@
-return;
 var assert = require('assert');
-var testStream = require('../test-stream/test-stream');
+var testStream = require('../test-stream');
 var GraphParser = require('../../src/js/graph/parsers/graphParser');
 var Graph = require('../../src/js/graph/graph');
 
