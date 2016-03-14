@@ -1,5 +1,9 @@
+var xmlEscape = require('xml-escape');
 var Graph = require('../graph');
 var TAB = "    ";
+var es = function(aVar) {
+    return xmlEscape(aVar.toString());
+};
 
 function GraphSerializerXml() { }
 GraphSerializerXml.prototype.serializeTrait = function(nodeTypeMap, tagName) {
@@ -7,22 +11,22 @@ GraphSerializerXml.prototype.serializeTrait = function(nodeTypeMap, tagName) {
     Object.keys(nodeTypeMap).map(function(nodeType) {
         var attrs = nodeTypeMap[nodeType];
         var attrStr = Object.keys(attrs).map(function(key) {
-            return key + '="' + attrs[key] + '"';
+            return key + '="' + es(attrs[key]) + '"';
         }).join(' ');
         if (attrStr.length > 0) { attrStr = ' ' + attrStr; }
-        lines.push(TAB + '<' + tagName + attrStr + ' nodeType="' + nodeType + '"></' + tagName + '>');
+        lines.push(TAB + '<' + tagName + attrStr + ' nodeType="' + es(nodeType) + '"/>');
     });
     return lines.join("\n");
 };
 GraphSerializerXml.prototype.serializeNode = function(node) {
-    var lines = [TAB + '<node id="' + node.getId() + '" type="' + node.getType() + '">'];
+    var lines = [TAB + '<node id="' + es(node.getId()) + '" type="' + es(node.getType()) + '">'];
     var props = node.getProps();
     Object.keys(props).forEach(function(key) {
         var prop = props[key];
-        lines.push(TAB+TAB + '<' + prop.type + 'Prop v="' + prop.val + '" k="' + prop.key + '"></' + prop.type + 'Prop>');
+        lines.push(TAB+TAB + '<' + prop.type + 'Prop v="' + es(prop.val) + '" k="' + es(prop.key) + '"/>');
     });
     node.getEdges().forEach(function(edge) {
-        lines.push(TAB+TAB + '<edge toType="' + edge.getTargetType() + '" to="' + edge.getTargetId() + '" type="' + edge.getEdgeType() + '"></edge>');
+        lines.push(TAB+TAB + '<edge toType="' + es(edge.getTargetType()) + '" to="' + es(edge.getTargetId()) + '" type="' + es(edge.getEdgeType()) + '"/>');
     });
     lines.push(TAB + '</node>');
     return lines.join("\n");
@@ -33,16 +37,14 @@ GraphSerializerXml.prototype.serialize = function(graph) {
     }
     var self = this;
     var lines = ['<?xml version="1.0" encoding="UTF-8"?>'];
-    var docLine = '<document xmlns="http://pagi.org/stream" id="' + graph.getId() + '" version="' + graph.getVersion() + '">';
-    var schemas = '';
-    graph.getSchemaUris().forEach(function(schemaUri) {
-        schemas += '<schema uri="' + schemaUri + '"></schema>';
+    lines.push('<document xmlns="http://pagi.org/stream" id="' + es(graph.getId()) + '" version="' + es(graph.getVersion()) + '">');
+    graph.getSchemaUris().map(function(schemaUri) {
+        lines.push('<schema uri="' + es(schemaUri) + '"></schema>');
     });
-    lines.push(docLine + schemas);
     lines.push(this.serializeTrait(graph.getNodeTypesAsSpan(), 'asSpan'));
     lines.push(this.serializeTrait(graph.getNodeTypesAsSequence(), 'asSequence'));
     lines.push(this.serializeTrait(graph.getNodeTypesAsSpanContainer(), 'asSpanContainer'));
-    lines.push(TAB + '<content contentType="' + graph.getContentType() + '">' + graph.getContent() + '</content>');
+    lines.push(TAB + '<content contentType="' + es(graph.getContentType()) + '">' + es(graph.getContent()) + '</content>');
     lines.push("");
     graph.getNodes().forEach(function(node) {
         lines.push(self.serializeNode(node));
