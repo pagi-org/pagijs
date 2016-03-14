@@ -26,12 +26,12 @@ describe('GraphSerializer', function() {
         // The test-suite does not store nodes in any sorted order
         // so checking aginst the xml docs with an exported graph
         // will always fail for the time being.
-        // it('matches the xml file', function() {
-        //     var serialized = GraphSerializer.serialize(graph);
-        //     var gold = stream.getXml();
-        //     fs.writeFileSync('/tmp/schema-serialize-' + stream.name + '.xml', serialized);
-        //     fs.writeFileSync('/tmp/schema-serialize-' + stream.name + '-gold.xml', gold);
-        //     assert.equal(serialized, gold);
-        // });
+        it('matches the xml file', function() {
+            var serialized = GraphSerializer.serialize(graph);
+            var gold = stream.getXml();
+            fs.writeFileSync('/tmp/schema-serialize-' + stream.name + '.xml', serialized);
+            fs.writeFileSync('/tmp/schema-serialize-' + stream.name + '-gold.xml', gold);
+            assert.equal(serialized, gold);
+        });
     });
 });

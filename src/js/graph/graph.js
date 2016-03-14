@@ -3,6 +3,7 @@ var GraphImpl = require("graphlib").Graph;
 
 function Graph(id) {
     this._id = id || null;
+    this._version = '2.0';
     this._schemaUris = [];
     this._content = null;
     this._contentType = null;
@@ -14,6 +15,7 @@ function Graph(id) {
 }
 Graph.prototype.setId = function(id) { this._id = id; };
 Graph.prototype.getId = function() { return this._id; };
+Graph.prototype.getVersion = function() { return this._version; };
 
 Graph.prototype.addSchemaUri = function(uri) {
     this._schemaUris.push(uri);

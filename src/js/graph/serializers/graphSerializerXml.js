@@ -29,11 +29,11 @@ GraphSerializerXml.prototype.serializeNode = function(node) {
 };
 GraphSerializerXml.prototype.serialize = function(graph) {
     if (!(graph instanceof Graph)) {
-        throw Error("`Graph.SerializeXml.serialize` expects a Graph instance.");
+        throw Error("`GraphSerializerXml.serialize` expects a Graph instance.");
     }
     var self = this;
     var lines = ['<?xml version="1.0" encoding="UTF-8"?>'];
-    var docLine = '<document xmlns="http://pagi.org/stream" id="' + graph.getId() + '" version="2.0">';
+    var docLine = '<document xmlns="http://pagi.org/stream" id="' + graph.getId() + '" version="' + graph.getVersion() + '">';
     var schemas = '';
     graph.getSchemaUris().forEach(function(schemaUri) {
         schemas += '<schema uri="' + schemaUri + '"></schema>';
