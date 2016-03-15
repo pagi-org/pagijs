@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:document xmlns:p="http://pagi.org/stream" id="zh_hague"><p:schema uri="http://pagi.org/testSuite/extTokFull"></p:schema>
+	<p:asSpan nodeType="TOK">
+	</p:asSpan>
+	<p:asSequence nodeType="TOK">
+	</p:asSequence>
+	<p:asSequence nodeType="SB">
+	</p:asSequence>
+	<p:asSpanContainer spanType="TOK" nodeType="SB">
+	</p:asSpanContainer>
+	<p:content contentType="text/plain">海牙, 官方亦稱 s-Gravenhage (ˈsxraːvə(n)ˌɦaːɣə （幫助·關於）)）是荷蘭第三大城市，在阿姆斯特丹和鹿特丹之後，人口48萬5千人（2009年5月31日），大海牙地區人口約101萬人，面積約100平方公里。海牙位在西荷蘭的南荷蘭省，同時也是該省省會。鸛鳥徽是海牙的市徽。
+
+雖然海牙並不是荷蘭的首都，因荷蘭的憲法規定首都是阿姆斯特丹，但它是荷蘭中央政府所在地，而且贝娅特丽克丝女王居住在海牙並於此辦公。所有的中央政府機關與外國使館幾乎都位於此，另外最高法院與許多組織也都在此辦公，例如荷蘭城市自治協會VNG。
+</p:content>
+
+	<p:node id="33:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="33" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="34:6" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="32:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="32" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="33:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="152:117" type="TOK">
+		<p:intProp v="117" k="length"></p:intProp>
+		<p:intProp v="152" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+	</p:node>
+	<p:node id="2:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="2" k="start"></p:intProp>
+		<p:strProp v="," k="pos"></p:strProp>
+		<p:edge to="4:4" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="22:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="22" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="23:8" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="0:2" type="TOK">
+		<p:intProp v="2" k="length"></p:intProp>
+		<p:intProp v="0" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="2:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="48:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="48" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="49:101" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="0" type="SB">
+		<p:edge to="0:2" toType="TOK" type="first"></p:edge>
+		<p:edge to="152:117" toType="TOK" type="last"></p:edge>
+	</p:node>
+	<p:node id="9:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="9" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="10:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="49:101" type="TOK">
+		<p:intProp v="101" k="length"></p:intProp>
+		<p:intProp v="49" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="152:117" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="34:6" type="TOK">
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:intProp v="34" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="41:7" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="4:4" type="TOK">
+		<p:intProp v="4" k="length"></p:intProp>
+		<p:intProp v="4" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="9:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="10:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="10" k="start"></p:intProp>
+		<p:strProp v="SYM" k="pos"></p:strProp>
+		<p:edge to="11:10" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="31:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="31" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="32:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="11:10" type="TOK">
+		<p:intProp v="10" k="length"></p:intProp>
+		<p:intProp v="11" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="22:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="41:7" type="TOK">
+		<p:intProp v="7" k="length"></p:intProp>
+		<p:intProp v="41" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="48:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="23:8" type="TOK">
+		<p:intProp v="8" k="length"></p:intProp>
+		<p:intProp v="23" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="31:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+</p:document>

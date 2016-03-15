@@ -20,12 +20,6 @@ describe("roundtrip schema parse", function () {
 						//var s = "----------------------------------------------------------\n";
 						//print ("\n", s, "    ", schema.simpleName, "\n", s,
 						//	   flatRep, "\n", s, s);
-						var match = schema.getFlatRepresentation() === flatRep;
-						if (!match) {
-							console.log(schema.getFlatRepresentation());
-							console.log(flatRep);
-						}
-
 						assert.equal(schema.getFlatRepresentation(), flatRep);
 					}).done(done, done);
 				});

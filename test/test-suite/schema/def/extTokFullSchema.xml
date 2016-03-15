@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pagis xmlns="http://pagi.org/schema" id="http://pagi.org/testSuite/extTokFull">
+	<extends id="http://pagi.org/testSuite/extTok"/>
+	<extends id="http://pagi.org/testSuite/extTokCoref"/>
+
+</pagis>

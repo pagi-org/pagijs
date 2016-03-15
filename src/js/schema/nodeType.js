@@ -3,8 +3,9 @@ var propertySpec = require("./propertySpec.js");
 var edgeSpec = require("./edgeSpec.js");
 var constants = require("./constants.js");
 
-function NodeType(name, description, propertySpecMap, edgeSpecMap, traitSpan, traitSequence, traitSpanContainer, spanType) {
+function NodeType(name, readableName, description, propertySpecMap, edgeSpecMap, traitSpan, traitSequence, traitSpanContainer, spanType) {
 	this.name = name;
+	this.readableName = readableName;
 	this.description = description;
 	this.propertySpecMap = propertySpecMap;
 	this.edgeSpecMap = edgeSpecMap;
@@ -63,6 +64,11 @@ function mergeParentSpecs(thisMap, parentMap, callback) {
 
 NodeTypeBuilder.prototype.withName = function(name) {
 	this.name = name;
+	return this;
+};
+
+NodeTypeBuilder.prototype.withReadableName = function(readableName) {
+	this.readableName = readableName;
 	return this;
 };
 
@@ -141,7 +147,7 @@ NodeTypeBuilder.prototype.build = function() {
 	if (this.name === undefined) {
 		throw Error("No name supplied for NodeType.");
 	}
-	return new NodeType(this.name, this.description, Object.freeze(this.propertySpecMap), Object.freeze(this.edgeSpecMap),
+	return new NodeType(this.name, this.readableName, this.description, Object.freeze(this.propertySpecMap), Object.freeze(this.edgeSpecMap),
 	                    this.traitSpan, this.traitSequence, this.traitSpanContainer, this.spanType);
 };
 

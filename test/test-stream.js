@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var streamTestRoot = 'build/test-suite/stream/';
+var streamTestRoot = __dirname + '/test-suite/stream/';
 
 function TestStream(name) {
   var xmlTestRoot = streamTestRoot + 'xml/';
@@ -48,7 +48,7 @@ function TestStream(name) {
     return fs.createReadStream(pbfFeaturesTestRoot + this.name + ".pbf");
   };
 
-  
+
 
   /**
    * Returns a string containing the text of the file.

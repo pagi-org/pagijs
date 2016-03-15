@@ -1,8 +1,9 @@
 var util = require("../util.js");
 var constants = require("./constants.js");
 
-function EdgeSpec(name, description, targetNodeTypes, minArity, maxArity, targetMinArity, targetMaxArity) {
+function EdgeSpec(name, readableName, description, targetNodeTypes, minArity, maxArity, targetMinArity, targetMaxArity) {
 	this.name = name;
+	this.readableName = readableName;
 	this.description = description;
 	this.targetNodeTypes = targetNodeTypes;
 	this.minArity = minArity;
@@ -22,6 +23,11 @@ function EdgeSpecBuilder() {
 
 EdgeSpecBuilder.prototype.withName = function(name) {
 	this.name = name;
+	return this;
+};
+
+EdgeSpecBuilder.prototype.withReadableName = function(readableName) {
+	this.readableName = readableName;
 	return this;
 };
 
@@ -74,7 +80,7 @@ EdgeSpecBuilder.prototype.build = function() {
 	if (this.targetNodeTypes.length <= 0) {
 		throw Error("At least 1 target node type must be specified for edge spec '" + this.name + "'.");
 	}
-	return new EdgeSpec(this.name, this.description, this.targetNodeTypes, this.minArity, this.maxArity, this.targetMinArity, this.targetMaxArity);
+	return new EdgeSpec(this.name, this.readableName, this.description, this.targetNodeTypes, this.minArity, this.maxArity, this.targetMinArity, this.targetMaxArity);
 };
 
 module.exports.createBuilder = function() {

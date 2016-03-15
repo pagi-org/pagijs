@@ -1,0 +1,33 @@
+All of the documents in the test suite are freely copyable.
+
+Sources:
+
+The following group are all sourced from wikipedia. They are the first couple of paragraphs from the the article "The Hague".
+
+ar_hague.txt - http://ar.wikipedia.org/wiki/The_Hague
+es_hague.txt - http://es.wikipedia.org/wiki/The_Hague
+fa_hague.txt - http://fa.wikipedia.org/wiki/The_Hague
+fr_hague.txt - http://fr.wikipedia.org/wiki/The_Hague
+ru_hague.txt - http://ru.wikipedia.org/wiki/The_Hague
+zh_hague.txt - http://zh.wikipedia.org/wiki/The_Hague
+
+The following is a group of nursery rhymes, copied as excerpts out of project gutenberg books.
+  http://www.gutenberg.org/files/20511/20511-h/20511-h.htm
+
+crooked.txt - http://www.gutenberg.org/files/20511/20511-h/20511-h.htm#Page_71
+diddle.txt - http://www.gutenberg.org/files/20511/20511-h/20511-h.htm#Page_100
+mary.txt - http://www.gutenberg.org/files/20511/20511-h/20511-h.htm#Page_68
+peter.txt - http://www.gutenberg.org/files/20511/20511-h/20511-h.htm#Page_57
+sixpence.txt - http://www.gutenberg.org/files/20511/20511-h/20511-h.htm#Page_70
+
+The following is a book from project gutenberg.
+
+huckfinn.txt - http://www.gutenberg.org/cache/epub/76/pg76.txt
+
+The following two documents are original and licensed under the same terms as this spec.
+
+testDoc1.txt
+testDoc2.txt
+
+All pbf and xml documents are licensed under the same terms as this spec.
+
