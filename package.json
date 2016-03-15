@@ -17,7 +17,8 @@
     "cleanBuild": "gulp",
     "build": "gulp build",
     "test": "gulp test",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "debug": "node debug $(which gulp) watch"
   },
   "devDependencies": {
     "del": "^1.2.0",
@@ -30,12 +31,18 @@
     "gulp-rename": "^1.2.0",
     "gulp-untar2": "0.0.6",
     "jshint-stylish": "^0.4.0",
+    "libxslt": "^0.6.3",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.1.2",
     "sprintf-js": "^1.0.3"
   },
   "dependencies": {
+    "graphlib": "^2.1.0",
     "q": "^1.4.1",
-    "sax": "^0.6.0"
+    "sax": "^0.6.0",
+    "xml-escape": "^1.1.0"
+  },
+  "engines": { 
+    "node": ">=0.10.3 <0.12" 
   }
 }

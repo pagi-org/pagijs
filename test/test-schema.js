@@ -81,18 +81,18 @@ function toFlatString(schema)
     var appendNodeType = function (nodeTypeName)
     {
         var nodeType = schema.nodeTypeMap[nodeTypeName];
-        sb.append("\n").append("NODETYPE ").append(nodeType.name).append(" ").append(nodeType.idGeneratorPattern);
-        if (nodeType.traitSequence)
-        {
+        sb.append("\n").append("NODETYPE ").append(nodeType.name);
+        if (nodeType.traitSequence) {
             sb.append(" SEQUENCE");
         }
-        if (nodeType.traitSpan)
-        {
+        if (nodeType.traitSpan) {
             sb.append(" SPAN");
         }
-        if (nodeType.traitSpanContainer)
-        {
-            sb.append(" SPAN_CONTAINER ").append(nodeType.spanType)
+        if (nodeType.traitSpanContainer) {
+            sb.append(" SPAN_CONTAINER ").append(nodeType.spanType);
+        }
+        if (nodeType.description) {
+            sb.append(" " + nodeType.description);
         }
         sb.append("\n");
         var appendPropSpec = function (propSpecName)
@@ -103,6 +103,9 @@ function toFlatString(schema)
                 .append(propSpec.minArity).append(" ")
                 .append(maxArityString(propSpec.maxArity)).append(" ")
                 .append(propSpec.valueType.name);
+            if (propSpec.description) {
+                sb.append(" " + propSpec.description);
+            }
             switch (propSpec.valueType)
             {
                 case pagi.schema.ValueType.INTEGER:
@@ -144,6 +147,9 @@ function toFlatString(schema)
             {
                 sb.append(" ").append(targetType);
             });
+            if (edgeSpec.description) {
+                sb.append(" " + edgeSpec.description);
+            }
             sb.append("\n");
         };
         forSortedKeys(nodeType.edgeSpecMap, appendEdgeSpec);
@@ -166,7 +172,7 @@ var schemas = lines.map(function(line) {
         return new TestSchema(parts[0], parts[1]);
     }
 }).filter(function(schema) {
-    return schema != undefined;
+    return schema !== undefined;
 });
 
 var schemaMap = {};

@@ -48,14 +48,16 @@ function TestStream(name) {
     return fs.createReadStream(pbfFeaturesTestRoot + this.name + ".pbf");
   };
 
-  
+  this.getXml = function() {
+      return fs.readFileSync(xmlTestRoot + this.name + ".xml", { encoding: 'utf8' });
+  };
 
   /**
    * Returns a string containing the text of the file.
    */
   this.getText = function() {
     return fs.readFileSync(txtTestRoot + this.name + ".txt", {encoding: 'utf8'});
-  }
+  };
 }
 
 function getStreamsFromListFile(listFile)
