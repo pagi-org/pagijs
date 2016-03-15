@@ -44,6 +44,8 @@ function doParse(readableStream, locator) {
 	var deferred = Q.defer();
 	var schemaBuilder = schema.createBuilder();
 	var nodeBuilder, propSpecBuilder, edgeSpecBuilder, currentTag, valueType;
+	var textContent = '';
+	var inDescriptionTag = false;
 	var delegatePromises = [];
 
 	var streamParser = sax.createStream(true, {xmlns: true, position: true});
@@ -158,6 +160,15 @@ function doParse(readableStream, locator) {
 					edgeSpecBuilder.withTargetNodeType(tag.attributes.name.value);
 				}
 				break;
+			case "description":
+				inDescriptionTag = true;
+				textContent = '';
+				break;
+		}
+	});
+	streamParser.on("text", function(text) {
+		if (nodeBuilder && inDescriptionTag) {
+			textContent += text.toString();
 		}
 	});
     streamParser.on('text', function(text) {
@@ -189,6 +200,17 @@ function doParse(readableStream, locator) {
 					schemaBuilder.withNodeType(nodeBuilder.build());
 					nodeBuilder = null;
 				}
+				break;
+			case "description":
+				if (propSpecBuilder) {
+					propSpecBuilder.withDescription(textContent);
+				} else if (edgeSpecBuilder) {
+					edgeSpecBuilder.withDescription(textContent);
+				} else if (nodeBuilder) {
+					nodeBuilder.withDescription(textContent);
+				}
+
+				inDescriptionTag = false;
 				break;
 			case "enumProperty":
 			case "stringProperty":

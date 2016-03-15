@@ -39,13 +39,11 @@ function TestSchema(id, simpleName) {
   };
 
 }
-function maxArityString(value)
-{
+function maxArityString(value) {
     return value < 0 ? "UNBOUNDED" : String(value);
 }
 
-function formatFloat(float)
-{
+function formatFloat(float) {
 	var result = sprintf("%.7e", float);
     result = result.replace(/e[+\-].$/, function(exp) {
 	    var s = exp.substring(0, 2) + "0" + exp.substring(2, 3);
@@ -54,34 +52,29 @@ function formatFloat(float)
     return result;
 }
 
-function toFlatString(schema)
-{
+function toFlatString(schema) {
     var sb = new util.StringBuilder();
     sb.append(schema.id).append("\n");
 
-    var forSorted = function (arr, appendCallback)
-    {
+    var forSorted = function (arr, appendCallback) {
         var newArr = arr.slice();
         newArr.sort().forEach(appendCallback);
     };
-    var forSortedKeys = function (map, appendCallback)
-    {
+    var forSortedKeys = function (map, appendCallback) {
         var keys = Object.getOwnPropertyNames(map);
         keys.sort().forEach(appendCallback);
     };
 
     // EXTENDS section
-    forSorted(schema.parentSchemas, function (parent)
-    {
+    forSorted(schema.parentSchemas, function (parent) {
         sb.append("EXTENDS ").append(parent.id).append("\n");
     });
 
 
     // NODETYPE sections
-    var appendNodeType = function (nodeTypeName)
-    {
+    var appendNodeType = function (nodeTypeName) {
         var nodeType = schema.nodeTypeMap[nodeTypeName];
-        sb.append("\n").append("NODETYPE ").append(nodeType.name);
+        sb.append("\n").append("NODETYPE ").append(nodeType.name).append(nodeType.description ? ' ' + nodeType.description : null);
         if (nodeType.traitSequence) {
             sb.append(" SEQUENCE");
         }
@@ -91,23 +84,16 @@ function toFlatString(schema)
         if (nodeType.traitSpanContainer) {
             sb.append(" SPAN_CONTAINER ").append(nodeType.spanType);
         }
-        if (nodeType.description) {
-            sb.append(" " + nodeType.description);
-        }
         sb.append("\n");
-        var appendPropSpec = function (propSpecName)
-        {
+        var appendPropSpec = function (propSpecName) {
             var propSpec = nodeType.propertySpecMap[propSpecName];
             sb.append("PROP ")
                 .append(propSpecName).append(" ")
                 .append(propSpec.minArity).append(" ")
                 .append(maxArityString(propSpec.maxArity)).append(" ")
-                .append(propSpec.valueType.name);
-            if (propSpec.description) {
-                sb.append(" " + propSpec.description);
-            }
-            switch (propSpec.valueType)
-            {
+                .append(propSpec.valueType.name)
+                .append(propSpec.description ? ' ' + propSpec.description : null);
+            switch (propSpec.valueType) {
                 case pagi.schema.ValueType.INTEGER:
                     sb.append(" ").append(propSpec.restrictions.minRange);
                     sb.append(" ").append(propSpec.restrictions.maxRange);
@@ -120,8 +106,7 @@ function toFlatString(schema)
                     // nothing interesting to do here
                     break;
                 case pagi.schema.ValueType.STRING:
-                    if (propSpec.restrictions && propSpec.restrictions.items)
-                    {
+                    if (propSpec.restrictions && propSpec.restrictions.items) {
                         forSorted(propSpec.restrictions.items, function (item)
                         {
                             sb.append(" ");
@@ -134,8 +119,7 @@ function toFlatString(schema)
         };
         forSortedKeys(nodeType.propertySpecMap, appendPropSpec);
 
-        var appendEdgeSpec = function (edgeSpecName)
-        {
+        var appendEdgeSpec = function (edgeSpecName) {
             var edgeSpec = nodeType.edgeSpecMap[edgeSpecName];
             sb.append("EDGE ");
             sb.append(edgeSpecName).append(" ");
@@ -143,13 +127,10 @@ function toFlatString(schema)
             sb.append(maxArityString(edgeSpec.maxArity)).append(" ");
             sb.append(edgeSpec.targetMinArity).append(" ");
             sb.append(maxArityString(edgeSpec.targetMaxArity));
-            forSorted(edgeSpec.targetNodeTypes, function (targetType)
-            {
+            forSorted(edgeSpec.targetNodeTypes, function (targetType) {
                 sb.append(" ").append(targetType);
             });
-            if (edgeSpec.description) {
-                sb.append(" " + edgeSpec.description);
-            }
+            sb.append(edgeSpec.description ? ' ' + edgeSpec.description : null);
             sb.append("\n");
         };
         forSortedKeys(nodeType.edgeSpecMap, appendEdgeSpec);
@@ -163,12 +144,9 @@ var lines = fs.readFileSync(schemaTestRoot + "full.list", {encoding: 'utf8'}).sp
 
 var schemas = lines.map(function(line) {
     var parts = line.split(" ");
-    if (parts.length < 2)
-    {
+    if (parts.length < 2) {
         return undefined;
-    }
-    else
-    {
+    } else {
         return new TestSchema(parts[0], parts[1]);
     }
 }).filter(function(schema) {
@@ -181,8 +159,7 @@ for (var i = 0; i < schemas.length; i++) {
     schemaMap[schemas[i].id] = schemas[i];
 }
 
-var locator = function (id, parser)
-{
+var locator = function (id, parser) {
     var testSchema = schemaMap[id];
     return testSchema ? parser(testSchema.getXmlStream()) : Q.reject("No schema with id " + id + " is available.");
 };
