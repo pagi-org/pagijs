@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/pagi-org/pagijs.svg)](https://travis-ci.org/pagi-org/pagijs)
+[![Build Status](https://travis-ci.org/digitalreasoning/pagijs.svg)](https://travis-ci.org/digitalreasoning/pagijs)
 pagijs
 ======
 
