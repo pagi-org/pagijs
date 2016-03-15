@@ -1,156 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<p:document xmlns:p="http://pagi.org/stream" id="testDoc2"><p:schema uri="http://pagi.org/testSuite/simpleProps"></p:schema>
+<p:document xmlns:p="http://pagi.org/stream" id="testDoc2" version="2.0"><p:schema uri="http://pagi.org/testSuite/simpleProps"></p:schema>
 	<p:content contentType="text/plain">Some random text that doesn't really matter. Really, it doesn't.
 </p:content>
 
-	<p:node id="edge" type="MY_NODE">
+	<p:node id="0" type="MY_NODE">
 		<p:strProp v="edge" k="value"></p:strProp>
-		<p:edge to="1ip" toType="MY_NODE" type="bff"></p:edge>
+		<p:edge toType="MY_NODE" to="1" type="bff"></p:edge>
 	</p:node>
-	<p:node id="1ip" type="MY_NODE">
+	<p:node id="1" type="MY_NODE">
 		<p:strProp v="1ip" k="value"></p:strProp>
 		<p:intProp v="45" k="confidence"></p:intProp>
 	</p:node>
-	<p:node id="2ip" type="MY_NODE">
+	<p:node id="2" type="MY_NODE">
 		<p:strProp v="2ip" k="value"></p:strProp>
 		<p:intProp v="45" k="confidence"></p:intProp>
 	</p:node>
-	<p:node id="3ip" type="MY_NODE">
+	<p:node id="3" type="MY_NODE">
 		<p:strProp v="3ip" k="value"></p:strProp>
 		<p:intProp k="confidence">
 			<p:val int="45"></p:val>
 			<p:val int="88"></p:val>
 		</p:intProp>
 	</p:node>
-	<p:node id="1if" type="MY_NODE">
+	<p:node id="4" type="MY_NODE">
 		<p:strProp v="1if" k="value"></p:strProp>
 		<p:intFeat v="566" k="probability"></p:intFeat>
 	</p:node>
-	<p:node id="2if" type="MY_NODE">
+	<p:node id="5" type="MY_NODE">
 		<p:strProp v="2if" k="value"></p:strProp>
 		<p:intFeat v="566" k="probability"></p:intFeat>
 	</p:node>
-	<p:node id="3if" type="MY_NODE">
+	<p:node id="6" type="MY_NODE">
 		<p:strProp v="3if" k="value"></p:strProp>
 		<p:intFeat k="probability">
 			<p:val int="566"></p:val>
 			<p:val int="599"></p:val>
 		</p:intFeat>
 	</p:node>
-	<p:node id="1fp" type="MY_NODE">
+	<p:node id="7" type="MY_NODE">
 		<p:strProp v="1fp" k="value"></p:strProp>
 		<p:floatProp v="0.45" k="precision"></p:floatProp>
 	</p:node>
-	<p:node id="2fp" type="MY_NODE">
+	<p:node id="8" type="MY_NODE">
 		<p:strProp v="2fp" k="value"></p:strProp>
 		<p:floatProp v="0.45" k="precision"></p:floatProp>
 	</p:node>
-	<p:node id="3fp" type="MY_NODE">
+	<p:node id="9" type="MY_NODE">
 		<p:strProp v="3fp" k="value"></p:strProp>
 		<p:floatProp k="precision">
 			<p:val float="0.45"></p:val>
 			<p:val float="0.88"></p:val>
 		</p:floatProp>
 	</p:node>
-	<p:node id="1ff" type="MY_NODE">
+	<p:node id="10" type="MY_NODE">
 		<p:strProp v="1ff" k="value"></p:strProp>
 		<p:floatFeat v="0.566" k="probability"></p:floatFeat>
 	</p:node>
-	<p:node id="2ff" type="MY_NODE">
+	<p:node id="11" type="MY_NODE">
 		<p:strProp v="2ff" k="value"></p:strProp>
 		<p:floatFeat v="0.566" k="probability"></p:floatFeat>
 	</p:node>
-	<p:node id="3ff" type="MY_NODE">
+	<p:node id="12" type="MY_NODE">
 		<p:strProp v="3ff" k="value"></p:strProp>
 		<p:floatFeat k="probability">
 			<p:val float="0.566"></p:val>
 			<p:val float="0.599"></p:val>
 		</p:floatFeat>
 	</p:node>
-	<p:node id="1bp" type="MY_NODE">
+	<p:node id="13" type="MY_NODE">
 		<p:strProp v="1bp" k="value"></p:strProp>
 		<p:boolProp v="true" k="enabled"></p:boolProp>
 	</p:node>
-	<p:node id="2bp" type="MY_NODE">
+	<p:node id="14" type="MY_NODE">
 		<p:strProp v="2bp" k="value"></p:strProp>
 		<p:boolProp v="false" k="enabled"></p:boolProp>
 	</p:node>
-	<p:node id="3bp" type="MY_NODE">
+	<p:node id="15" type="MY_NODE">
 		<p:strProp v="3bp" k="value"></p:strProp>
 		<p:boolProp k="enabled">
 			<p:val bool="false"></p:val>
 			<p:val bool="true"></p:val>
 		</p:boolProp>
 	</p:node>
-	<p:node id="1bf" type="MY_NODE">
+	<p:node id="16" type="MY_NODE">
 		<p:strProp v="1bf" k="value"></p:strProp>
 		<p:boolFeat v="false" k="probability"></p:boolFeat>
 	</p:node>
-	<p:node id="2bf" type="MY_NODE">
+	<p:node id="17" type="MY_NODE">
 		<p:strProp v="2bf" k="value"></p:strProp>
 		<p:boolFeat v="true" k="probability"></p:boolFeat>
 	</p:node>
-	<p:node id="3bf" type="MY_NODE">
+	<p:node id="18" type="MY_NODE">
 		<p:strProp v="3bf" k="value"></p:strProp>
 		<p:boolFeat k="probability">
 			<p:val bool="true"></p:val>
 			<p:val bool="false"></p:val>
 		</p:boolFeat>
 	</p:node>
-	<p:node id="1sp" type="MY_NODE">
+	<p:node id="19" type="MY_NODE">
 		<p:strProp v="1sp" k="value"></p:strProp>
 		<p:strProp v="value1" k="labeled"></p:strProp>
 	</p:node>
-	<p:node id="2sp" type="MY_NODE">
+	<p:node id="20" type="MY_NODE">
 		<p:strProp v="2sp" k="value"></p:strProp>
 		<p:strProp v="value2" k="labeled"></p:strProp>
 	</p:node>
-	<p:node id="3sp" type="MY_NODE">
+	<p:node id="21" type="MY_NODE">
 		<p:strProp v="3sp" k="value"></p:strProp>
 		<p:strProp k="labeled">
 			<p:val str="value2"></p:val>
 			<p:val str="value1"></p:val>
 		</p:strProp>
 	</p:node>
-	<p:node id="1sf" type="MY_NODE">
+	<p:node id="22" type="MY_NODE">
 		<p:strProp v="1sf" k="value"></p:strProp>
 		<p:strFeat v="value2" k="probability"></p:strFeat>
 	</p:node>
-	<p:node id="2sf" type="MY_NODE">
+	<p:node id="23" type="MY_NODE">
 		<p:strProp v="2sf" k="value"></p:strProp>
 		<p:strFeat v="value1" k="probability"></p:strFeat>
 	</p:node>
-	<p:node id="3sf" type="MY_NODE">
+	<p:node id="24" type="MY_NODE">
 		<p:strProp v="3sf" k="value"></p:strProp>
 		<p:strFeat k="probability">
 			<p:val str="value1"></p:val>
 			<p:val str="value2"></p:val>
 		</p:strFeat>
 	</p:node>
-	<p:node id="1ep" type="MY_NODE">
+	<p:node id="25" type="MY_NODE">
 		<p:strProp v="1ep" k="value"></p:strProp>
 		<p:strProp v="value1" k="selected"></p:strProp>
 	</p:node>
-	<p:node id="2ep" type="MY_NODE">
+	<p:node id="26" type="MY_NODE">
 		<p:strProp v="2ep" k="value"></p:strProp>
 		<p:strProp v="value2" k="selected"></p:strProp>
 	</p:node>
-	<p:node id="3ep" type="MY_NODE">
+	<p:node id="27" type="MY_NODE">
 		<p:strProp v="3ep" k="value"></p:strProp>
 		<p:strProp k="selected">
 			<p:val str="value2"></p:val>
 			<p:val str="value1"></p:val>
 		</p:strProp>
 	</p:node>
-	<p:node id="1ef" type="MY_NODE">
+	<p:node id="28" type="MY_NODE">
 		<p:strProp v="1ef" k="value"></p:strProp>
 		<p:strFeat v="value2" k="probability"></p:strFeat>
 	</p:node>
-	<p:node id="2ef" type="MY_NODE">
+	<p:node id="29" type="MY_NODE">
 		<p:strProp v="2ef" k="value"></p:strProp>
 		<p:strFeat v="value1" k="probability"></p:strFeat>
 	</p:node>
-	<p:node id="3ef" type="MY_NODE">
+	<p:node id="30" type="MY_NODE">
 		<p:strProp v="3ef" k="value"></p:strProp>
 		<p:strFeat k="probability">
 			<p:val str="value1"></p:val>
