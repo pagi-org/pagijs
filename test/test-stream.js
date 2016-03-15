@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var streamTestRoot = 'build/test-suite/stream/';
+var streamTestRoot = __dirname + '/test-suite/stream/';
 
 function TestStream(name) {
   var xmlTestRoot = streamTestRoot + 'xml/';
@@ -77,7 +77,7 @@ function getStreamsFromListFile(listFile)
 	                        })
 		.filter(function (stream)
 	                        {
-		                        return stream != undefined;
+		                        return stream !== undefined;
 	                        });
 }
 module.exports.fullList = getStreamsFromListFile("full.list");

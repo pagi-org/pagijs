@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pagis xmlns='http://pagi.org/schema' id='http://pagi.org/testSuite/allRestrictions'>
+
+	<nodeType name='nt1'>
+		<sequence/>
+		<span/>
+		<spanContainer spanType='nt2'/>
+		<edgeType name='e1' targetNodeType='nt2'/>
+		<edgeType name='e2' targetNodeType='nt3' minArity='1'/>
+		<edgeType name='e3' targetNodeType='nt2' minArity='2' maxArity='5'/>
+		<edgeType name='e4' targetNodeType='nt3' maxArity='3'/>
+		<edgeType name='e5' targetNodeType='nt2' maxArity='unbounded'/>
+		<edgeType name='e6' targetNodeType='nt3' minArity='3' maxArity='unbounded'/>
+		<edgeType name='e1t' targetNodeType='nt2'/>
+		<edgeType name='e2t' targetNodeType='nt3' targetMinArity='1'/>
+		<edgeType name='e3t' targetNodeType='nt2' targetMinArity='2' targetMaxArity='5'/>
+		<edgeType name='e4t' targetNodeType='nt3' targetMaxArity='3'/>
+		<edgeType name='e5t' targetNodeType='nt2' targetMaxArity='unbounded'/>
+		<edgeType name='e6t' targetNodeType='nt3' targetMinArity='3' targetMaxArity='unbounded'/>
+		<edgeType name='e1b' targetNodeType='nt2'/>
+		<edgeType name='e2b' targetNodeType='nt3' targetMinArity='1' minArity='1'/>
+		<edgeType name='e3b' targetNodeType='nt2' targetMinArity='2' targetMaxArity='5' minArity='2' maxArity='5'/>
+		<edgeType name='e4b' targetNodeType='nt3' targetMaxArity='3' maxArity='3'/>
+		<edgeType name='e5b' targetNodeType='nt2' targetMaxArity='unbounded' maxArity='unbounded'/>
+		<edgeType name='e6b' targetNodeType='nt3' targetMinArity='3' targetMaxArity='unbounded' minArity='3' maxArity='unbounded'/>
+
+		<edgeType name="e_even" minArity="0" maxArity="1">
+			<description>Links to even node types. Not odd ones though.</description>
+			<targetNodeType name="nt2"/>
+			<targetNodeType name="nt4"/>
+			<targetNodeType name="nt6"/>
+		</edgeType>
+	</nodeType>
+
+	<nodeType name='nt2'>
+		<sequence/>
+		<span/>
+		<integerProperty name='p1'/>
+		<integerProperty name='p2' minArity='1'/>
+		<integerProperty name='p3' minArity='1' maxArity='3'/>
+		<integerProperty name='p4' minArity='1' maxArity='unbounded'/>
+		<integerProperty name='p5' maxArity='3'/>
+		<integerProperty name='p6' maxArity='unbounded'/>
+		<integerProperty name='p7' minRange='-3'/>
+		<integerProperty name='p8' minRange='-3' maxRange='3'/>
+		<integerProperty name='p9' minRange='3'/>
+		<integerProperty name='p10' minRange='3' maxRange='3'/>
+		<integerProperty name='p11' minRange='-3' maxRange='-1'/>
+		<integerProperty name='p12' maxRange='-3'/>
+		<integerProperty name='p13' maxRange='3'/>
+		<integerProperty name='p14' minRange='3' maxRange='5' minArity='2' maxArity='5'/>
+		<integerProperty name='p15' minRange='3' maxRange='5' minArity='2'/>
+		<integerProperty name='p16' minRange='3' maxRange='5' maxArity='5'/>
+		<integerProperty name='p17' minRange='3' minArity='2' maxArity='5'/>
+		<integerProperty name='p18' maxRange='5' minArity='2' maxArity='5'/>
+		<integerProperty name='p19' minRange='3' minArity='2'/>
+		<integerProperty name='p20' minRange='3' maxArity='5'/>
+		<integerProperty name='p21' maxRange='5' minArity='2'/>
+		<integerProperty name='p22' maxRange='5' maxArity='5'/>
+	</nodeType>
+
+	<nodeType name='nt3'>
+		<span/>
+		<floatProperty name='p1'/>
+		<floatProperty name='p2' minArity='1'/>
+		<floatProperty name='p3' minArity='1' maxArity='3'/>
+		<floatProperty name='p4' minArity='1' maxArity='unbounded'/>
+		<floatProperty name='p5' maxArity='3'/>
+		<floatProperty name='p6' maxArity='unbounded'/>
+		<floatProperty name='p7' minRange='-3.0'/>
+		<floatProperty name='p8' minRange='-3.0' maxRange='3.5'/>
+		<floatProperty name='p9' minRange='3.5'/>
+		<floatProperty name='p10' minRange='3.2' maxRange='3.2'/>
+		<floatProperty name='p11' minRange='-3.8' maxRange='-1.2'/>
+		<floatProperty name='p12' maxRange='-3.0'/>
+		<floatProperty name='p13' maxRange='3.2'/>
+		<floatProperty name='p14' minRange='3.2' maxRange='5.2' minArity='2' maxArity='5'/>
+		<floatProperty name='p15' minRange='3.2' maxRange='5.4' minArity='2'/>
+		<floatProperty name='p16' minRange='3.2' maxRange='5.1' maxArity='5'/>
+		<floatProperty name='p17' minRange='3.2' minArity='2' maxArity='5'/>
+		<floatProperty name='p18' maxRange='5.2' minArity='2' maxArity='5'/>
+		<floatProperty name='p19' minRange='3.2' minArity='2'/>
+		<floatProperty name='p20' minRange='3.2' maxArity='5'/>
+		<floatProperty name='p21' maxRange='5.2' minArity='2'/>
+		<floatProperty name='p22' maxRange='5.3' maxArity='5'/>
+	</nodeType>
+	<nodeType name='nt4'>
+		<booleanProperty name='p1'/>
+		<booleanProperty name='p2' minArity='1'/>
+		<booleanProperty name='p3' minArity='1' maxArity='3'/>
+		<booleanProperty name='p4' minArity='1' maxArity='unbounded'/>
+		<booleanProperty name='p5' maxArity='3'/>
+		<booleanProperty name='p6' maxArity='unbounded'/>
+	</nodeType>
+	<nodeType name='nt5'>
+		<sequence/>
+		<stringProperty name='p1'/>
+		<stringProperty name='p2' minArity='1'/>
+		<stringProperty name='p3' minArity='1' maxArity='3'/>
+		<stringProperty name='p4' minArity='1' maxArity='unbounded'/>
+		<stringProperty name='p5' maxArity='3'/>
+		<stringProperty name='p6' maxArity='unbounded'/>
+	</nodeType>
+	<nodeType name='nt6'>
+		<enumProperty name='p1'>
+			<item name='i1'/>
+		</enumProperty>
+		<enumProperty name='p2' minArity='1'>
+			<item name='i1'/>
+			<item name='i2'/>
+		</enumProperty>
+		<enumProperty name='p3' minArity='1' maxArity='3'>
+			<item name='i1'/>
+			<item name='i2'/>
+		</enumProperty>
+		<enumProperty name='p4' minArity='1' maxArity='unbounded'>
+			<item name='i1'/>
+			<item name='i2'/>
+		</enumProperty>
+		<enumProperty name='p5' maxArity='3'>
+			<item name='i1'/>
+			<item name='i2'/>
+		</enumProperty>
+		<enumProperty name='p6' maxArity='unbounded'>
+			<item name='i1'/>
+			<item name='i2'/>
+		</enumProperty>
+	</nodeType>
+</pagis>

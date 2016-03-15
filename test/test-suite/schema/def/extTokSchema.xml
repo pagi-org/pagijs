@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pagis xmlns="http://pagi.org/schema" id="http://pagi.org/testSuite/extTok">
+	<extends id="http://pagi.org/testSuite/simpleTok"/>
+
+	<nodeType name="SB">
+		<sequence/>
+		<spanContainer spanType="TOK"/>
+	</nodeType>
+	<nodeTypeExtension extends="TOK">
+		<enumProperty  name="pos">
+			<description>These pos tags are taken from Penn Treebank - here: https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html</description>
+			<item name="CC"/>
+			<item name="CD"/>
+			<item name="DT"/>
+			<item name="EX"/>
+			<item name="FW"/>
+			<item name="IN"/>
+			<item name="JJ"/>
+			<item name="JJR"/>
+			<item name="JJS"/>
+			<item name="LS"/>
+			<item name="MD"/>
+			<item name="NN"/>
+			<item name="NNS"/>
+			<item name="NNP"/>
+			<item name="NNPS"/>
+			<item name="PDT"/>
+			<item name="POS"/>
+			<item name="PRP"/>
+			<item name="PRP$"/>
+			<item name="RB"/>
+			<item name="RBR"/>
+			<item name="RBS"/>
+			<item name="RP"/>
+			<item name="SYM"/>
+			<item name="TO"/>
+			<item name="UH"/>
+			<item name="VB"/>
+			<item name="VBD"/>
+			<item name="VBG"/>
+			<item name="VBN"/>
+			<item name="VBP"/>
+			<item name="VBZ"/>
+			<item name="WDT"/>
+			<item name="WP"/>
+			<item name="WP$"/>
+			<item name="WRB"/>
+			<!-- some extras -->
+			<item name="P2S"/>
+			<item name="P3S"/>
+			<item name=","/>
+			<item name="'"/>
+			<item name='"'/>
+		</enumProperty>
+	</nodeTypeExtension>
+</pagis>

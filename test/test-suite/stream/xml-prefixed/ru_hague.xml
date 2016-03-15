@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:document xmlns:p="http://pagi.org/stream" id="ru_hague"><p:schema uri="http://pagi.org/testSuite/extTokFull"></p:schema>
+	<p:asSpan nodeType="TOK">
+	</p:asSpan>
+	<p:asSequence nodeType="TOK">
+	</p:asSequence>
+	<p:asSequence nodeType="SB">
+	</p:asSequence>
+	<p:asSpanContainer spanType="TOK" nodeType="SB">
+	</p:asSpanContainer>
+	<p:content contentType="text/plain">Гаа́га — город и община на западе Нидерландов, у берега Северного моря, резиденция нидерландского правительства и парламента, столица Южной Голландии и местопребывание королевского двора. В Гааге расположены крупные международные правовые органы: Международный суд ООН, Международный уголовный суд, Международный арбитражный суд и другие. Гаага является третьим по величине городом Нидерландов после Амстердама и Роттердама. Её население составляет 501 725 жителей (на 1 февраля 2012 года), а площадь — 98,20 км². Гаага является частью агломерации Рандстад.
+</p:content>
+
+	<p:node id="294:3" type="TOK">
+		<p:intProp v="3" k="length"></p:intProp>
+		<p:intProp v="294" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="297:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="536:11" type="TOK">
+		<p:intProp v="11" k="length"></p:intProp>
+		<p:intProp v="536" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="548:8" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="362:2" type="TOK">
+		<p:intProp v="2" k="length"></p:intProp>
+		<p:intProp v="362" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="365:8" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="190:5" type="TOK">
+		<p:intProp v="5" k="length"></p:intProp>
+		<p:intProp v="190" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="196:11" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="469:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="469" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="471:7" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="83:14" type="TOK">
+		<p:intProp v="14" k="length"></p:intProp>
+		<p:intProp v="83" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="98:13" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="24:2" type="TOK">
+		<p:intProp v="2" k="length"></p:intProp>
+		<p:intProp v="24" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="27:6" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="325:3" type="TOK">
+		<p:intProp v="3" k="length"></p:intProp>
+		<p:intProp v="325" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="329:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="56:9" type="TOK">
+		<p:intProp v="9" k="length"></p:intProp>
+		<p:intProp v="56" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="66:4" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="45:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="45" k="start"></p:intProp>
+		<p:strProp v="," k="pos"></p:strProp>
+		<p:edge to="47:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="70:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="70" k="start"></p:intProp>
+		<p:strProp v="," k="pos"></p:strProp>
+		<p:edge to="72:10" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="457:7" type="TOK">
+		<p:intProp v="7" k="length"></p:intProp>
+		<p:intProp v="457" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="465:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="3" type="COREF">
+		<p:strProp v="международный" k="name"></p:strProp>
+		<p:edge to="299:13" toType="TOK" type="member"></p:edge>
+		<p:edge to="247:13" toType="TOK" type="member"></p:edge>
+		<p:edge to="270:13" toType="TOK" type="member"></p:edge>
+	</p:node>
+	<p:node id="140:9" type="TOK">
+		<p:intProp v="9" k="length"></p:intProp>
+		<p:intProp v="140" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="150:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="34:11" type="TOK">
+		<p:intProp v="11" k="length"></p:intProp>
+		<p:intProp v="34" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="45:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="1" type="COREF">
+		<p:strProp v="является" k="name"></p:strProp>
+		<p:edge to="520:8" toType="TOK" type="member"></p:edge>
+		<p:edge to="345:8" toType="TOK" type="member"></p:edge>
+	</p:node>
+	<p:node id="339:5" type="TOK">
+		<p:intProp v="5" k="length"></p:intProp>
+		<p:intProp v="339" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="345:8" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="2" type="COREF">
+		<p:strProp v="гаага" k="name"></p:strProp>
+		<p:edge to="339:5" toType="TOK" type="member"></p:edge>
+		<p:edge to="514:5" toType="TOK" type="member"></p:edge>
+	</p:node>
+	<p:node id="0" type="COREF">
+		<p:strProp v="нидерландов" k="name"></p:strProp>
+		<p:edge to="34:11" toType="TOK" type="member"></p:edge>
+		<p:edge to="382:11" toType="TOK" type="member"></p:edge>
+	</p:node>
+	<p:node id="114:10" type="TOK">
+		<p:intProp v="10" k="length"></p:intProp>
+		<p:intProp v="114" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="124:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="196:11" type="TOK">
+		<p:intProp v="11" k="length"></p:intProp>
+		<p:intProp v="196" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="208:7" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="453:3" type="TOK">
+		<p:intProp v="3" k="length"></p:intProp>
+		<p:intProp v="453" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="457:7" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="491:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="491" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="493:7" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="126:7" type="TOK">
+		<p:intProp v="7" k="length"></p:intProp>
+		<p:intProp v="126" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="134:5" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="66:4" type="TOK">
+		<p:intProp v="4" k="length"></p:intProp>
+		<p:intProp v="66" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="70:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="47:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="47" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="49:6" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="365:8" type="TOK">
+		<p:intProp v="8" k="length"></p:intProp>
+		<p:intProp v="365" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="374:7" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="345:8" type="TOK">
+		<p:intProp v="8" k="length"></p:intProp>
+		<p:intProp v="345" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="354:7" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="505:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="505" k="start"></p:intProp>
+		<p:strProp v="," k="pos"></p:strProp>
+		<p:edge to="506:2" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="514:5" type="TOK">
+		<p:intProp v="5" k="length"></p:intProp>
+		<p:intProp v="514" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="520:8" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="488:2" type="TOK">
+		<p:intProp v="2" k="length"></p:intProp>
+		<p:intProp v="488" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="491:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="471:7" type="TOK">
+		<p:intProp v="7" k="length"></p:intProp>
+		<p:intProp v="471" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="479:4" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="297:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="297" k="start"></p:intProp>
+		<p:strProp v="," k="pos"></p:strProp>
+		<p:edge to="299:13" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="313:11" type="TOK">
+		<p:intProp v="11" k="length"></p:intProp>
+		<p:intProp v="313" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="325:3" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="466:2" type="TOK">
+		<p:intProp v="2" k="length"></p:intProp>
+		<p:intProp v="466" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="469:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="503:2" type="TOK">
+		<p:intProp v="2" k="length"></p:intProp>
+		<p:intProp v="503" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="505:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="98:13" type="TOK">
+		<p:intProp v="13" k="length"></p:intProp>
+		<p:intProp v="98" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="112:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="247:13" type="TOK">
+		<p:intProp v="13" k="length"></p:intProp>
+		<p:intProp v="247" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="261:3" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="449:3" type="TOK">
+		<p:intProp v="3" k="length"></p:intProp>
+		<p:intProp v="449" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="453:3" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="382:11" type="TOK">
+		<p:intProp v="11" k="length"></p:intProp>
+		<p:intProp v="382" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="394:5" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="9:5" type="TOK">
+		<p:intProp v="5" k="length"></p:intProp>
+		<p:intProp v="9" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="15:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="27:6" type="TOK">
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:intProp v="27" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="34:11" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="216:13" type="TOK">
+		<p:intProp v="13" k="length"></p:intProp>
+		<p:intProp v="216" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="230:8" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="299:13" type="TOK">
+		<p:intProp v="13" k="length"></p:intProp>
+		<p:intProp v="299" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="313:11" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="493:7" type="TOK">
+		<p:intProp v="7" k="length"></p:intProp>
+		<p:intProp v="493" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="501:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="484:4" type="TOK">
+		<p:intProp v="4" k="length"></p:intProp>
+		<p:intProp v="484" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="488:2" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="239:6" type="TOK">
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:intProp v="239" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="245:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="428:9" type="TOK">
+		<p:intProp v="9" k="length"></p:intProp>
+		<p:intProp v="428" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="438:10" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="411:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="411" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="413:10" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="465:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="465" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="466:2" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="331:6" type="TOK">
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:intProp v="331" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+	</p:node>
+	<p:node id="49:6" type="TOK">
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:intProp v="49" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="56:9" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="261:3" type="TOK">
+		<p:intProp v="3" k="length"></p:intProp>
+		<p:intProp v="261" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="265:3" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="520:8" type="TOK">
+		<p:intProp v="8" k="length"></p:intProp>
+		<p:intProp v="520" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="529:6" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="188:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="188" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="190:5" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="479:4" type="TOK">
+		<p:intProp v="4" k="length"></p:intProp>
+		<p:intProp v="479" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="484:4" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="400:10" type="TOK">
+		<p:intProp v="10" k="length"></p:intProp>
+		<p:intProp v="400" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="411:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="15:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="15" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="17:6" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="230:8" type="TOK">
+		<p:intProp v="8" k="length"></p:intProp>
+		<p:intProp v="230" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="239:6" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="548:8" type="TOK">
+		<p:intProp v="8" k="length"></p:intProp>
+		<p:intProp v="548" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+	</p:node>
+	<p:node id="0" type="SB">
+		<p:edge to="0:6" toType="TOK" type="first"></p:edge>
+		<p:edge to="1" toType="SB" type="next"></p:edge>
+		<p:edge to="181:5" toType="TOK" type="last"></p:edge>
+	</p:node>
+	<p:node id="270:13" type="TOK">
+		<p:intProp v="13" k="length"></p:intProp>
+		<p:intProp v="270" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="284:9" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="506:2" type="TOK">
+		<p:intProp v="2" k="length"></p:intProp>
+		<p:intProp v="506" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="509:3" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="268:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="268" k="start"></p:intProp>
+		<p:strProp v="," k="pos"></p:strProp>
+		<p:edge to="270:13" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="2" type="SB">
+		<p:edge to="339:5" toType="TOK" type="first"></p:edge>
+		<p:edge to="413:10" toType="TOK" type="last"></p:edge>
+		<p:edge to="3" toType="SB" type="next"></p:edge>
+	</p:node>
+	<p:node id="284:9" type="TOK">
+		<p:intProp v="9" k="length"></p:intProp>
+		<p:intProp v="284" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="294:3" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="1" type="SB">
+		<p:edge to="188:1" toType="TOK" type="first"></p:edge>
+		<p:edge to="2" toType="SB" type="next"></p:edge>
+		<p:edge to="331:6" toType="TOK" type="last"></p:edge>
+	</p:node>
+	<p:node id="152:15" type="TOK">
+		<p:intProp v="15" k="length"></p:intProp>
+		<p:intProp v="152" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="168:12" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="208:7" type="TOK">
+		<p:intProp v="7" k="length"></p:intProp>
+		<p:intProp v="208" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="216:13" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="4" type="SB">
+		<p:edge to="548:8" toType="TOK" type="last"></p:edge>
+		<p:edge to="514:5" toType="TOK" type="first"></p:edge>
+	</p:node>
+	<p:node id="3" type="SB">
+		<p:edge to="509:3" toType="TOK" type="last"></p:edge>
+		<p:edge to="425:2" toType="TOK" type="first"></p:edge>
+		<p:edge to="4" toType="SB" type="next"></p:edge>
+	</p:node>
+	<p:node id="354:7" type="TOK">
+		<p:intProp v="7" k="length"></p:intProp>
+		<p:intProp v="354" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="362:2" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="413:10" type="TOK">
+		<p:intProp v="10" k="length"></p:intProp>
+		<p:intProp v="413" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+	</p:node>
+	<p:node id="7:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="7" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="9:5" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="181:5" type="TOK">
+		<p:intProp v="5" k="length"></p:intProp>
+		<p:intProp v="181" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+	</p:node>
+	<p:node id="17:6" type="TOK">
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:intProp v="17" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="24:2" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="112:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="112" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="114:10" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="529:6" type="TOK">
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:intProp v="529" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="536:11" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="438:10" type="TOK">
+		<p:intProp v="10" k="length"></p:intProp>
+		<p:intProp v="438" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="449:3" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="394:5" type="TOK">
+		<p:intProp v="5" k="length"></p:intProp>
+		<p:intProp v="394" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="400:10" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="501:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="501" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="503:2" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="72:10" type="TOK">
+		<p:intProp v="10" k="length"></p:intProp>
+		<p:intProp v="72" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="83:14" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="150:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="150" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="152:15" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="0:6" type="TOK">
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:intProp v="0" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="7:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="245:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="245" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="247:13" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="425:2" type="TOK">
+		<p:intProp v="2" k="length"></p:intProp>
+		<p:intProp v="425" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="428:9" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="374:7" type="TOK">
+		<p:intProp v="7" k="length"></p:intProp>
+		<p:intProp v="374" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="382:11" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="134:5" type="TOK">
+		<p:intProp v="5" k="length"></p:intProp>
+		<p:intProp v="134" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="140:9" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="124:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="124" k="start"></p:intProp>
+		<p:strProp v="," k="pos"></p:strProp>
+		<p:edge to="126:7" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="509:3" type="TOK">
+		<p:intProp v="3" k="length"></p:intProp>
+		<p:intProp v="509" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+	</p:node>
+	<p:node id="265:3" type="TOK">
+		<p:intProp v="3" k="length"></p:intProp>
+		<p:intProp v="265" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="268:1" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="168:12" type="TOK">
+		<p:intProp v="12" k="length"></p:intProp>
+		<p:intProp v="168" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="181:5" toType="TOK" type="next"></p:edge>
+	</p:node>
+	<p:node id="329:1" type="TOK">
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intProp v="329" k="start"></p:intProp>
+		<p:strProp v="NN" k="pos"></p:strProp>
+		<p:edge to="331:6" toType="TOK" type="next"></p:edge>
+	</p:node>
+</p:document>

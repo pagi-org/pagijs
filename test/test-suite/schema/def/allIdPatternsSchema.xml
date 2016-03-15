@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pagis xmlns="http://pagi.org/schema" id="http://pagi.org/testSuite/allIdPatterns">
+
+    <nodeType name="nt1">
+	    <description>The first node type.</description>
+    </nodeType>
+    <nodeType name="nt2" />
+    <nodeType name="nt3">
+        <stringProperty name="p1" minArity="1" maxArity="1">
+	        <description>A simple string property.</description>
+        </stringProperty>
+    </nodeType>
+	<nodeType name="nt3e">
+		<edgeType name="e1">
+			<description>The edge that links this to another doohicky.</description>
+			<targetNodeType name="nt3"/>
+		</edgeType>
+	</nodeType>
+    <nodeType name="nt4" />
+    <nodeType name="nt5" />
+    <nodeType name="nt6" />
+	<nodeType name="nt7">
+		<stringProperty name="p1" minArity="1" maxArity="1"/>
+	</nodeType>
+    <nodeType name="nt7e">
+	    <edgeType name="e1" targetNodeType="nt7">
+		    <description>The edge that links this to the other thing before it.</description>
+	    </edgeType>
+    </nodeType>
+
+    <nodeType name="nt8">
+        <stringProperty name="p1" minArity="1" maxArity="1"/>
+        <stringProperty name="p2" minArity="1" maxArity="1"/>
+    </nodeType>
+	<nodeType name="nt8e">
+		<edgeType name="e1" targetNodeType="nt8"/>
+		<edgeType name="e2" targetNodeType="nt7"/>
+	</nodeType>
+
+    <nodeType name="nt9" />
+    <nodeType name="nt10" />
+    <nodeType name="nt11" />
+
+
+    <nodeType name="nt12">
+        <stringProperty name="p1" minArity="1" maxArity="1"/>
+    </nodeType>
+	<nodeType name="nt12e">
+		<edgeType name="e1" targetNodeType="nt12"/>
+	</nodeType>
+
+    <nodeType name="nt14">
+        <stringProperty name="p1" minArity="1" maxArity="1"/>
+    </nodeType>
+	<nodeType name="nt14e">
+		<edgeType name="e1" targetNodeType="nt14"/>
+	</nodeType>
+</pagis>

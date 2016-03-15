@@ -8,7 +8,7 @@ var sprintf = require('sprintf-js').sprintf;
 var q = require("q");
 
 
-var schemaTestRoot = 'build/test-suite/schema/';
+var schemaTestRoot = __dirname + '/test-suite/schema/';
 
 function TestSchema(id, simpleName) {
   var xmlTestRoot = schemaTestRoot + 'def/';
@@ -74,7 +74,11 @@ function toFlatString(schema) {
     // NODETYPE sections
     var appendNodeType = function (nodeTypeName) {
         var nodeType = schema.nodeTypeMap[nodeTypeName];
-        sb.append("\n").append("NODETYPE ").append(nodeType.name).append(nodeType.description ? ' ' + nodeType.description : null);
+        sb.append("\n").append("NODETYPE ")
+            .append(nodeType.name)
+            .append(nodeType.readableName ? ' ' + nodeType.readableName : null)
+            .append(nodeType.description ? ' ' + nodeType.description : null);
+
         if (nodeType.traitSequence) {
             sb.append(" SEQUENCE");
         }
@@ -88,7 +92,9 @@ function toFlatString(schema) {
         var appendPropSpec = function (propSpecName) {
             var propSpec = nodeType.propertySpecMap[propSpecName];
             sb.append("PROP ")
-                .append(propSpecName).append(" ")
+                .append(propSpecName)
+                .append(propSpec.readableName ? ' ' + propSpec.readableName : null)
+                .append(" ")
                 .append(propSpec.minArity).append(" ")
                 .append(maxArityString(propSpec.maxArity)).append(" ")
                 .append(propSpec.valueType.name)
@@ -122,7 +128,9 @@ function toFlatString(schema) {
         var appendEdgeSpec = function (edgeSpecName) {
             var edgeSpec = nodeType.edgeSpecMap[edgeSpecName];
             sb.append("EDGE ");
-            sb.append(edgeSpecName).append(" ");
+            sb.append(edgeSpecName);
+            sb.append(edgeSpec.readableName ? ' ' + edgeSpec.readableName : null)
+            sb.append(" ");
             sb.append(edgeSpec.minArity).append(" ");
             sb.append(maxArityString(edgeSpec.maxArity)).append(" ");
             sb.append(edgeSpec.targetMinArity).append(" ");

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pagis xmlns="http://pagi.org/schema" id="http://pagi.org/testSuite/extTokCoref">
+	<extends id="http://pagi.org/testSuite/simpleTok"/>
+
+	<nodeType name="COREF">
+		<stringProperty name="name"/>
+		<edgeType name="member" targetNodeType="TOK" minArity="1" targetMinArity="0" targetMaxArity="1"/>
+	</nodeType>
+</pagis>

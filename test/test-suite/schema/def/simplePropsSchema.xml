@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pagis xmlns="http://pagi.org/schema" id="http://pagi.org/testSuite/simpleProps">
+
+	<nodeType name="MY_NODE">
+		<stringProperty name="value" maxArity="1" minArity="1"/>
+		<integerProperty name="confidence" minRange="0" maxRange="100"/>
+		<floatProperty name="precision" minRange="0.0" maxRange="1.0"/>
+		<booleanProperty name="enabled"/>
+		<stringProperty name="labeled" minArity="0" maxArity="2"/>
+		<enumProperty name="selected" minArity="0" maxArity="2">
+			<item name="value1"/>
+			<item name="value2"/>
+		</enumProperty>
+
+		<edgeType name="bff" targetNodeType="MY_NODE" minArity="0" maxArity="4"/>
+	</nodeType>
+</pagis>
