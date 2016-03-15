@@ -23,6 +23,17 @@ describe("Pagi object", function () {
             });
         });
     });
+    describe('`serialize` function', function() {
+        it('exists', function() {
+            assert(typeof Pagi.serialize === 'function');
+        });
+        it('returns a string', function(done) {
+            Pagi.parse(stream.getXmlStream()).then(function(graph) {
+                assert(typeof Pagi.serialize(graph) === 'string'); 
+                done();
+            });
+        });
+    });
     describe('`schema` object', function() {
         it('exists', function() {
             assert(typeof Pagi.schema === 'object');
