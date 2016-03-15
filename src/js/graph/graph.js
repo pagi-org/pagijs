@@ -81,12 +81,12 @@ Graph.prototype.connectEdges = function(nodes) {
         // Child nodes may not have edges in the graphImpl yet so create edges
         // based only on the edges array in the node.
         if (node.hasTraitSpanContainer()) {
-            var linkNode = self.getNodeById(node.getEdgeByType('first').getTargetId());
-            var lastNode = self.getNodeById(node.getEdgeByType('last').getTargetId());
+            var linkNode = self.getNodeById(node.getFirstEdgeByType('first').getTargetId());
+            var lastNode = self.getNodeById(node.getFirstEdgeByType('last').getTargetId());
             while (true) {
                 self._graphImpl.setEdge(node.getId(), linkNode.getId(), 'parent');
                 if (linkNode === lastNode) { break; }
-                linkNode = self.getNodeById(linkNode.getEdgeByType('next').getTargetId());
+                linkNode = self.getNodeById(linkNode.getFirstEdgeByType('next').getTargetId());
             }
         }
     });

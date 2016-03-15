@@ -44,10 +44,14 @@ Node.prototype.addEdge = function(targetId, targetType, edgeType) {
 Node.prototype.getEdges = function() {
     return this._edges.map(function(edge) { return edge; });
 };
-Node.prototype.getEdgeByType = function(edgeType) {
-    return this._edges.find(function(edge) {
+Node.prototype.getEdgesByType = function(edgeType) {
+    return this._edges.filter(function(edge) {
         return edge.getEdgeType() === edgeType;
     });
+};
+Node.prototype.getFirstEdgeByType = function(edgeType) {
+    var edges = this.getEdgesByType(edgeType);
+    return edges.length > 0 ? edges[0] : undefined;
 };
 Node.prototype.hasTraitSpan = function() {
     return this._graph.getNodeTypesAsSpan()[this.getType()] !== undefined;
@@ -93,7 +97,7 @@ Node.prototype.getText = function() {
 // Sequence trait functions
 Node.prototype.hasNext = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `hasNext` on a Node that does not have the `sequence` trait."); }
-    return this.getEdgeByType('next') instanceof Edge;
+    return !!this.getFirstEdgeByType('next');
 };
 Node.prototype.hasPrevious = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `hasPrevious` on a Node that does not have the `sequence` trait."); }
@@ -104,8 +108,7 @@ Node.prototype.hasPrevious = function() {
 };
 Node.prototype.next = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `next` on a Node that does not have the `sequence` trait."); }
-    var nextEdge = this.getEdgeByType('next');
-    return this._graph.getNodeById(nextEdge.getTargetId());
+    return this._graph.getNodeById(this.getFirstEdgeByType('next').getTargetId());
 };
 Node.prototype.previous = function() { 
     if (!this.hasTraitSequence()) { throw Error("Calling `previous` on a Node that does not have the `sequence` trait."); }
@@ -159,13 +162,11 @@ Node.prototype.getParentsOfType = function(nodeType) {
 // SpanContainer trait functions
 Node.prototype.getFirst = function() { 
     if (!this.hasTraitSpanContainer()) { throw Error("Calling `getFirst` on a Node that does not have the `span container` trait."); }
-    var firstEdge = this.getEdgeByType('first');
-    return this._graph.getNodeById(firstEdge.getTargetId());
+    return this._graph.getNodeById(this.getFirstEdgeByType('first').getTargetId());
 };
 Node.prototype.getLast = function() { 
     if (!this.hasTraitSpanContainer()) { throw Error("Calling `getLast` on a Node that does not have the `span container` trait."); }
-    var lastEdge = this.getEdgeByType('last');
-    return this._graph.getNodeById(lastEdge.getTargetId());
+    return this._graph.getNodeById(this.getFirstEdgeByType('last').getTargetId());
 };
 
 module.exports = Node;
