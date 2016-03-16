@@ -72,26 +72,43 @@ Node.prototype.getText = function() {
     if (!isSpan && !isSpanContainer) { 
         throw Error("Calling `getText` on a Node that does not have the `span` or `spanContainer` trait.");
     }
-    if (isSpan) {
-        var start = this.getProp('start'), length = this.getProp('length');
-        return this._graph.getContent().slice(start, start + length);
-    } else if (isSpanContainer) {
-        // Traverse the first and last edges until the nodes are no longer span containers.
-        var firstNode = this.getFirst(), lastNode = this.getLast();
-        while (true) {
-            var firstNodeIsSC = firstNode.hasTraitSpanContainer();
-            var lastNodeIsSC = lastNode.hasTraitSpanContainer();
-            if (!firstNodeIsSC && !lastNodeIsSC) { break; }
-            if (firstNodeIsSC) { firstNode = firstNode.getFirst(); }
-            if (lastNodeIsSC) { lastNode = lastNode.getFirst(); }
-        }
-        if (!firstNode.hasTraitSpan() || !lastNode.hasTraitSpan()) {
-            throw Error("Calling `getText` on a node [" + this._id + "] whose first or last edge does not resolve to a span.");
-        }
-        var endIdx = lastNode.getProp('start') + lastNode.getProp('length');
-        // JS String.slice(start, end) is start<inclusive> to end<exclusive>.
-        return this._graph.getContent().slice(firstNode.getProp('start'), endIdx + 1);
+    return this._graph.getContent().slice(this.getStartIndex(), this.getEndIndex());
+};
+Node.prototype.getStartIndex = function() {
+    var isSpan = this.hasTraitSpan(), isSpanContainer = this.hasTraitSpanContainer();
+    if (!isSpan && !isSpanContainer) { 
+        throw Error("Calling `getStartIndex` on a Node that does not have the `span` or `spanContainer` trait.");
     }
+    if (isSpan) { return this.getProp('start'); }
+    // Traverse the first edges until the nodes are no longer span containers.
+    var firstNode = this.getFirst();
+    while (true) {
+        var firstNodeIsSC = firstNode.hasTraitSpanContainer();
+        if (!firstNodeIsSC) { break; }
+        if (firstNodeIsSC) { firstNode = firstNode.getFirst(); }
+    }
+    if (!firstNode.hasTraitSpan()) {
+        throw Error("Calling `getText` on a node [" + this._id + "] whose first edge does not resolve to a span.");
+    }
+    return firstNode.getProp('start');
+};
+Node.prototype.getEndIndex = function() {
+    var isSpan = this.hasTraitSpan(), isSpanContainer = this.hasTraitSpanContainer();
+    if (!isSpan && !isSpanContainer) { 
+        throw Error("Calling `getEndIndex` on a Node that does not have the `span` or `spanContainer` trait.");
+    }
+    if (isSpan) { return this.getProp('start') + this.getProp('length'); }
+    // Traverse the first and last edges until the nodes are no longer span containers.
+    var lastNode = this.getLast();
+    while (true) {
+        var lastNodeIsSC = lastNode.hasTraitSpanContainer();
+        if (!lastNodeIsSC) { break; }
+        if (firstNodeIsSC) { firstNode = firstNode.getFirst(); }
+    }
+    if (!lastNode.hasTraitSpan()) {
+        throw Error("Calling `getText` on a node [" + this._id + "] whose last edge does not resolve to a span.");
+    }
+    return lastNode.getProp('start') + lastNode.getProp('length');
 };
 
 // Sequence trait functions

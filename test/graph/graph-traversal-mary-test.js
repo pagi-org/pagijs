@@ -78,7 +78,15 @@ describe('Graph traversal for `mary` stream', function() {
         });
         it('should return the proper text from it\'s spans', function() {
             var node = graph.getNodeById('68');
-            assert.equal(node.getText(), 'MARY had a little lamb with fleece as white as snow,\nAnd everywhere that Mary went the lamb was sure to go.');
+            assert.equal(node.getText(), 'MARY had a little lamb with fleece as white as snow,\nAnd everywhere that Mary went the lamb was sure to go');
+        });
+        it('should return the proper start index', function() {
+            var node = graph.getNodeById('68');
+            assert.equal(node.getStartIndex(), 0);
+        });
+        it('should return the proper end index', function() {
+            var node = graph.getNodeById('68');
+            assert.equal(node.getEndIndex(), 106);
         });
     });
 });
