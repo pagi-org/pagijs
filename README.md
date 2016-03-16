@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jbunting/pagijs.png?branch=master)](https://travis-ci.org/jbunting/pagijs)
+[![Build Status](https://travis-ci.org/digitalreasoning/pagijs.svg)](https://travis-ci.org/digitalreasoning/pagijs)
 pagijs
 ======
 

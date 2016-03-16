@@ -86,7 +86,7 @@ function toFlatString(schema) {
             sb.append(" SPAN");
         }
         if (nodeType.traitSpanContainer) {
-            sb.append(" SPAN_CONTAINER ").append(nodeType.spanType)
+            sb.append(" SPAN_CONTAINER ").append(nodeType.spanType);
         }
         sb.append("\n");
         var appendPropSpec = function (propSpecName) {
@@ -158,7 +158,7 @@ var schemas = lines.map(function(line) {
         return new TestSchema(parts[0], parts[1]);
     }
 }).filter(function(schema) {
-    return schema != undefined;
+    return schema !== undefined;
 });
 
 var schemaMap = {};
