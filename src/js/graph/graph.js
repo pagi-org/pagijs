@@ -66,7 +66,7 @@ Graph.prototype.addNode = function(node, connectEdges) {
     // Create node type buckets.
     this._nodeTypes[node.getType()] = this._nodeTypes[node.getType()] || [];
     this._nodeTypes[node.getType()].push(node);
-       
+
     if (connectEdges) { this.connectEdges([node]); }
 };
 Graph.prototype.connectEdges = function(nodes) {
@@ -74,7 +74,7 @@ Graph.prototype.connectEdges = function(nodes) {
     (nodes || this._graphImpl.nodes()).forEach(function(nodeId) {
         var node = self._graphImpl.node(nodeId);
         node.getEdges().forEach(function(edge) {
-            self._graphImpl.setEdge(node.getId(), edge.getTargetId(), edge.getEdgeType()); 
+            self._graphImpl.setEdge(node.getId(), edge.getTargetId(), edge.getEdgeType());
         });
         // If node is a span container create edges to all it's children.
         // This allows children to quickly reference their parent nodes.
@@ -94,6 +94,7 @@ Graph.prototype.connectEdges = function(nodes) {
 Graph.prototype.getNodeById = function(nodeId) { return this._graphImpl.node(nodeId); };
 Graph.prototype.getNodeTypes = function() { return Object.keys(this._nodeTypes); };
 Graph.prototype.getNodesByType = function(nodeType) {
+    if (this._nodeTypes[nodeType] === undefined) { return []; }
     return this._nodeTypes[nodeType].map(function(node) {
         return node;
     });
