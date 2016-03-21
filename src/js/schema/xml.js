@@ -55,6 +55,9 @@ function doParse(readableStream, locator) {
 			case "pagis":
 				schemaBuilder.withId(tag.attributes.id.value);
 				break;
+			case "effectivePagis":
+				schemaBuilder.withId(tag.attributes.id.value);
+				break;
 			case "extends":
 				var parentId = tag.attributes.id.value;
 				var p = callLocator(parentId, locator).then(function(schema) {
@@ -171,21 +174,11 @@ function doParse(readableStream, locator) {
 			textContent += text.toString();
 		}
 	});
-    streamParser.on('text', function(text) {
-        text = text.trim();
-        if (currentTag && currentTag.name === 'description' && text.length > 0) {
-            if (edgeSpecBuilder) {
-                edgeSpecBuilder.withDescription(text);
-            } else if (propSpecBuilder) {
-                propSpecBuilder.withDescription(text);
-            } else if (nodeBuilder) {
-                nodeBuilder.withDescription(text);
-            }
-        }
-    });
 	streamParser.on("closetag", function(tagName) {
 		switch(tagName) {
 			case "pagis":
+				break;
+			case "effectivePagis":
 				break;
 			case "nodeTypeExtension":
 				if (nodeBuilder)
@@ -231,7 +224,7 @@ function doParse(readableStream, locator) {
 				}
 				break;
 		}
-        valueType = null;
+    valueType = null;
 	});
 	streamParser.on("end", function() {
 		Q.allSettled(delegatePromises).then(function() {
@@ -245,8 +238,7 @@ function doParse(readableStream, locator) {
 		readableStream.unpipe(streamParser);
 		deferred.reject(err);
 	});
-	try
-	{
+	try {
 		readableStream.pipe(streamParser);
 	} catch (e) {
 		throw Error("Could not parse stream " + readableStream.id + "..." + e);
