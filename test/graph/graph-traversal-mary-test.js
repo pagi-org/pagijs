@@ -21,6 +21,9 @@ describe('Graph traversal for `mary` stream', function() {
         assert.equal(graph.getNodesByType('COREF').length, 6);
         assert.equal(graph.getNodesByType('SB').length, 5);
     });
+    it('should return an empty array if provided a node type that does not exist', function() {
+        assert(graph.getNodesByType('THIS_DOES_NOT_EXIST').length === 0);
+    });
     it('should return the correct node by id', function() {
         var node = graph.getNodeById('0');
         assert.equal(node.getProp('start'), 96);
