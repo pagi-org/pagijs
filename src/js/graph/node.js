@@ -72,13 +72,12 @@ Node.prototype.getText = function() {
     if (!isSpan && !isSpanContainer) {
         throw Error("Calling `getText` on a Node that does not have the `span` or `spanContainer` trait.");
     }
-    return this._graph.getContent().slice(this.getStartIndex(), this.getEndIndex() + 1);
+    return this._graph.getContent().slice(this.getStartIndex(), this.getEndIndex());
 };
 Node.prototype._getIndex = function(isStart) {
     if (this.hasTraitSpan()) {
         var start = this.getProp('start');
-        // Remove one as (start + length) will always be one greater than the length.
-        return isStart ? start : start + this.getProp('length') - 1;
+        return isStart ? start : start + this.getProp('length');
     }
     if (this.hasTraitSpanContainer()) {
         return isStart ? this.getFirst().getStartIndex() : this.getLast().getEndIndex();
@@ -104,9 +103,11 @@ Node.prototype._getIndex = function(isStart) {
         return reduced;
     }
 };
+// The value returned is INclusive to the annotation.
 Node.prototype.getStartIndex = function() {
     return this._getIndex(true);
 };
+// The value returned is EXclusive to the annotation.
 Node.prototype.getEndIndex = function() {
     return this._getIndex();
 };

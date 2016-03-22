@@ -89,7 +89,7 @@ describe('Graph traversal for `mary` stream', function() {
         });
         it('should return the proper end index', function() {
             var node = graph.getNodeById('68');
-            assert.equal(node.getEndIndex(), 105);
+            assert.equal(node.getEndIndex(), 106);
         });
     });
     describe('non-span/span-container node', function() {
@@ -101,7 +101,7 @@ describe('Graph traversal for `mary` stream', function() {
             assert.equal(node.getStartIndex(), 0);
         });
         it('should find an end index', function() {
-            assert.equal(node.getEndIndex(), 411);
+            assert.equal(node.getEndIndex(), 412);
         });
         it('should return -1 if it cannot find a start index', function() {
             // Not possible to test atm. All nodes boil down to a span.
