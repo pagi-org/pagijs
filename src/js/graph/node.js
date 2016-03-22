@@ -67,69 +67,69 @@ Node.prototype.setGraph = function(graph) {
 };
 
 // Span/SpanContainer trait functions
-Node.prototype.getText = function() { 
+Node.prototype.getText = function() {
     var isSpan = this.hasTraitSpan(), isSpanContainer = this.hasTraitSpanContainer();
-    if (!isSpan && !isSpanContainer) { 
+    if (!isSpan && !isSpanContainer) {
         throw Error("Calling `getText` on a Node that does not have the `span` or `spanContainer` trait.");
     }
-    return this._graph.getContent().slice(this.getStartIndex(), this.getEndIndex());
+    return this._graph.getContent().slice(this.getStartIndex(), this.getEndIndex() + 1);
+};
+Node.prototype._getIndex = function(isStart) {
+    if (this.hasTraitSpan()) {
+        var start = this.getProp('start');
+        // Remove one as (start + length) will always be one greater than the length.
+        return isStart ? start : start + this.getProp('length') - 1;
+    }
+    if (this.hasTraitSpanContainer()) {
+        return isStart ? this.getFirst().getStartIndex() : this.getLast().getEndIndex();
+    } else {
+        // Find all edges that are not the same type as the current node.
+        // And determine which one has the proper index.
+        var self = this;
+        var reduced = this.getEdges().filter(function(edge) {
+            return edge.getTargetType() !== self.getType();
+        }).reduce(function(idx, edge) {
+            var node = self._graph.getNodeById(edge.getTargetId());
+            var newIndex = isStart ? node.getStartIndex() : node.getEndIndex();
+            if (isStart) {
+                if (newIndex < idx) { return newIndex; }
+            } else {
+                if (idx < newIndex) { return newIndex; }
+            }
+            return idx;
+        }, isStart ? Infinity : Number.NEGATIVE_INFINITY);
+        // Replace Infinity with -1
+        reduced = reduced === Infinity                 ? -1 : reduced;
+        reduced = reduced === Number.NEGATIVE_INFINITY ? -1 : reduced;
+        return reduced;
+    }
 };
 Node.prototype.getStartIndex = function() {
-    var isSpan = this.hasTraitSpan(), isSpanContainer = this.hasTraitSpanContainer();
-    if (!isSpan && !isSpanContainer) { 
-        throw Error("Calling `getStartIndex` on a Node that does not have the `span` or `spanContainer` trait.");
-    }
-    if (isSpan) { return this.getProp('start'); }
-    // Traverse the first edges until the nodes are no longer span containers.
-    var firstNode = this.getFirst();
-    while (true) {
-        var firstNodeIsSC = firstNode.hasTraitSpanContainer();
-        if (!firstNodeIsSC) { break; }
-        if (firstNodeIsSC) { firstNode = firstNode.getFirst(); }
-    }
-    if (!firstNode.hasTraitSpan()) {
-        throw Error("Calling `getText` on a node [" + this._id + "] whose first edge does not resolve to a span.");
-    }
-    return firstNode.getProp('start');
+    return this._getIndex(true);
 };
 Node.prototype.getEndIndex = function() {
-    var isSpan = this.hasTraitSpan(), isSpanContainer = this.hasTraitSpanContainer();
-    if (!isSpan && !isSpanContainer) { 
-        throw Error("Calling `getEndIndex` on a Node that does not have the `span` or `spanContainer` trait.");
-    }
-    if (isSpan) { return this.getProp('start') + this.getProp('length'); }
-    // Traverse the first and last edges until the nodes are no longer span containers.
-    var lastNode = this.getLast();
-    while (true) {
-        var lastNodeIsSC = lastNode.hasTraitSpanContainer();
-        if (!lastNodeIsSC) { break; }
-        if (firstNodeIsSC) { firstNode = firstNode.getFirst(); }
-    }
-    if (!lastNode.hasTraitSpan()) {
-        throw Error("Calling `getText` on a node [" + this._id + "] whose last edge does not resolve to a span.");
-    }
-    return lastNode.getProp('start') + lastNode.getProp('length');
+    return this._getIndex();
 };
 
 // Sequence trait functions
-Node.prototype.hasNext = function() { 
+Node.prototype.hasNext = function() {
     if (!this.hasTraitSequence()) { throw Error("Calling `hasNext` on a Node that does not have the `sequence` trait."); }
     return !!this.getFirstEdgeByType('next');
 };
-Node.prototype.hasPrevious = function() { 
+Node.prototype.hasPrevious = function() {
     if (!this.hasTraitSequence()) { throw Error("Calling `hasPrevious` on a Node that does not have the `sequence` trait."); }
-    // Special case, there will not be an explicit `previous` edge. 
+    // Special case, there will not be an explicit `previous` edge.
     // This library assumes a sequence node will only ever have one incoming `next` edge.
     var previousImplEdges = this._getEdgesImplByLabel('in', 'next');
     return previousImplEdges.length === 1;
 };
-Node.prototype.next = function() { 
+Node.prototype.next = function() {
     if (!this.hasTraitSequence()) { throw Error("Calling `next` on a Node that does not have the `sequence` trait."); }
     return this._graph.getNodeById(this.getFirstEdgeByType('next').getTargetId());
 };
-Node.prototype.previous = function() { 
+Node.prototype.previous = function() {
     if (!this.hasTraitSequence()) { throw Error("Calling `previous` on a Node that does not have the `sequence` trait."); }
-    // Special case, there will not be an explicit `previous` edge. 
+    // Special case, there will not be an explicit `previous` edge.
     // This library assumes a sequence node will only ever have one incoming `next` edge.
     var previousImplEdges = this._getEdgesImplByLabel('in', 'next');
     if (previousImplEdges.length !== 1) { return undefined; }
@@ -138,13 +138,13 @@ Node.prototype.previous = function() {
 Node.prototype._getEdgesImplByLabel = function(direction, label)  {
     var graphImpl = this._graph._graphImpl;
     return graphImpl[direction + 'Edges'](this._id).filter(function(edgeImpl) {
-        return graphImpl.edge(edgeImpl.v, edgeImpl.w) === label;        
+        return graphImpl.edge(edgeImpl.v, edgeImpl.w) === label;
     });
 };
 // Breadth-first search for parents of a given node type.
 Node.prototype._getParentsOfType = function(fnName, nodeType, stopOnFirst) {
     if (!this.hasTraitSequence()) { throw Error("Calling `" + fnName + "` on a Node that does not have the `sequence` trait."); }
-    if (this._graph.getNodeTypes().indexOf(nodeType) === -1) { 
+    if (this._graph.getNodeTypes().indexOf(nodeType) === -1) {
         throw Error("`Node." + fnName + "`: '" + nodeType + "' is not a node type available in the graph.");
     }
     var currentNode, parentEdges, i, matchingNodes = [], self = this;
@@ -157,7 +157,7 @@ Node.prototype._getParentsOfType = function(fnName, nodeType, stopOnFirst) {
         if (currentNodes.length === 0) { break; }
         currentNode = currentNodes.pop();
         // Found the parent, return it.
-        if (currentNode.getType() === nodeType) { 
+        if (currentNode.getType() === nodeType) {
             if (stopOnFirst) { return currentNode; }
             else { matchingNodes.push(currentNode); }
         }
@@ -177,11 +177,11 @@ Node.prototype.getParentsOfType = function(nodeType) {
 };
 
 // SpanContainer trait functions
-Node.prototype.getFirst = function() { 
+Node.prototype.getFirst = function() {
     if (!this.hasTraitSpanContainer()) { throw Error("Calling `getFirst` on a Node that does not have the `span container` trait."); }
     return this._graph.getNodeById(this.getFirstEdgeByType('first').getTargetId());
 };
-Node.prototype.getLast = function() { 
+Node.prototype.getLast = function() {
     if (!this.hasTraitSpanContainer()) { throw Error("Calling `getLast` on a Node that does not have the `span container` trait."); }
     return this._graph.getNodeById(this.getFirstEdgeByType('last').getTargetId());
 };
