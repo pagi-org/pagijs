@@ -1,5 +1,5 @@
 var Edge = require('./edge');
-VALID_PROP_TYPES = ['string', 'float', 'integer', 'boolean'];
+var VALID_PROP_TYPES = ['string', 'float', 'integer', 'boolean'];
 
 function Node(id, type) {
     this._id = id || null;
