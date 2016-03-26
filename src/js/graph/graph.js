@@ -1,6 +1,10 @@
 var Node = require('./node');
 var GraphImpl = require("graphlib").Graph;
 
+function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+
 function Graph(id) {
     this._id = id || null;
     this._version = '2.0';
@@ -13,6 +17,7 @@ function Graph(id) {
     this._nodeTypes = { };
     this._graphImpl = new GraphImpl({ multigraph: true });
 }
+
 Graph.prototype.setId = function(id) { this._id = id; };
 Graph.prototype.getId = function() { return this._id; };
 Graph.prototype.getVersion = function() { return this._version; };
@@ -39,19 +44,19 @@ Graph.prototype.setNodeTypeAsSpan = function(nodeType, attrMap) {
     this._spanNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSpan = function() {
-    return JSON.parse(JSON.stringify(this._spanNodeTypes));
+    return deepClone(this._spanNodeTypes);
 };
 Graph.prototype.setNodeTypeAsSequence = function(nodeType, attrMap) {
     this._sequenceNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSequence = function() {
-    return JSON.parse(JSON.stringify(this._sequenceNodeTypes));
+    return deepClone(this._sequenceNodeTypes);
 };
 Graph.prototype.setNodeTypeAsSpanContainer = function(nodeType, attrMap) {
     this._spanContainerNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSpanContainer = function() {
-    return JSON.parse(JSON.stringify(this._spanContainerNodeTypes));
+    return deepClone(this._spanContainerNodeTypes);
 };
 Graph.prototype.addNode = function(node, connectEdges) {
     if (!(node instanceof Node)) {
@@ -99,11 +104,13 @@ Graph.prototype.getNodesByType = function(nodeType) {
         return node;
     });
 };
+Graph.prototype.getNodeIds = function() {
+    return this._graphImpl.nodes();
+};
 Graph.prototype.getNodes = function() {
-    var self = this;
-    return self._graphImpl.nodes().map(function(nodeId) {
-        return self._graphImpl.node(nodeId);
-    });
+    return this.getNodeIds().map(function(nodeId) {
+        return this.getNodeById(nodeId);
+    }, this);
 };
 
 module.exports = Graph;
