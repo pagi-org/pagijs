@@ -1,9 +1,6 @@
 var Node = require('./node');
-var GraphImpl = require("graphlib").Graph;
-
-function deepClone(obj) {
-    return JSON.parse(JSON.stringify(obj));
-}
+var GraphImpl = require('graphlib').Graph;
+var deepClone = require('../util').deepClone;
 
 function Graph(id) {
     this._id = id || null;
