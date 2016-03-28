@@ -1,6 +1,7 @@
 'use strict';
 
 var nodeValidator = require('./validators/node');
+var validationError = require('./validation-error');
 
 function validateNode(id, graph, schema) {
   var errors = [];
@@ -10,15 +11,9 @@ function validateNode(id, graph, schema) {
   if (node && nodeSpec) {
     errors = nodeValidator(node, nodeSpec);
   } else if (!node) {
-    errors.push({
-      nodeId: id,
-      message: ['Node with id', id, 'does not exist'].join(' ')
-    });
+    errors.push(validationError(id, ['Node with id', id, 'does not exist'].join(' ')));
   } else {
-    errors.push({
-      nodeId: node.getId(),
-      message: [node.getType(), 'is not defined in', schema.id].join(' ')
-    });
+    errors.push(validationError(node.getId(), [node.getType(), 'is not defined in', schema.id].join(' ')));
   }
 
   var isValid = (errors.length === 0);
