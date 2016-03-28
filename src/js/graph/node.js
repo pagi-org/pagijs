@@ -56,23 +56,6 @@ Node.prototype.getFirstEdgeByType = function(edgeType) {
     var edges = this.getEdgesByType(edgeType);
     return edges.length > 0 ? edges[0] : undefined;
 };
-Node.prototype.removeEdge = function(aEdge) {
-    if (!(aEdge instanceof Edge)) {
-        throw Error("`Node.removeEdge` only accepts an instance of Edge.");
-    }
-    // console.log("REMOVE EDGE nodeId: " + this.getId() + ", targetId: " + aEdge.getTargetId() + ", targetType: " + aEdge.getTargetType() + ", edgeType: " + aEdge.getEdgeType() + ".");
-    var self = this;
-    self._edges = self._edges.filter(function(edge) {
-        var matches = aEdge === edge;
-        var edgeNode = self._graph.getNodeById(edge.getTargetId());
-
-        // Remove the edge from the graphImpl.
-        // console.log("UNLINK EDGE nodeId: " + self.getId() + ", targetId: " + edgeNode.getId() + ", type: " + edge.getEdgeType() + ".");
-        self._graph._graphImpl.removeEdge(self.getId(), edgeNode.getId(), edge.getEdgeType());
-        // Only keep edges that don't match the one provided.
-        return aEdge !== edge;
-    });
-};
 Node.prototype.hasTraitSpan = function() {
     return this._graph.getNodeTypesAsSpan()[this.getType()] !== undefined;
 };
@@ -85,6 +68,7 @@ Node.prototype.hasTraitSpanContainer = function() {
 Node.prototype.setGraph = function(graph) {
     this._graph = graph;
 };
+Node.prototype.removeGraph = function() { this._graph = null; };
 Node.prototype.connectEdges = function() {
     if (!this._graph) { return; }
     var self = this, graphImpl = this._graph._graphImpl;
@@ -134,12 +118,9 @@ Node.prototype._connectEdgesSpanContainer = function() {
 Node.prototype._connectEdgesSequence = function() {
     var self = this;
     if (!self.hasTraitSequence()) { return; }
-    // Scenario (first)
-    // A -> ...
-    // B A -> ...
-    // B -><- A -> ...
+    // Sequence (first)
     // Handled by the generic edge loop above.
-    // Scenario (middle)
+    // Sequence (middle)
     // A -> B
     // A C -> B
     // A -> C -> B
@@ -165,11 +146,55 @@ Node.prototype._connectEdgesSequence = function() {
             });
         });
     }
-    // Scenario (last)
-    // ... -> A
-    // ... -> A B
-    // ... -> A -> B
+    // Sequence (last)
     // Is this even possible? There are no edges to indicate that it is.
+};
+Node.prototype.removeEdge = function(aEdge) {
+    if (!(aEdge instanceof Edge)) {
+        throw Error("`Node.removeEdge` only accepts an instance of Edge.");
+    }
+    // console.log("REMOVE EDGE nodeId: " + this.getId() + ", targetId: " + aEdge.getTargetId() + ", targetType: " + aEdge.getTargetType() + ", edgeType: " + aEdge.getEdgeType() + ".");
+    var self = this;
+    self._edges = self._edges.filter(function(edge) {
+        var matches = aEdge === edge;
+        var edgeNode = self._graph.getNodeById(edge.getTargetId());
+
+        // Remove the edge from the graphImpl.
+        // console.log("UNLINK EDGE nodeId: " + self.getId() + ", targetId: " + edgeNode.getId() + ", type: " + edge.getEdgeType() + ".");
+        self._graph._graphImpl.removeEdge(self.getId(), edgeNode.getId(), edge.getEdgeType());
+        // Only keep edges that don't match the one provided.
+        return aEdge !== edge;
+    });
+};
+Node.prototype.removeEdges = function() {
+    var self = this;
+    self._removeEdgesSpanContainer();
+    self._removeEdgesSequence();
+    // Remove the standard edges
+    self.getEdges().forEach(function(edge) {
+        self.removeEdge(edge);
+    });
+};
+Node.prototype._removeEdgesSpanContainer = function() {
+
+};
+Node.prototype._removeEdgesSequence = function() {
+    // Sequence (first)
+    // Handled by the generic loop above.
+    // Sequence (middle)
+    // A -> C -> B
+    // A C B
+    // A -> B
+    if (this.hasNext() && this.hasPrevious()) {
+        var prevNode = this.previous();
+        var nextNode = this.next();
+        this.removeEdge(this.getFirstEdgeByType('next'));
+        prevNode.removeEdge(prevNode.getFirstEdgeByType('next'));
+        prevNode.addEdge(nextNode.getId(), nextNode.getType(), 'next');
+        // Parent edges will be broken by removing the node from graphlib.
+    }
+    // Sequence (last)
+    // Nothing to do here.
 };
 
 // Span/SpanContainer trait functions

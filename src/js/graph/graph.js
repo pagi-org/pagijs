@@ -85,6 +85,17 @@ Graph.prototype.connectEdges = function() {
     });
     // console.log("Graph.connectEdges ------------------------");
 };
+Graph.prototype.removeNode = function(node) {
+    if (!(node instanceof Node)) {
+        throw Error("Parameter must be an instance of Node when calling Graph.removeNode.");
+    }
+    node.removeEdges();
+    this._nodeTypes[node.getType()] = this._nodeTypes[node.getType()].filter(function(aNode) {
+        return aNode.getId() !== node.getId();
+    });
+    node.removeGraph();
+    this._graphImpl.removeNode(node.getId());
+};
 Graph.prototype.getNodeById = function(nodeId) { return this._graphImpl.node(nodeId); };
 Graph.prototype.getNodeTypes = function() { return Object.keys(this._nodeTypes); };
 Graph.prototype.getNodesByType = function(nodeType) {

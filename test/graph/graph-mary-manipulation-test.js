@@ -77,7 +77,7 @@ describe('Graph manipulation for `mary` stream', function() {
             });
         });
     });
-    describe('adding an edge to a node in the graph', function() {
+    describe('adding an edge to a node', function() {
         var node;
         beforeEach(function() {
             node = graph.createNode();
@@ -91,6 +91,42 @@ describe('Graph manipulation for `mary` stream', function() {
             assert.equal(edge.getTargetId(), '2');
             assert.equal(edge.getTargetType(), 'TOK');
             assert.equal(edge.getEdgeType(), 'arbitrary-edge');
+        });
+    });
+    describe('removing a node from a graph', function() {
+        var node, prevNode, nextNode, nodeTotalCnt, nodeTypeCnt;
+        beforeEach(function() {
+            node = graph.getNodeById('2');
+            prevNode = node.previous();
+            nextNode = node.next();
+            nodeTotalCnt = graph.getNodes().length;
+            nodeTypeCnt = graph.getNodesByType(node.getType()).length;
+            graph.removeNode(node);
+        });
+
+        it('node is removed properly', function() {
+            assert.equal(graph.getNodes().length, nodeTotalCnt - 1);
+            assert.equal(graph.getNodesByType(node.getType()).length, nodeTypeCnt - 1);
+            assert.equal(graph.getNodeById(node.getId()), null);
+        });
+        it('node\'s edges are removed properly for sequences', function() {
+            assert(nextNode.hasPrevious());
+            assert(nextNode.previous() === prevNode);
+            assert(prevNode.hasNext());
+            assert(prevNode.next() === nextNode);
+        });
+    });
+    describe('removing an edge from a node', function() {
+        var node;
+        beforeEach(function() {
+            node = graph.getNodeById('2');
+            var nextEdge = node.getFirstEdgeByType('next');
+            node.removeEdge(nextEdge);
+        });
+
+        it('should no longer have a reference to that edge', function() {
+            assert.equal(node.getFirstEdgeByType('next'), undefined);
+            assert.equal(node.hasNext(), false);
         });
     });
 });
