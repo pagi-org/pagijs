@@ -28,8 +28,10 @@ GraphSerializerXml.prototype.serializeNode = function(node) {
     var lines = [TAB + '<node id="' + es(node.getId()) + '" type="' + es(node.getType()) + '">'];
     var props = node.getProps();
     Object.keys(props).forEach(function(key) {
-        var prop = props[key];
-        lines.push(TAB+TAB + '<' + nodePropMap[prop.type] + 'Prop v="' + es(prop.val) + '" k="' + es(prop.key) + '"/>');
+        var propVals = props[key];
+        propVals.forEach(function(prop) {
+            lines.push(TAB+TAB + '<' + nodePropMap[prop.type] + 'Prop v="' + es(prop.val) + '" k="' + es(prop.key) + '"/>');
+        });
     });
     node.getEdges().forEach(function(edge) {
         lines.push(TAB+TAB + '<edge toType="' + es(edge.getTargetType()) + '" to="' + es(edge.getTargetId()) + '" type="' + es(edge.getEdgeType()) + '"/>');
