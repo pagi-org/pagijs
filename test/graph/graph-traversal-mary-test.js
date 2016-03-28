@@ -26,9 +26,9 @@ describe('Graph traversal for `mary` stream', function() {
     });
     it('should return the correct node by id', function() {
         var node = graph.getNodeById('0');
-        assert.equal(node.getProp('start'), 96);
-        assert.equal(node.getProp('length'), 4);
-        assert.equal(node.getProp('pos'), 'JJ');
+        assert.equal(node.getFirstProp('start'), 96);
+        assert.equal(node.getFirstProp('length'), 4);
+        assert.equal(node.getFirstProp('pos'), 'JJ');
     });
     describe('span trait', function() {
         it('node should return the correct text', function() {
