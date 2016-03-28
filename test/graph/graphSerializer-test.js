@@ -40,7 +40,7 @@ describe('GraphSerializer', function() {
                 beforeEach(function(done) {
                     GraphParser.parse(stream.getXmlStream()).then(function(aGraph) {
                         graph = aGraph; done();
-                    });
+                    }, console.error);
                 });
                 it('matches the xml file', function() {
                     var preSerialized = GraphSerializer.serialize(graph);

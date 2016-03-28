@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pagis xmlns="http://pagi.org/schema" id="http://pagi.org/testSuite/extTokParticipant">
+	<extends id="http://pagi.org/testSuite/extTok"/>
+
+  <nodeType name="PARTICIPANT">
+    <stringProperty name="alias" minArity="0" maxArity="unbounded"/>
+    <stringProperty name="name" minArity="0" maxArity="1"/>
+    <stringProperty name="phone-number" minArity="0" maxArity="unbounded"/>
+    <enumProperty name="type" minArity="1" maxArity="unbounded">
+      <item name="author"/>
+      <item name="copied"/>
+    </enumProperty>
+  </nodeType>
+</pagis>

@@ -30,10 +30,21 @@ Node.prototype.addProp = function(type, key, val) {
         default:
             throw Error("Unknown Node property type `" + type + "`.");
     }
-    this._properties[key] = { type: type, key: key, val: newVal };
+
+    if (Array.isArray(this._properties[key])) {
+        this._properties[key].push({ type: type, key: key, val: newVal });
+    } else {
+        this._properties[key] = [{ type: type, key: key, val: newVal }];
+    }
 };
 Node.prototype.getProp = function(key) {
-    return this._properties[key] && this._properties[key].val;
+    return this._properties[key] && this._properties[key].map(function(prop) {
+        return prop.val;
+    });
+};
+Node.prototype.getFirstProp = function(key) {
+    // convenience method for properties with known max arity of 1
+    return this._properties[key] && this._properties[key][0].val;
 };
 Node.prototype.getProps = function() {
     return JSON.parse(JSON.stringify(this._properties));
@@ -207,8 +218,8 @@ Node.prototype.getText = function() {
 };
 Node.prototype._getIndex = function(isStart) {
     if (this.hasTraitSpan()) {
-        var start = this.getProp('start');
-        return isStart ? start : start + this.getProp('length');
+        var start = this.getFirstProp('start');
+        return isStart ? start : start + this.getFirstProp('length');
     }
     if (this.hasTraitSpanContainer()) {
         return isStart ? this.getFirst().getStartIndex() : this.getLast().getEndIndex();
