@@ -93,6 +93,9 @@ Graph.prototype.removeNode = function(node) {
     this._nodeTypes[node.getType()] = this._nodeTypes[node.getType()].filter(function(aNode) {
         return aNode.getId() !== node.getId();
     });
+    if (this._nodeTypes[node.getType()].length === 0) {
+        delete this._nodeTypes[node.getType()];
+    }
     node.removeGraph();
     this._graphImpl.removeNode(node.getId());
 };
