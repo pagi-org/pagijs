@@ -11,7 +11,6 @@ function isOutOfRange(value, range) {
 }
 
 function validateIntProp(prop, propSpec, nodeId) {
-  console.log('Int props were validated');
   var errors = [];
 
   function isInteger(n) {
@@ -36,7 +35,6 @@ function validateIntProp(prop, propSpec, nodeId) {
 }
 
 function validateFloatProp(prop, propSpec, nodeId) {
-  console.log('Float props were validated');
   var errors = [];
 
   if (typeof prop.val !== 'number') {
@@ -57,7 +55,6 @@ function validateFloatProp(prop, propSpec, nodeId) {
 }
 
 function validateStringRestrictions(prop, restrictions, nodeId) {
-  console.log('String restrictions were validated');
   var errors = [];
 
   if (restrictions.items.indexOf(prop.val) === -1) {
@@ -68,7 +65,6 @@ function validateStringRestrictions(prop, restrictions, nodeId) {
 }
 
 function validateStringProp(prop, propSpec, nodeId) {
-  console.log('String props were validated');
   var errors = [];
 
   function valueIsEnumerated(restrictions) {
@@ -87,7 +83,6 @@ function validateStringProp(prop, propSpec, nodeId) {
 }
 
 function validateBoolProp(prop, propSpec, nodeId) {
-  console.log('Bool props were validated');
   var errors = [];
 
   if (typeof prop.value !== 'boolean') {
