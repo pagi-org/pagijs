@@ -26,13 +26,13 @@ describe('GraphSerializer', function() {
             if (stream.name === 'testDoc1') {
                 it('does not support node features', function() {
                     GraphParser.parse(stream.getXmlStream()).fail(function(err) {
-                        assert.throws(err, /Pagi.js does not support node features/);    
+                        assert.throws(err, /Pagi.js does not support node features/);
                     });
                 });
             } else if (stream.name === 'testDoc2') {
                 it('does not support nested node properties', function() {
                     GraphParser.parse(stream.getXmlStream()).fail(function(err) {
-                        assert.throws(err, /Pagi.js does not support nested node property values/);    
+                        assert.throws(err, /Pagi.js does not support nested node property values/);
                     });
                 });
             } else {

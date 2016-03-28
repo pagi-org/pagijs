@@ -37,7 +37,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
                     }
                     break;
                 case 'asSpan':
-                case 'asSequence': 
+                case 'asSequence':
                 case 'asSpanContainer':
                     try {
                         var cap = (tag.name[0].toUpperCase()) + tag.name.slice(1, tag.name.length);
@@ -45,7 +45,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
                         // Capture all the extra attributes for a trait.
                         Object.keys(tag.attributes).forEach(function(attr) {
                             if (attr === 'nodeType') { return; }
-                            traitAttrs[attr] = tag.attributes[attr].value; 
+                            traitAttrs[attr] = tag.attributes[attr].value;
                         });
                         graph['setNodeType' + cap](tag.attributes.nodeType.value, traitAttrs);
                     } catch (err) {
@@ -64,6 +64,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
                     try {
                         node.setId(tag.attributes.id.value);
                         node.setType(tag.attributes.type.value);
+                        graph.addNode(node, false);
                     } catch (err) {
                         reject(new Error("Failed to parse node `id` and `type`. [" + err + "]"));
                     }
@@ -72,7 +73,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
                 case 'floatProp':
                 case 'boolProp':
                 case 'strProp':
-                    if (node) { 
+                    if (node) {
                         try {
                             var pAttrs = tag.attributes;
                             if (pAttrs.k && !pAttrs.v) {
@@ -90,11 +91,11 @@ GraphParserXml.prototype.parse = function(readableStream) {
                 case 'strFeat':
                     reject(new Error("Pagi.js does not support node features at the moment. Create an issue at https://github.com/pagi-org/pagijs."));
                     break;
-                case 'edge': 
+                case 'edge':
                     if (node) {
                         try {
                             var eAttrs = tag.attributes;
-                            node.addEdge(eAttrs.to.value, eAttrs.toType.value, eAttrs.type.value);
+                            node.addEdge(eAttrs.to.value, eAttrs.toType.value, eAttrs.type.value, false);
                         } catch (err) {
                             reject(new Error("Failed to parse edge for node `" + node.id + "`. [" + err + "]"));
                         }
@@ -110,12 +111,11 @@ GraphParserXml.prototype.parse = function(readableStream) {
         });
         streamParser.on("closetag", function(tagName) {
             switch (tagName) {
-                case 'content': 
+                case 'content':
                     graph.setContent(content);
                     content = null;
                     break;
                 case 'node':
-                    graph.addNode(node, false);
                     node = null;
                     break;
             }
