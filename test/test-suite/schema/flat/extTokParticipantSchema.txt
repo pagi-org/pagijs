@@ -1,0 +1,19 @@
+http://pagi.org/testSuite/extTokParticipant
+EXTENDS http://pagi.org/testSuite/extTok
+
+NODETYPE PARTICIPANT
+PROP alias 0 UNBOUNDED STRING
+PROP name 0 1 STRING
+PROP phone-number 0 UNBOUNDED STRING
+PROP type 1 UNBOUNDED STRING author copied
+
+NODETYPE SB SEQUENCE SPAN_CONTAINER TOK
+EDGE first 1 1 0 UNBOUNDED TOK
+EDGE last 1 1 0 UNBOUNDED TOK
+EDGE next 0 1 0 UNBOUNDED SB
+
+NODETYPE TOK SEQUENCE SPAN
+PROP length 1 1 INTEGER 0 2147483647
+PROP pos 0 UNBOUNDED STRING These pos tags are taken from Penn Treebank - here: https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html " ' , CC CD DT EX FW IN JJ JJR JJS LS MD NN NNP NNPS NNS P2S P3S PDT POS PRP PRP$ RB RBR RBS RP SYM TO UH VB VBD VBG VBN VBP VBZ WDT WP WP$ WRB
+PROP start 1 1 INTEGER 0 2147483647
+EDGE next 0 1 0 UNBOUNDED TOK

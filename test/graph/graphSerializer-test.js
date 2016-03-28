@@ -26,13 +26,13 @@ describe('GraphSerializer', function() {
             if (stream.name === 'testDoc1') {
                 it('does not support node features', function() {
                     GraphParser.parse(stream.getXmlStream()).fail(function(err) {
-                        assert.throws(err, /Pagi.js does not support node features/);    
+                        assert.throws(err, /Pagi.js does not support node features/);
                     });
                 });
             } else if (stream.name === 'testDoc2') {
                 it('does not support nested node properties', function() {
                     GraphParser.parse(stream.getXmlStream()).fail(function(err) {
-                        assert.throws(err, /Pagi.js does not support nested node property values/);    
+                        assert.throws(err, /Pagi.js does not support nested node property values/);
                     });
                 });
             } else {
@@ -40,7 +40,7 @@ describe('GraphSerializer', function() {
                 beforeEach(function(done) {
                     GraphParser.parse(stream.getXmlStream()).then(function(aGraph) {
                         graph = aGraph; done();
-                    });
+                    }, console.error);
                 });
                 it('matches the xml file', function() {
                     var preSerialized = GraphSerializer.serialize(graph);
