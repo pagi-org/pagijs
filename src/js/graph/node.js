@@ -179,15 +179,11 @@ Node.prototype.removeEdge = function(aEdge) {
 };
 Node.prototype.removeEdges = function() {
     var self = this;
-    self._removeEdgesSpanContainer();
     self._removeEdgesSequence();
     // Remove the standard edges
     self.getEdges().forEach(function(edge) {
         self.removeEdge(edge);
     });
-};
-Node.prototype._removeEdgesSpanContainer = function() {
-
 };
 Node.prototype._removeEdgesSequence = function() {
     // Sequence (first)
