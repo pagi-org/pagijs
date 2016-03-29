@@ -1,6 +1,7 @@
 'use strict';
 
 var validationError = require('../validation-error');
+var validateArity = require('./arity');
 
 function isRequired(propSpec) {
   return ( propSpec.minArity > 0 );
@@ -103,6 +104,8 @@ module.exports = function validateProperties(node, nodeSpec) {
     var props = nodePropMap[propSpec.name];
 
     if (props) {
+      errors.push.apply(errors, validateArity(props, propSpec, nodeId));
+
       props.forEach(function(prop) {
         switch(propSpec.valueType.name) {
           case 'INTEGER':
