@@ -30,6 +30,6 @@ describe('validator validateGraph', function() {
   it('should validate a graph against a schema', function() {
     var results = validator.validateGraph(graph, schema);
     assert.equal(results.isValid, true);
-    assert.equal(results.errors.length, 0);
+    assert(results.errors.length === 0);
   });
 });

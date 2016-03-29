@@ -1,23 +1,13 @@
 'use strict';
 
-var spanContainerValidator = require('./span-container');
-var edgeValidator = require('./edge');
 var propValidator = require('./property');
-var spanValidator = require('./span');
+var edgeValidator = require('./edge');
 
-module.exports = function nodeValidator(node, nodeSpec) {
+module.exports = function nodeValidator(node, graph, nodeSpec) {
   var errors = [];
 
   errors.push.apply(errors, propValidator(node, nodeSpec));
-  errors.push.apply(errors, edgeValidator(node, nodeSpec));
-
-  if (nodeSpec.traitSpan) {
-    errors.push.apply(errors, spanValidator(node, nodeSpec));
-  }
-
-  if (nodeSpec.traitSpanContainer) {
-    errors.push.apply(errors, spanContainerValidator(node, nodeSpec));
-  }
+  errors.push.apply(errors, edgeValidator(node, graph, nodeSpec));
 
   return errors;
 };

@@ -1,11 +1,8 @@
 'use strict';
 
 var validationError = require('../validation-error');
-var validateArity = require('./arity');
-
-function isRequired(propSpec) {
-  return ( propSpec.minArity > 0 );
-}
+var validateArity = require('./validation-utils').validateArity;
+var isRequired = require('./validation-utils').isRequired;
 
 function isOutOfRange(value, range) {
   return ( range.minRange <= value ) && ( value <= range.maxRange );

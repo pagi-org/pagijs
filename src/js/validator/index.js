@@ -9,7 +9,7 @@ function validateNode(id, graph, schema) {
   var nodeSpec = schema.nodeTypeMap[node.getType()];
 
   if (node && nodeSpec) {
-    errors = nodeValidator(node, nodeSpec);
+    errors = nodeValidator(node, graph, nodeSpec);
   } else if (!node) {
     errors.push(validationError(id, ['Node with id', id, 'does not exist'].join(' ')));
   } else {
