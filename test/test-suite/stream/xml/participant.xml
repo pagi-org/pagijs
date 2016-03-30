@@ -680,7 +680,9 @@ And waited patiently about till Mary did appear.
 	<node id="112" type="PARTICIPANT">
 		<strProp v="cool hand mary" k="alias"></strProp>
 		<strProp v="mary" k="name"></strProp>
-		<strProp v="author" k="type"></strProp>
-		<strProp v="copied" k="type"></strProp>
+		<strProp k="type">
+			<val str="author"></val>
+			<val str="copied"></val>
+		</strProp>
 	</node>
 </document>
