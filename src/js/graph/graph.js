@@ -39,57 +39,65 @@ Graph.prototype.setNodeTypeAsSpan = function(nodeType, attrMap) {
     this._spanNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSpan = function() {
+    // Don't return a direct reference to the object.
     return JSON.parse(JSON.stringify(this._spanNodeTypes));
 };
 Graph.prototype.setNodeTypeAsSequence = function(nodeType, attrMap) {
     this._sequenceNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSequence = function() {
+    // Don't return a direct reference to the object.
     return JSON.parse(JSON.stringify(this._sequenceNodeTypes));
 };
 Graph.prototype.setNodeTypeAsSpanContainer = function(nodeType, attrMap) {
     this._spanContainerNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSpanContainer = function() {
+    // Don't return a direct reference to the object.
     return JSON.parse(JSON.stringify(this._spanContainerNodeTypes));
 };
 Graph.prototype.addNode = function(node, connectEdges) {
     if (!(node instanceof Node)) {
         throw Error("Parameter must be an instance of Node when calling Graph.addNode.");
     }
+    if (node.getType() === null) {
+        throw Error("Adding a node to the graph must have a TYPE.");
+    }
     if (this.getNodeById(node.getId()) !== undefined) {
         throw Error("Graph already contains a node with id `" + node.getId() + "`.");
     }
+    if (!node.getId()) {
+        node.setId(this._generateNodeId());
+    }
+    // console.log("ADD NODE id: " + node.getId() + ", type: " + node.getType() + ".");
     connectEdges = connectEdges === undefined ? true : false;
     this._graphImpl.setNode(node.getId(), node);
     node.setGraph(this);
     // Create node type buckets.
     this._nodeTypes[node.getType()] = this._nodeTypes[node.getType()] || [];
     this._nodeTypes[node.getType()].push(node);
-
-    if (connectEdges) { this.connectEdges([node]); }
+    if (connectEdges) { node.connectEdges(); }
 };
-Graph.prototype.connectEdges = function(nodes) {
-    var self = this;
-    (nodes || this._graphImpl.nodes()).forEach(function(nodeId) {
-        var node = self._graphImpl.node(nodeId);
-        node.getEdges().forEach(function(edge) {
-            self._graphImpl.setEdge(node.getId(), edge.getTargetId(), edge.getEdgeType());
-        });
-        // If node is a span container create edges to all it's children.
-        // This allows children to quickly reference their parent nodes.
-        // Child nodes may not have edges in the graphImpl yet so create edges
-        // based only on the edges array in the node.
-        if (node.hasTraitSpanContainer()) {
-            var linkNode = self.getNodeById(node.getFirstEdgeByType('first').getTargetId());
-            var lastNode = self.getNodeById(node.getFirstEdgeByType('last').getTargetId());
-            while (true) {
-                self._graphImpl.setEdge(node.getId(), linkNode.getId(), 'parent');
-                if (linkNode === lastNode) { break; }
-                linkNode = self.getNodeById(linkNode.getFirstEdgeByType('next').getTargetId());
-            }
-        }
+Graph.prototype.connectEdges = function() {
+    // console.log("Graph.connectEdges ------------------------");
+    this.getNodes().forEach(function(node) {
+        node.connectEdges();
     });
+    // console.log("Graph.connectEdges ------------------------");
+};
+Graph.prototype.removeNode = function(node) {
+    if (!(node instanceof Node)) {
+        throw Error("Parameter must be an instance of Node when calling Graph.removeNode.");
+    }
+    node.removeEdges();
+    this._nodeTypes[node.getType()] = this._nodeTypes[node.getType()].filter(function(aNode) {
+        return aNode.getId() !== node.getId();
+    });
+    if (this._nodeTypes[node.getType()].length === 0) {
+        delete this._nodeTypes[node.getType()];
+    }
+    node.removeGraph();
+    this._graphImpl.removeNode(node.getId());
 };
 Graph.prototype.getNodeById = function(nodeId) { return this._graphImpl.node(nodeId); };
 Graph.prototype.getNodeTypes = function() { return Object.keys(this._nodeTypes); };
@@ -104,6 +112,21 @@ Graph.prototype.getNodes = function() {
     return self._graphImpl.nodes().map(function(nodeId) {
         return self._graphImpl.node(nodeId);
     });
+};
+
+// Manipulation functions
+Graph.prototype.createNode = function() {
+    return new Node();
+};
+
+// Hidden functions
+Graph.prototype._generateNodeId = function() {
+    // Increment the max id by one to get the new id.
+    return (this.getNodes().reduce(function(minId, node) {
+        var nodeId = node.getId() ? parseInt(node.getId()) : -1;
+        if (nodeId > minId) { return nodeId; }
+        return minId;
+    }, 0) + 1).toString();
 };
 
 module.exports = Graph;
