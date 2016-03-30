@@ -28,23 +28,23 @@ Node.prototype.addProp = function(type, key, val) {
         case VALID_PROP_TYPES[3]:
             newVal = val === 'true'; break;
         default:
-            throw Error("Unknown Node property type `" + type + "`.");
+            throw Error('Unknown Node property type `' + type + '`.');
     }
 
-    if (Array.isArray(this._properties[key])) {
-        this._properties[key].push({ type: type, key: key, val: newVal });
+    if (this._properties[key]) {
+        this._properties[key].vals.push(newVal);
     } else {
-        this._properties[key] = [{ type: type, key: key, val: newVal }];
+        this._properties[key] = { type: type, key: key, vals: [newVal] };
     }
 };
 Node.prototype.getProp = function(key) {
-    return this._properties[key] && this._properties[key].map(function(prop) {
-        return prop.val;
+    return this._properties[key] && this._properties[key].vals.map(function(val) {
+        return val;
     });
 };
 Node.prototype.getFirstProp = function(key) {
     // convenience method for properties with known max arity of 1
-    return this._properties[key] && this._properties[key][0].val;
+    return this._properties[key] && this._properties[key].vals[0];
 };
 Node.prototype.getProps = function() {
     return JSON.parse(JSON.stringify(this._properties));
