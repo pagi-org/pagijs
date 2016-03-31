@@ -13,28 +13,36 @@ Node.prototype.setId = function(id) { this._id = id; };
 Node.prototype.getId = function() { return this._id; };
 Node.prototype.setType = function(type) { this._type = type; };
 Node.prototype.getType = function() { return this._type; };
-// Node.prototype.addFeature = function(key, val) { };
-// Node.prototype.getFeature = function(key) { };
-Node.prototype.addProp = function(type, key, val) {
+function convertValue(type, value) {
     var newVal;
-    type = type.toLowerCase();
     switch (type) {
         case VALID_PROP_TYPES[0]:
-            newVal = val.toString(); break;
+            newVal = value.toString(); break;
         case VALID_PROP_TYPES[1]:
-            newVal = parseInt(val); break;
+            newVal = parseInt(value); break;
         case VALID_PROP_TYPES[2]:
-            newVal = parseFloat(val); break;
+            newVal = parseFloat(value); break;
         case VALID_PROP_TYPES[3]:
-            newVal = val === 'true'; break;
+            newVal = value === 'true'; break;
         default:
             throw Error('Unknown Node property type `' + type + '`.');
     }
 
-    if (this._properties[key]) {
-        this._properties[key].vals.push(newVal);
+    return newVal;
+}
+Node.prototype.addProp = function(type, key, val) {
+    var typeName = type.toLowerCase(),
+        newVal;
+
+    if (val) {
+        newVal = convertValue(typeName, val);
+        if (this._properties[key]) {
+            this._properties[key].vals.push(newVal);
+        } else {
+            this._properties[key] = { type: typeName, key: key, vals: [newVal] };
+        }
     } else {
-        this._properties[key] = { type: type, key: key, vals: [newVal] };
+        this._properties[key] = { type: typeName, key: key, vals: [] };
     }
 };
 Node.prototype.getProp = function(key) {

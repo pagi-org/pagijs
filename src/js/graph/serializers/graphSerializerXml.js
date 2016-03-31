@@ -31,12 +31,14 @@ GraphSerializerXml.prototype.serializeNode = function(node) {
         var prop = props[key];
         if (prop.vals.length === 1) {
             lines.push(TAB+TAB + '<' + nodePropMap[prop.type] + 'Prop v="' + es(prop.vals[0]) + '" k="' + es(prop.key) + '"/>');
-        } else {
-            lines.push(TAB+TAB + '<' + nodePropMap[prop.type] + 'Prop v="' + es(prop.vals[0]) + '" k="' + es(prop.key) + '">');
+        } else if (prop.vals.length > 1) {
+            lines.push(TAB+TAB + '<' + nodePropMap[prop.type] + 'Prop k="' + es(prop.key) + '">');
             prop.vals.forEach(function(val) {
                 lines.push(TAB+TAB+TAB + '<val ' + nodePropMap[prop.type] + '="' + es(val) + '"></val>');
             });
             lines.push(TAB+TAB + '</' + nodePropMap[prop.type] + 'Prop/>');
+        } else {
+            throw Error("`GraphSerializerXml.serializeNode` cannot serialize node properties without values.");
         }
     });
     node.getEdges().forEach(function(edge) {

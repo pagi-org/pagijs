@@ -1,6 +1,6 @@
 var Q = require('q');
 var sax = require("sax");
-var print = require("util").print;
+// var print = require("util").print;
 var Graph = require('../graph');
 var Node = require('../node');
 
@@ -19,7 +19,10 @@ GraphParserXml.prototype.parse = function(readableStream) {
             'int': 'integer',
             'bool': 'boolean'
         };
+        var multiValData = null;
+
         streamParser.on("opentag", function(tag) {
+            var pAttrs = null;
             currentTag = tag;
             switch (tag.name) {
                 case 'document':
@@ -75,22 +78,56 @@ GraphParserXml.prototype.parse = function(readableStream) {
                 case 'strProp':
                     if (node) {
                         try {
-                            var pAttrs = tag.attributes;
+                            pAttrs = tag.attributes;
                             if (pAttrs.k && !pAttrs.v) {
-                                reject(new Error("Pagi.js does not support nested node property values at the moment. Create an issue here https://github.com/pagi-org/pagijs"));
+                                multiValData = {
+                                    type: tag.name.replace('Prop', ''),
+                                    key: pAttrs.k.value
+                                };
+                                node.addProp(nodePropMap[tag.name.replace('Prop', '')], pAttrs.k.value);
+                            } else {
+                                node.addProp(nodePropMap[tag.name.replace('Prop', '')], pAttrs.k.value, pAttrs.v.value);
                             }
-                            node.addProp(nodePropMap[tag.name.replace('Prop', '')], pAttrs.k.value, pAttrs.v.value);
+                        } catch (err) {
+                            reject(new Error("Failed to parse property for node `" + node.id + "`. [" + err + "]"));
+                        }
+                    }
+                    break;
+                case 'enumProp':
+                    // Parse and encode enumProps into the graph like strProp nodes
+                    if (node) {
+                        try {
+                            pAttrs = tag.attributes;
+                            var STRING_PROP_PREFIX = 'str';
+                            if (pAttrs.k && !pAttrs.v) {
+                                multiValData = {
+                                    type: STRING_PROP_PREFIX,
+                                    key: pAttrs.k.value
+                                };
+                                node.addProp(nodePropMap[STRING_PROP_PREFIX], pAttrs.k.value);
+                            } else {
+                                node.addProp(nodePropMap[STRING_PROP_PREFIX], pAttrs.k.value, pAttrs.v.value);
+                            }
+                        } catch (err) {
+                            reject(new Error("Failed to parse property for node `" + node.id + "`. [" + err + "]"));
+                        }
+                    }
+                    break;
+                case 'val':
+                    if (node && multiValData) {
+                        try {
+                            pAttrs = tag.attributes;
+                            node.addProp(nodePropMap[multiValData.type], multiValData.key, pAttrs[multiValData.type].value);
                         } catch (err) {
                             reject(new Error("Failed to parse property for node `" + node.id + "`. [" + err + "]"));
                         }
                     }
                     break;
                 case 'intFeat':
-                case 'enumProp':
                 case 'floatFeat':
                 case 'boolFeat':
                 case 'strFeat':
-                    reject(new Error("Pagi.js does not support node features at the moment. Create an issue at https://github.com/pagi-org/pagijs."));
+                    console.warn('Pagi.js does not support parsing ' + tag.name + ' and it was not added to the graph');
                     break;
                 case 'edge':
                     if (node) {
@@ -118,6 +155,9 @@ GraphParserXml.prototype.parse = function(readableStream) {
                     break;
                 case 'node':
                     node = null;
+                    break;
+                case 'val':
+                    multiValData = null;
                     break;
             }
         });
