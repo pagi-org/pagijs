@@ -41,34 +41,22 @@ Graph.prototype.setNodeTypeAsSpan = function(nodeType, attrMap) {
     this._spanNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSpan = function() {
-<<<<<<< HEAD
-    return deepClone(this._spanNodeTypes);
-=======
     // Don't return a direct reference to the object.
-    return JSON.parse(JSON.stringify(this._spanNodeTypes));
->>>>>>> origin/master
+    return deepClone(this._spanNodeTypes);
 };
 Graph.prototype.setNodeTypeAsSequence = function(nodeType, attrMap) {
     this._sequenceNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSequence = function() {
-<<<<<<< HEAD
-    return deepClone(this._sequenceNodeTypes);
-=======
     // Don't return a direct reference to the object.
-    return JSON.parse(JSON.stringify(this._sequenceNodeTypes));
->>>>>>> origin/master
+    return deepClone(this._sequenceNodeTypes);
 };
 Graph.prototype.setNodeTypeAsSpanContainer = function(nodeType, attrMap) {
     this._spanContainerNodeTypes[nodeType] = attrMap || { };
 };
 Graph.prototype.getNodeTypesAsSpanContainer = function() {
-<<<<<<< HEAD
-    return deepClone(this._spanContainerNodeTypes);
-=======
     // Don't return a direct reference to the object.
-    return JSON.parse(JSON.stringify(this._spanContainerNodeTypes));
->>>>>>> origin/master
+    return deepClone(this._spanContainerNodeTypes);
 };
 Graph.prototype.addNode = function(node, connectEdges) {
     if (!(node instanceof Node)) {
