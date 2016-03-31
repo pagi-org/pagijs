@@ -127,7 +127,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
                 case 'floatFeat':
                 case 'boolFeat':
                 case 'strFeat':
-                    console.warn('Pagi.js does not support parsing ' + tag.name + ' and it was not added to the graph');
+                    // console.warn('Pagi.js does not support parsing ' + tag.name + ' and it was not added to the graph');
                     break;
                 case 'edge':
                     if (node) {

@@ -84,10 +84,13 @@ function doParse(readableStream, locator) {
 			case "enumProperty":
 			case "stringProperty":
 				valueType = valueType || schema.ValueType.STRING;
+				/* falls through */
 			case "floatProperty":
 				valueType = valueType || schema.ValueType.FLOAT;
+				/* falls through */
 			case "booleanProperty":
 				valueType = valueType || schema.ValueType.BOOLEAN;
+				/* falls through */
 			case "integerProperty":
 				valueType = valueType || schema.ValueType.INTEGER;
 
