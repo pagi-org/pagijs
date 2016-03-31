@@ -5,7 +5,7 @@ var validateArity = require('./validation-utils').validateArity;
 var isRequired = require('./validation-utils').isRequired;
 
 function isOutOfRange(value, range) {
-  return ( range.minRange <= value ) && ( value <= range.maxRange );
+  return !(( range.minRange <= value ) && ( value <= range.maxRange ));
 }
 
 function validateIntProp(prop, propSpec, nodeId) {
@@ -15,19 +15,21 @@ function validateIntProp(prop, propSpec, nodeId) {
     return ( n === +n ) && ( n === (n|0) );
   }
 
-  if (!isInteger(prop.val)) {
-    errors.push(validationError(nodeId, [propSpec.name, 'must be an integer'].join(' ')));
-  }
+  prop.vals.forEach(function(val) {
+    if (!isInteger(val)) {
+      errors.push(validationError(nodeId, [propSpec.name, 'must be an integer'].join(' ')));
+    }
 
-  if (isOutOfRange(prop.value, propSpec.restrictions)) {
-    errors.push(validationError(nodeId, [
-      propSpec.name,
-      'must be within',
-      propSpec.restrictions.minRange,
-      'and',
-      propSpec.restrictions.maxRange
-    ].join(' ')));
-  }
+    if (isOutOfRange(val, propSpec.restrictions)) {
+      errors.push(validationError(nodeId, [
+        propSpec.name,
+        'must be within',
+        propSpec.restrictions.minRange,
+        'and',
+        propSpec.restrictions.maxRange
+      ].join(' ')));
+    }
+  });
 
   return errors;
 }
@@ -35,19 +37,21 @@ function validateIntProp(prop, propSpec, nodeId) {
 function validateFloatProp(prop, propSpec, nodeId) {
   var errors = [];
 
-  if (typeof prop.val !== 'number') {
-    errors.push(validationError(nodeId, [propSpec.name, 'must be a float'].join(' ')));
-  }
+  prop.vals.forEach(function(val) {
+    if (typeof val !== 'number') {
+      errors.push(validationError(nodeId, [propSpec.name, 'must be a float'].join(' ')));
+    }
 
-  if (isOutOfRange(prop.value, propSpec.restrictions)) {
-    errors.push(validationError(nodeId, [
-      propSpec.name,
-      'must be within',
-      propSpec.restrictions.minRange,
-      'and',
-      propSpec.restrictions.maxRange
-    ].join(' ')));
-  }
+    if (isOutOfRange(val, propSpec.restrictions)) {
+      errors.push(validationError(nodeId, [
+        propSpec.name,
+        'must be within',
+        propSpec.restrictions.minRange,
+        'and',
+        propSpec.restrictions.maxRange
+      ].join(' ')));
+    }
+  });
 
   return errors;
 }
@@ -55,9 +59,11 @@ function validateFloatProp(prop, propSpec, nodeId) {
 function validateStringRestrictions(prop, restrictions, nodeId) {
   var errors = [];
 
-  if (restrictions.items.indexOf(prop.val) === -1) {
-    errors.push(validationError(nodeId, [prop.val, 'is not a valid value for property', prop.key].join(' ')));
-  }
+  prop.vals.forEach(function(val) {
+    if (restrictions.items.indexOf(val) === -1) {
+      errors.push(validationError(nodeId, [prop.val, 'is not a valid value for property', prop.key].join(' ')));
+    }
+  });
 
   return errors;
 }
@@ -69,9 +75,11 @@ function validateStringProp(prop, propSpec, nodeId) {
     return !!restrictions.items;
   }
 
-  if (typeof prop.val !== 'string') {
-    errors.push(validationError(nodeId, [propSpec.name, 'must be a string'].join(' ')));
-  }
+  prop.vals.forEach(function(val) {
+    if (typeof val !== 'string') {
+      errors.push(validationError(nodeId, [propSpec.name, 'must be a string'].join(' ')));
+    }
+  });
 
   if (valueIsEnumerated(propSpec.restrictions)) {
     errors.push.apply(errors, validateStringRestrictions(prop, propSpec.restrictions, nodeId));
@@ -83,9 +91,11 @@ function validateStringProp(prop, propSpec, nodeId) {
 function validateBoolProp(prop, propSpec, nodeId) {
   var errors = [];
 
-  if (typeof prop.value !== 'boolean') {
-    errors.push(validationError(nodeId, [propSpec.name, 'must be a boolean'].join(' ')));
-  }
+  prop.vals.forEach(function(val) {
+    if (typeof val !== 'boolean') {
+      errors.push(validationError(nodeId, [propSpec.name, 'must be a boolean'].join(' ')));
+    }
+  });
 
   return errors;
 }
@@ -98,29 +108,27 @@ module.exports = function validateProperties(node, nodeSpec) {
 
   Object.keys(propSpecMap).forEach(function(propName) {
     var propSpec = propSpecMap[propName];
-    var props = nodePropMap[propSpec.name];
+    var prop = nodePropMap[propSpec.name];
 
-    if (props) {
-      errors.push.apply(errors, validateArity(props, propSpec, nodeId));
+    if (prop) {
+      errors.push.apply(errors, validateArity(prop.vals, propSpec, nodeId));
 
-      props.forEach(function(prop) {
-        switch(propSpec.valueType.name) {
-          case 'INTEGER':
-            errors.push.apply(errors, validateIntProp(prop, propSpec, nodeId));
-            break;
-          case 'FLOAT':
-            errors.push.apply(errors, validateFloatProp(prop, propSpec, nodeId));
-            break;
-          case 'STRING':
-            errors.push.apply(errors, validateStringProp(prop, propSpec, nodeId));
-            break;
-          case 'BOOLEAN':
-            errors.push.apply(errors, validateBoolProp(prop, propSpec, nodeId));
-            break;
-          default:
-            throw new Error('Schema valueType ' + propSpec.valueType.name + ' not a valid type.');
-        }
-      });
+      switch(propSpec.valueType.name) {
+        case 'INTEGER':
+          errors.push.apply(errors, validateIntProp(prop, propSpec, nodeId));
+          break;
+        case 'FLOAT':
+          errors.push.apply(errors, validateFloatProp(prop, propSpec, nodeId));
+          break;
+        case 'STRING':
+          errors.push.apply(errors, validateStringProp(prop, propSpec, nodeId));
+          break;
+        case 'BOOLEAN':
+          errors.push.apply(errors, validateBoolProp(prop, propSpec, nodeId));
+          break;
+        default:
+          throw new Error('Schema valueType ' + propSpec.valueType.name + ' not a valid type.');
+      }
     } else if (isRequired(propSpec)) {
       errors.push(validationError(nodeId, [propSpec.name, 'is a required property'].join(' ')));
     }
