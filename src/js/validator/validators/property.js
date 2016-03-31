@@ -61,7 +61,7 @@ function validateStringRestrictions(prop, restrictions, nodeId) {
 
   prop.vals.forEach(function(val) {
     if (restrictions.items.indexOf(val) === -1) {
-      errors.push(validationError(nodeId, [prop.val, 'is not a valid value for property', prop.key].join(' ')));
+      errors.push(validationError(nodeId, [val, 'is not a valid value for property', prop.key].join(' ')));
     }
   });
 

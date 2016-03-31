@@ -4,29 +4,35 @@ var validationError = require('../validation-error');
 var validateArity = require('./validation-utils').validateArity;
 var isRequired = require('./validation-utils').isRequired;
 
-function invalidTarget(edge, edgeSpec) {
-  return (edgeSpec.targetNodeTypes.indexOf(edge.getTargetType()) === -1);
-}
-
 function targetExists(id, graph) {
   return !!graph.getNodeById(id);
 }
 
-function validate(edge, edgeSpec, nodeId, graph) {
+function validateTarget(edge, edgeSpec, nodeId, graph) {
   var errors = [];
+  var targetNode = graph.getNodeById(edge.getTargetId());
+  var invalidTarget = edgeSpec.targetNodeTypes.indexOf(targetNode.getType()) === -1;
 
-  if (invalidTarget(edge, edgeSpec)) {
+  if (invalidTarget) {
     errors.push(validationError(nodeId, [
-      edge.getTargetType(),
+      targetNode.getType(),
       'is an invalid target for edge',
       edge.getEdgeType()
     ].join(' ')));
   }
 
-  if (!targetExists(edge.getTargetId(), graph)) {
+  return errors;
+}
+
+function validate(edge, edgeSpec, nodeId, graph) {
+  var errors = [];
+
+  if (targetExists(edge.getTargetId(), graph)) {
+    errors.push.apply(errors, validateTarget(edge, edgeSpec, nodeId, graph));
+  } else {
     errors.push(validationError(nodeId, [
       edge.getEdgeType(),
-      'points to non-existent node with id',
+      'edge points to non-existent node with id',
       edge.getTargetId()
     ].join(' ')));
   }
