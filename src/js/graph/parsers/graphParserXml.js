@@ -86,6 +86,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
                     }
                     break;
                 case 'intFeat':
+                case 'enumProp':
                 case 'floatFeat':
                 case 'boolFeat':
                 case 'strFeat':
