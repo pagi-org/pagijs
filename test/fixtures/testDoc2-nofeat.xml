@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://pagi.org/stream" id="testDoc2" version="2.0"><schema uri="http://pagi.org/testSuite/simpleProps"></schema>
+	<content contentType="text/plain">Some random text that doesn't really matter. Really, it doesn't.
+</content>
+
+	<node id="0" type="MY_NODE">
+		<strProp v="edge" k="value"></strProp>
+		<edge toType="MY_NODE" to="1" type="bff"></edge>
+	</node>
+	<node id="1" type="MY_NODE">
+		<strProp v="1ip" k="value"></strProp>
+		<intProp v="45" k="confidence"></intProp>
+	</node>
+	<node id="2" type="MY_NODE">
+		<strProp v="2ip" k="value"></strProp>
+		<intProp v="45" k="confidence"></intProp>
+	</node>
+	<node id="3" type="MY_NODE">
+		<strProp v="3ip" k="value"></strProp>
+		<intProp k="confidence">
+			<val int="45"></val>
+			<val int="88"></val>
+		</intProp>
+	</node>
+	<node id="4" type="MY_NODE">
+		<strProp v="1if" k="value"></strProp>
+	</node>
+	<node id="5" type="MY_NODE">
+		<strProp v="2if" k="value"></strProp>
+	</node>
+	<node id="6" type="MY_NODE">
+		<strProp v="3if" k="value"></strProp>
+	</node>
+	<node id="7" type="MY_NODE">
+		<strProp v="1fp" k="value"></strProp>
+		<floatProp v="0.45" k="precision"></floatProp>
+	</node>
+	<node id="8" type="MY_NODE">
+		<strProp v="2fp" k="value"></strProp>
+		<floatProp v="0.45" k="precision"></floatProp>
+	</node>
+	<node id="9" type="MY_NODE">
+		<strProp v="3fp" k="value"></strProp>
+		<floatProp k="precision">
+			<val float="0.45"></val>
+			<val float="0.88"></val>
+		</floatProp>
+	</node>
+	<node id="10" type="MY_NODE">
+		<strProp v="1ff" k="value"></strProp>
+	</node>
+	<node id="11" type="MY_NODE">
+		<strProp v="2ff" k="value"></strProp>
+	</node>
+	<node id="12" type="MY_NODE">
+		<strProp v="3ff" k="value"></strProp>
+	</node>
+	<node id="13" type="MY_NODE">
+		<strProp v="1bp" k="value"></strProp>
+		<boolProp v="true" k="enabled"></boolProp>
+	</node>
+	<node id="14" type="MY_NODE">
+		<strProp v="2bp" k="value"></strProp>
+		<boolProp v="false" k="enabled"></boolProp>
+	</node>
+	<node id="15" type="MY_NODE">
+		<strProp v="3bp" k="value"></strProp>
+		<boolProp k="enabled">
+			<val bool="false"></val>
+			<val bool="true"></val>
+		</boolProp>
+	</node>
+	<node id="16" type="MY_NODE">
+		<strProp v="1bf" k="value"></strProp>
+	</node>
+	<node id="17" type="MY_NODE">
+		<strProp v="2bf" k="value"></strProp>
+	</node>
+	<node id="18" type="MY_NODE">
+		<strProp v="3bf" k="value"></strProp>
+	</node>
+	<node id="19" type="MY_NODE">
+		<strProp v="1sp" k="value"></strProp>
+		<strProp v="value1" k="labeled"></strProp>
+	</node>
+	<node id="20" type="MY_NODE">
+		<strProp v="2sp" k="value"></strProp>
+		<strProp v="value2" k="labeled"></strProp>
+	</node>
+	<node id="21" type="MY_NODE">
+		<strProp v="3sp" k="value"></strProp>
+		<strProp k="labeled">
+			<val str="value2"></val>
+			<val str="value1"></val>
+		</strProp>
+	</node>
+	<node id="22" type="MY_NODE">
+		<strProp v="1sf" k="value"></strProp>
+	</node>
+	<node id="23" type="MY_NODE">
+		<strProp v="2sf" k="value"></strProp>
+	</node>
+	<node id="24" type="MY_NODE">
+		<strProp v="3sf" k="value"></strProp>
+	</node>
+	<node id="25" type="MY_NODE">
+		<strProp v="1ep" k="value"></strProp>
+		<strProp v="value1" k="selected"></strProp>
+	</node>
+	<node id="26" type="MY_NODE">
+		<strProp v="2ep" k="value"></strProp>
+		<strProp v="value2" k="selected"></strProp>
+	</node>
+	<node id="27" type="MY_NODE">
+		<strProp v="3ep" k="value"></strProp>
+		<strProp k="selected">
+			<val str="value2"></val>
+			<val str="value1"></val>
+		</strProp>
+	</node>
+	<node id="28" type="MY_NODE">
+		<strProp v="1ef" k="value"></strProp>
+	</node>
+	<node id="29" type="MY_NODE">
+		<strProp v="2ef" k="value"></strProp>
+	</node>
+	<node id="30" type="MY_NODE">
+		<strProp v="3ef" k="value"></strProp>
+	</node>
+</document>
