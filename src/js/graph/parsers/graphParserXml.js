@@ -13,6 +13,7 @@ GraphParserXml.prototype.parse = function(readableStream) {
         var graph = new Graph();
         var streamParser = sax.createStream(true, { xmlns: true, position: true });
         var currentTag, node, content = '';
+        var pAttrs = null;
         var nodePropMap = {
             'str': 'string',
             'float': 'float',
@@ -22,7 +23,6 @@ GraphParserXml.prototype.parse = function(readableStream) {
         var multiValData = null;
 
         streamParser.on("opentag", function(tag) {
-            var pAttrs = null;
             currentTag = tag;
             switch (tag.name) {
                 case 'document':
@@ -156,7 +156,11 @@ GraphParserXml.prototype.parse = function(readableStream) {
                 case 'node':
                     node = null;
                     break;
-                case 'val':
+                case 'intProp':
+                case 'floatProp':
+                case 'boolProp':
+                case 'strProp':
+                case 'enumProp':
                     multiValData = null;
                     break;
             }

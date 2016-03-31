@@ -19,15 +19,14 @@ function convertValue(type, value) {
         case VALID_PROP_TYPES[0]:
             newVal = value.toString(); break;
         case VALID_PROP_TYPES[1]:
-            newVal = parseInt(value); break;
-        case VALID_PROP_TYPES[2]:
             newVal = parseFloat(value); break;
+        case VALID_PROP_TYPES[2]:
+            newVal = parseInt(value); break;
         case VALID_PROP_TYPES[3]:
             newVal = value === 'true'; break;
         default:
             throw Error('Unknown Node property type `' + type + '`.');
     }
-
     return newVal;
 }
 Node.prototype.addProp = function(type, key, val) {
