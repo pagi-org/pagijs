@@ -15,7 +15,7 @@ module.exports.serialize = function(graph) {
 module.exports.validateGraph = function(graph, schema) {
   if (!(graph instanceof Graph)) { throw Error("`Pagi.validateGraph` expects a Graph instance."); }
   return validator.validateGraph(graph, schema);
-}
+};
 
 module.exports.validateNode = function(id, graph, schema) {
   if (!(graph instanceof Graph)) { throw Error("`Pagi.validateGraph` expects a Graph instance."); }
