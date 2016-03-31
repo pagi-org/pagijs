@@ -29,7 +29,7 @@ describe("Pagi object", function () {
         });
         it('returns a string', function(done) {
             Pagi.parse(stream.getXmlStream()).then(function(graph) {
-                assert(typeof Pagi.serialize(graph) === 'string'); 
+                assert(typeof Pagi.serialize(graph) === 'string');
                 done();
             });
         });
