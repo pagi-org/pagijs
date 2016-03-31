@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var assert = require('assert');
 var libxslt = require('libxslt');
 var testStream = require('../test-stream');
@@ -23,31 +24,30 @@ describe('GraphSerializer', function() {
         // console.log("GraphSerializer testing stream " + stream.name);
 
         describe('test schema `' + stream.name + '` serialization', function() {
-            if (stream.name === 'testDoc1') {
-                it('does not support node features', function() {
-                    GraphParser.parse(stream.getXmlStream()).fail(function(err) {
-                        assert.throws(err, /Pagi.js does not support node features/);
-                    });
-                });
-            } else if (stream.name === 'testDoc2') {
-                it('does not support nested node properties', function() {
-                    GraphParser.parse(stream.getXmlStream()).fail(function(err) {
-                        assert.throws(err, /Pagi.js does not support nested node property values/);
-                    });
+            var graph, filePath;
+            beforeEach(function(done) {
+                GraphParser.parse(stream.getXmlStream()).then(function(aGraph) {
+                    graph = aGraph; done();
+                }, console.error);
+            });
+            if (stream.name === 'testDoc1' || stream.name === 'testDoc2') {
+                it('matches the xml file without feature nodes', function() {
+                    filePath = path.join(__dirname, '..', 'fixtures', stream.name + '-nofeat.xml');
+                    var preSerialized = GraphSerializer.serialize(graph);
+                    // fs.writeFileSync('/tmp/pre-serialize-' + stream.name + '.xml', preSerialized);
+                    var serialized = PAGI_XSLT.apply(preSerialized);
+                    // fs.writeFileSync('/tmp/serialize-' + stream.name + '.xml', serialized);
+                    var gold = PAGI_XSLT.apply(fs.readFileSync(filePath, {encoding: 'utf8'}));
+                    // fs.writeFileSync('/tmp/serialize-' + stream.name + '-gold.xml', gold);
+                    assert.equal(serialized, gold);
                 });
             } else {
-                var graph;
-                beforeEach(function(done) {
-                    GraphParser.parse(stream.getXmlStream()).then(function(aGraph) {
-                        graph = aGraph; done();
-                    }, console.error);
-                });
                 it('matches the xml file', function() {
                     var preSerialized = GraphSerializer.serialize(graph);
                     // fs.writeFileSync('/tmp/pre-serialize-' + stream.name + '.xml', preSerialized);
                     var serialized = PAGI_XSLT.apply(preSerialized);
-                    var gold = PAGI_XSLT.apply(stream.getXml());
                     // fs.writeFileSync('/tmp/serialize-' + stream.name + '.xml', serialized);
+                    var gold = PAGI_XSLT.apply(stream.getXml());
                     // fs.writeFileSync('/tmp/serialize-' + stream.name + '-gold.xml', gold);
                     assert.equal(serialized, gold);
                 });

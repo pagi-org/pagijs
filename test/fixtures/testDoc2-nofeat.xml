@@ -24,18 +24,12 @@
 	</node>
 	<node id="4" type="MY_NODE">
 		<strProp v="1if" k="value"></strProp>
-		<intFeat v="566" k="probability"></intFeat>
 	</node>
 	<node id="5" type="MY_NODE">
 		<strProp v="2if" k="value"></strProp>
-		<intFeat v="566" k="probability"></intFeat>
 	</node>
 	<node id="6" type="MY_NODE">
 		<strProp v="3if" k="value"></strProp>
-		<intFeat k="probability">
-			<val int="566"></val>
-			<val int="599"></val>
-		</intFeat>
 	</node>
 	<node id="7" type="MY_NODE">
 		<strProp v="1fp" k="value"></strProp>
@@ -54,18 +48,12 @@
 	</node>
 	<node id="10" type="MY_NODE">
 		<strProp v="1ff" k="value"></strProp>
-		<floatFeat v="0.566" k="probability"></floatFeat>
 	</node>
 	<node id="11" type="MY_NODE">
 		<strProp v="2ff" k="value"></strProp>
-		<floatFeat v="0.566" k="probability"></floatFeat>
 	</node>
 	<node id="12" type="MY_NODE">
 		<strProp v="3ff" k="value"></strProp>
-		<floatFeat k="probability">
-			<val float="0.566"></val>
-			<val float="0.599"></val>
-		</floatFeat>
 	</node>
 	<node id="13" type="MY_NODE">
 		<strProp v="1bp" k="value"></strProp>
@@ -84,18 +72,12 @@
 	</node>
 	<node id="16" type="MY_NODE">
 		<strProp v="1bf" k="value"></strProp>
-		<boolFeat v="false" k="probability"></boolFeat>
 	</node>
 	<node id="17" type="MY_NODE">
 		<strProp v="2bf" k="value"></strProp>
-		<boolFeat v="true" k="probability"></boolFeat>
 	</node>
 	<node id="18" type="MY_NODE">
 		<strProp v="3bf" k="value"></strProp>
-		<boolFeat k="probability">
-			<val bool="true"></val>
-			<val bool="false"></val>
-		</boolFeat>
 	</node>
 	<node id="19" type="MY_NODE">
 		<strProp v="1sp" k="value"></strProp>
@@ -114,18 +96,12 @@
 	</node>
 	<node id="22" type="MY_NODE">
 		<strProp v="1sf" k="value"></strProp>
-		<strFeat v="value2" k="probability"></strFeat>
 	</node>
 	<node id="23" type="MY_NODE">
 		<strProp v="2sf" k="value"></strProp>
-		<strFeat v="value1" k="probability"></strFeat>
 	</node>
 	<node id="24" type="MY_NODE">
 		<strProp v="3sf" k="value"></strProp>
-		<strFeat k="probability">
-			<val str="value1"></val>
-			<val str="value2"></val>
-		</strFeat>
 	</node>
 	<node id="25" type="MY_NODE">
 		<strProp v="1ep" k="value"></strProp>
@@ -137,24 +113,18 @@
 	</node>
 	<node id="27" type="MY_NODE">
 		<strProp v="3ep" k="value"></strProp>
-		<enumProp k="selected">
+		<strProp k="selected">
 			<val str="value2"></val>
 			<val str="value1"></val>
-		</enumProp>
+		</strProp>
 	</node>
 	<node id="28" type="MY_NODE">
 		<strProp v="1ef" k="value"></strProp>
-		<strFeat v="value2" k="probability"></strFeat>
 	</node>
 	<node id="29" type="MY_NODE">
 		<strProp v="2ef" k="value"></strProp>
-		<strFeat v="value1" k="probability"></strFeat>
 	</node>
 	<node id="30" type="MY_NODE">
 		<strProp v="3ef" k="value"></strProp>
-		<strFeat k="probability">
-			<val str="value1"></val>
-			<val str="value2"></val>
-		</strFeat>
 	</node>
 </document>
