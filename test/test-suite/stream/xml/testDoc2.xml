@@ -137,10 +137,10 @@
 	</node>
 	<node id="27" type="MY_NODE">
 		<strProp v="3ep" k="value"></strProp>
-		<strProp k="selected">
+		<enumProp k="selected">
 			<val str="value2"></val>
 			<val str="value1"></val>
-		</strProp>
+		</enumProp>
 	</node>
 	<node id="28" type="MY_NODE">
 		<strProp v="1ef" k="value"></strProp>
