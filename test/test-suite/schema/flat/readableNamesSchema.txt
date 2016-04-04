@@ -5,7 +5,7 @@ NODETYPE nt1 node type 1 The first node type.
 NODETYPE nt2 node type 2
 
 NODETYPE nt3 node type 3
-PROP p1 property 1 1 1 STRING A simple string property.
+PROP p1 property 1 0 1 1 STRING A simple string property.
 
 NODETYPE nt3e node type 3e
 EDGE e1 edge 1 0 UNBOUNDED 0 UNBOUNDED nt3 The edge that links this to another doohicky.

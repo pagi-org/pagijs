@@ -82,6 +82,9 @@ function toFlatString(schema) {
         if (nodeType.traitSequence) {
             sb.append(" SEQUENCE");
         }
+        if (nodeType.traitContiguousSequence) {
+            sb.append(" CONTIGUOUS");
+        }
         if (nodeType.traitSpan) {
             sb.append(" SPAN");
         }
@@ -91,22 +94,24 @@ function toFlatString(schema) {
         sb.append("\n");
         var appendPropSpec = function (propSpecName) {
             var propSpec = nodeType.propertySpecMap[propSpecName];
-            sb.append("PROP ")
+            sb.append('PROP ')
                 .append(propSpecName)
                 .append(propSpec.readableName ? ' ' + propSpec.readableName : null)
-                .append(" ")
-                .append(propSpec.minArity).append(" ")
-                .append(maxArityString(propSpec.maxArity)).append(" ")
+                .append(' ')
+                .append(propSpec.priority)
+                .append(' ')
+                .append(propSpec.minArity).append(' ')
+                .append(maxArityString(propSpec.maxArity)).append(' ')
                 .append(propSpec.valueType.name)
                 .append(propSpec.description ? ' ' + propSpec.description : null);
             switch (propSpec.valueType) {
                 case pagi.schema.ValueType.INTEGER:
-                    sb.append(" ").append(propSpec.restrictions.minRange);
-                    sb.append(" ").append(propSpec.restrictions.maxRange);
+                    sb.append(' ').append(propSpec.restrictions.minRange);
+                    sb.append(' ').append(propSpec.restrictions.maxRange);
                     break;
                 case pagi.schema.ValueType.FLOAT:
-                    sb.append(" ").append(formatFloat(propSpec.restrictions.minRange));
-                    sb.append(" ").append(formatFloat(propSpec.restrictions.maxRange));
+                    sb.append(' ').append(formatFloat(propSpec.restrictions.minRange));
+                    sb.append(' ').append(formatFloat(propSpec.restrictions.maxRange));
                     break;
                 case pagi.schema.ValueType.BOOLEAN:
                     // nothing interesting to do here
@@ -115,7 +120,7 @@ function toFlatString(schema) {
                     if (propSpec.restrictions && propSpec.restrictions.items) {
                         forSorted(propSpec.restrictions.items, function (item)
                         {
-                            sb.append(" ");
+                            sb.append(' ');
                             sb.append(item);
                         });
                     }
@@ -129,7 +134,7 @@ function toFlatString(schema) {
             var edgeSpec = nodeType.edgeSpecMap[edgeSpecName];
             sb.append("EDGE ");
             sb.append(edgeSpecName);
-            sb.append(edgeSpec.readableName ? ' ' + edgeSpec.readableName : null)
+            sb.append(edgeSpec.readableName ? ' ' + edgeSpec.readableName : null);
             sb.append(" ");
             sb.append(edgeSpec.minArity).append(" ");
             sb.append(maxArityString(edgeSpec.maxArity)).append(" ");

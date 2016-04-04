@@ -1,7 +1,7 @@
 http://pagi.org/testSuite/simpleSpanSequence
 
 NODETYPE bool_type
-PROP bool_prop 1 1 BOOLEAN
+PROP bool_prop 0 1 1 BOOLEAN
 
 NODETYPE seq_type SEQUENCE
 EDGE next 0 1 0 UNBOUNDED seq_type
@@ -11,12 +11,12 @@ EDGE first 1 1 0 UNBOUNDED span_seq_type
 EDGE last 1 1 0 UNBOUNDED span_seq_type
 
 NODETYPE span_seq_type SEQUENCE SPAN
-PROP length 1 1 INTEGER 0 2147483647
-PROP start 1 1 INTEGER 0 2147483647
+PROP length 0 1 1 INTEGER 0 2147483647
+PROP start 0 1 1 INTEGER 0 2147483647
 EDGE next 0 1 0 UNBOUNDED span_seq_type
 
 NODETYPE span_type SPAN
-PROP length 1 1 INTEGER 0 2147483647
-PROP start 1 1 INTEGER 0 2147483647
+PROP length 0 1 1 INTEGER 0 2147483647
+PROP start 0 1 1 INTEGER 0 2147483647
 
 NODETYPE type
