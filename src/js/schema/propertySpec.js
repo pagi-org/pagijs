@@ -1,10 +1,11 @@
 var util = require("../util.js");
 var constants = require("./constants.js");
 
-function PropertySpec(name, readableName, description, valueType, minArity, maxArity, restrictions) {
+function PropertySpec(name, readableName, description, priority, valueType, minArity, maxArity, restrictions) {
 	this.name = name;
 	this.readableName = readableName;
 	this.description = description;
+	this.priority = priority;
 	this.valueType = valueType;
 	this.minArity = minArity;
 	this.maxArity = maxArity;
@@ -46,6 +47,11 @@ PropertySpecBuilder.prototype.withReadableName = function(readableName) {
 
 PropertySpecBuilder.prototype.withDescription = function(description) {
 	this.description = description;
+	return this;
+};
+
+PropertySpecBuilder.prototype.withPriority = function(priority) {
+	this.priority = priority;
 	return this;
 };
 
@@ -94,6 +100,10 @@ PropertySpecBuilder.prototype.build = function() {
 		throw Error("minArity [" + this.minArity + "] must be less than or equal to maxArity [" + this.maxArity + "] for PropertySpec '" + this.name + "'.");
 	}
 
+	if (this.priority === undefined) {
+		this.priority = 0;
+	}
+
 	if (this.restrictions === undefined) {
 		switch (this.valueType) {
 			case constants.ValueType.INTEGER:
@@ -109,7 +119,7 @@ PropertySpecBuilder.prototype.build = function() {
 		}
 	}
 
-	return new PropertySpec(this.name, this.readableName, this.description, this.valueType, this.minArity, this.maxArity, this.restrictions);
+	return new PropertySpec(this.name, this.readableName, this.description, this.priority, this.valueType, this.minArity, this.maxArity, this.restrictions);
 };
 
 module.exports.createBuilder = function() {
