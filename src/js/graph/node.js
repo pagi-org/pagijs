@@ -33,7 +33,7 @@ Node.prototype.addProp = function(type, key, val) {
     var typeName = type.toLowerCase(),
         newVal;
 
-    if (val) {
+    if (val !== undefined && val !== null) {
         newVal = convertValue(typeName, val);
         if (this._properties[key]) {
             this._properties[key].vals.push(newVal);
