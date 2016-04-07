@@ -7,13 +7,14 @@ function validateNode(id, graph, schema) {
   var errors = [];
   var node = graph.getNodeById(id);
   var nodeSpec = schema.nodeTypeMap[node.getType()];
+  var customError = validationError.createTemplate(id, node.getType());
 
   if (node && nodeSpec) {
-    errors = nodeValidator(node, graph, nodeSpec);
+    errors = nodeValidator(node, graph, nodeSpec, customError);
   } else if (!node) {
-    errors.push(validationError(id, ['Node with id', id, 'does not exist'].join(' ')));
+    errors.push(customError(id, ['Node with id', id, 'does not exist'].join(' ')));
   } else {
-    errors.push(validationError(node.getId(), [node.getType(), 'is not defined in', schema.id].join(' ')));
+    errors.push(customError([node.getType(), 'is not defined in', schema.id].join(' ')));
   }
 
   var isValid = (errors.length === 0);

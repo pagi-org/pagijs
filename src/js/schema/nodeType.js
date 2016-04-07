@@ -3,7 +3,7 @@ var propertySpec = require("./propertySpec.js");
 var edgeSpec = require("./edgeSpec.js");
 var constants = require("./constants.js");
 
-function NodeType(name, readableName, description, propertySpecMap, edgeSpecMap, traitSpan, traitSequence, traitSpanContainer, spanType) {
+function NodeType(name, readableName, description, propertySpecMap, edgeSpecMap, traitSpan, traitSequence, traitContiguousSequence, traitSpanContainer, spanType) {
 	this.name = name;
 	this.readableName = readableName;
 	this.description = description;
@@ -11,6 +11,7 @@ function NodeType(name, readableName, description, propertySpecMap, edgeSpecMap,
 	this.edgeSpecMap = edgeSpecMap;
 	this.traitSpan = traitSpan;
 	this.traitSequence = traitSequence;
+	this.traitContiguousSequence = traitContiguousSequence;
 	this.traitSpanContainer = traitSpanContainer;
 	this.spanType = spanType;
 	util.doFreeze(this);
@@ -21,6 +22,7 @@ function NodeTypeBuilder() {
 	this.edgeSpecMap = {};
 	this.traitSpan = false;
 	this.traitSequence = false;
+	this.traitContiguousSequence = false;
 	this.traitSpanContainer = false;
 }
 
@@ -108,8 +110,9 @@ NodeTypeBuilder.prototype.asSpan = function() {
 	return this;
 };
 
-NodeTypeBuilder.prototype.asSequence = function() {
+NodeTypeBuilder.prototype.asSequence = function(contiguous) {
 	this.traitSequence = true;
+	this.traitContiguousSequence = contiguous;
 	var nextEdgeSpec = this.createEdgeSpecBuilder()
 		.withName(constants.TRAIT_SEQUENCE_NEXT_EDGE)
 		.withMinArity(0)
@@ -148,7 +151,7 @@ NodeTypeBuilder.prototype.build = function() {
 		throw Error("No name supplied for NodeType.");
 	}
 	return new NodeType(this.name, this.readableName, this.description, Object.freeze(this.propertySpecMap), Object.freeze(this.edgeSpecMap),
-	                    this.traitSpan, this.traitSequence, this.traitSpanContainer, this.spanType);
+	                    this.traitSpan, this.traitSequence, this.traitContiguousSequence, this.traitSpanContainer, this.spanType);
 };
 
 module.exports.createBuilder = function() {

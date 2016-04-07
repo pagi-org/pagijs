@@ -170,7 +170,7 @@ describe('validator validateGraph', function() {
 
     assert.equal(results.isValid, false);
     assert(results.errors.length === 3);
-    assert.equal(results.errors[0].message, 'member edge points to non-existent node with id 8');
+    assert.equal(results.errors[0].message, 'member edge points to non-existent target with id: 8');
   });
 
   it('should validate target Edge type', function() {
@@ -182,6 +182,6 @@ describe('validator validateGraph', function() {
 
     assert.equal(results.isValid, false);
     assert(results.errors.length === 1);
-    assert.equal(results.errors[0].message, 'COREF is an invalid target for edge member');
+    assert.equal(results.errors[0].message, 'COREF is an invalid target for edge type: member');
   });
 });

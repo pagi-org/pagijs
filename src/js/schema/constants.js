@@ -16,6 +16,7 @@ module.exports.ID_EDGE_DEFAULT_DELIMITER = ",";
 module.exports.DEFAULT_MIN_ARITY = 0;
 module.exports.UNBOUNDED_ARITY = -1;
 module.exports.DEFAULT_MAX_ARITY = module.exports.UNBOUNDED_ARITY;
+module.exports.DEFAULT_TRAIT_SEQUENCE_CONTIGUOUS = false;
 
 var ValueType = {
 	INTEGER: {"name": "INTEGER"},

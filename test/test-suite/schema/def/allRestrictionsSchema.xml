@@ -93,7 +93,7 @@
 		<booleanProperty name='p6' maxArity='unbounded'/>
 	</nodeType>
 	<nodeType name='nt5'>
-		<sequence/>
+		<sequence contiguous="true"/>
 		<stringProperty name='p1'/>
 		<stringProperty name='p2' minArity='1'/>
 		<stringProperty name='p3' minArity='1' maxArity='3'/>
