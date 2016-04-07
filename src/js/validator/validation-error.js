@@ -1,10 +1,14 @@
 'use strict';
 
-function validationError(nodeId, message) {
-  return {
-    nodeId: nodeId,
-    message: message
+module.exports.createTemplate = createTemplate;
+
+function createTemplate(id, nodeType) {
+  return function validationError(message, targetId) {
+    return {
+      nodeId: id,
+      targetId: targetId,
+      nodeType: nodeType,
+      message: message
+    };
   };
 }
-
-module.exports = validationError;

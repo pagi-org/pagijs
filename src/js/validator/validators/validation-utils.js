@@ -1,14 +1,13 @@
 'use strict';
 
-var validationError = require('../validation-error');
 var constants = require('../../schema/constants');
 
-module.exports.validateArity = function validateArity(objs, spec, nodeId) {
+module.exports.validateArity = function validateArity(objs, spec, customErr) {
   var errors = [];
   if (spec.maxArity === constants.UNBOUNDED_ARITY) { return errors; }
 
   if (objs.length > spec.maxArity) {
-    errors.push(validationError(nodeId, [
+    errors.push(customErr([
       'Arity of',
       spec.name,
       'property is out of range. Arity min:',
