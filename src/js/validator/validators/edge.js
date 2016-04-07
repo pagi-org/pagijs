@@ -16,7 +16,7 @@ function validateTarget(edge, edgeSpec, graph) {
   if (invalidTarget) {
     errors.push(validationError([
       targetNode.getType(),
-      'is an invalid target for edge',
+      'is an invalid target for edge type:',
       edge.getEdgeType()
     ].join(' ')));
   }
@@ -31,10 +31,12 @@ function validate(edge, edgeSpec, graph) {
     errors.push.apply(errors, validateTarget(edge, edgeSpec, graph));
   } else {
     errors.push(validationError([
-      edge.getEdgeType(),
-      'edge points to non-existent node with id',
-      edge.getTargetId()
-    ].join(' ')));
+        edge.getEdgeType(),
+        'edge points to non-existent target with id:',
+        edge.getTargetId()
+      ].join(' '),
+      edge.getTargetId())
+    );
   }
 
   return errors;
