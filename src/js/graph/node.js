@@ -45,7 +45,9 @@ Node.prototype.addProp = function(type, key, val) {
     }
 };
 Node.prototype.getProp = function(key) {
-    return this._properties[key] && this._properties[key].vals.map(function(val) {
+    if (this._properties[key] === undefined) { return []; }
+
+    return this._properties[key].vals.map(function(val) {
         return val;
     });
 };
