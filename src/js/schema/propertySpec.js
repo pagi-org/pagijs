@@ -51,7 +51,7 @@ PropertySpecBuilder.prototype.withDescription = function(description) {
 };
 
 PropertySpecBuilder.prototype.withPriority = function(priority) {
-	this.priority = priority;
+	this.priority = parseFloat(priority);
 	return this;
 };
 
