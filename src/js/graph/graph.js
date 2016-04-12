@@ -69,7 +69,8 @@ Graph.prototype.addNode = function(node, connectEdges) {
         throw Error("Graph already contains a node with id `" + node.getId() + "`.");
     }
     if (!node.getId()) {
-        node.setId(this._generateNodeId());
+        var id = this._generateNodeId();
+        node.setId(id);
     }
     // console.log("ADD NODE id: " + node.getId() + ", type: " + node.getType() + ".");
     connectEdges = connectEdges === undefined ? true : false;
@@ -79,13 +80,6 @@ Graph.prototype.addNode = function(node, connectEdges) {
     this._nodeTypes[node.getType()] = this._nodeTypes[node.getType()] || [];
     this._nodeTypes[node.getType()].push(node);
     if (connectEdges) { node.connectEdges(); }
-};
-Graph.prototype.connectEdges = function() {
-    // console.log("Graph.connectEdges ------------------------");
-    this.getNodes().forEach(function(node) {
-        node.connectEdges();
-    });
-    // console.log("Graph.connectEdges ------------------------");
 };
 Graph.prototype.removeNode = function(node) {
     if (!(node instanceof Node)) {
@@ -100,6 +94,63 @@ Graph.prototype.removeNode = function(node) {
     }
     node.removeGraph();
     this._graphImpl.removeNode(node.getId());
+};
+function logEdgeError(graph, sourceId, targetId, edgeType) {
+    var message;
+
+    if (!graph.getNodeById(sourceId) && !graph.getNodeById(targetId)) {
+        message = [
+            'Cannot create `',
+            edgeType,
+            '` edge between non-existent node ids `',
+            sourceId,
+            '` and `',
+            targetId,
+            '`.'
+        ].join('');
+    } else if (!graph.getNodeById(sourceId)) {
+        message = [
+            'Cannot create `',
+            edgeType,
+            '` edge from non-existent node id `',
+            sourceId,
+            '` to node id `',
+            targetId,
+            '`.'
+        ].join('');
+    } else if (!graph.getNodeById(targetId)) {
+        message = [
+            'Cannot create `',
+            edgeType,
+            '` edge from node id `',
+            sourceId,
+            '` to non-existent node id `',
+            targetId,
+            '`.'
+        ].join('');
+    }
+
+    if (message) { console.warn(message); }
+    return message;
+}
+Graph.prototype.setEdge = function(sourceId, targetId, edgeType) {
+    if (!this.getNodeById(sourceId) || !this.getNodeById(targetId)) {
+        return logEdgeError(this, sourceId, targetId, edgeType);
+    }
+    this._graphImpl.setEdge(sourceId, targetId, edgeType);
+};
+Graph.prototype.getEdge = function(sourceId, targetId) {
+    return this._graphImpl.edge(sourceId, targetId);
+};
+Graph.prototype.removeEdge = function(sourceId, targetId, edgeType) {
+    this._graphImpl.removeEdge(sourceId, targetId, edgeType);
+};
+Graph.prototype.connectEdges = function() {
+    // console.log("Graph.connectEdges ------------------------");
+    this.getNodes().forEach(function(node) {
+        node.connectEdges();
+    });
+    // console.log("Graph.connectEdges ------------------------");
 };
 Graph.prototype.getNodeById = function(nodeId) { return this._graphImpl.node(nodeId); };
 Graph.prototype.getNodeTypes = function() { return Object.keys(this._nodeTypes); };
