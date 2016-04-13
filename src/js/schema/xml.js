@@ -51,6 +51,7 @@ function doParse(readableStream, locator) {
 	var textContent = '';
 	var inDescriptionTag = false;
 	var delegatePromises = [];
+	var isEffectiveSchema = false;
 
 	var streamParser = sax.createStream(true, {xmlns: true, position: true});
 	streamParser.on("opentag", function (tag) {
@@ -60,14 +61,19 @@ function doParse(readableStream, locator) {
 				schemaBuilder.withId(tag.attributes.id.value);
 				break;
 			case "effectivePagis":
+				isEffectiveSchema = true;
 				schemaBuilder.withId(tag.attributes.id.value);
 				break;
 			case "extends":
-				var parentId = tag.attributes.id.value;
-				var p = callLocator(parentId, locator).then(function(schema) {
-					schemaBuilder.withParent(schema);
-				});
-				delegatePromises.push(p);
+				// if the schema is an effectiveSchema, it has already been merged and we
+				// shouldn't call the locator or attempt to merge the schemas again
+				if (!isEffectiveSchema) {
+					var parentId = tag.attributes.id.value;
+					var p = callLocator(parentId, locator).then(function(schema) {
+						schemaBuilder.withParent(schema);
+					});
+					delegatePromises.push(p);
+				}
 				break;
 			case "nodeTypeExtension":
 				nodeBuilder = schemaBuilder.createNodeTypeBuilder().withName(tag.attributes.extends.value);
