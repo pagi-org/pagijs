@@ -61,7 +61,7 @@ Node.prototype.getProps = function() {
 Node.prototype.addEdge = function(targetId, targetType, edgeType, connectEdges) {
     // console.log("ADD EDGE for nodeId: " + this.getId() + ", targetId: " + targetId + ", targetType: " + targetType + ", edgeType: " + edgeType + ".");
     this._edges.push(new Edge(targetId, targetType, edgeType));
-    connectEdges = connectEdges === undefined ? true : false;
+    connectEdges = connectEdges === undefined ? true : connectEdges;
     if (connectEdges) { this.connectEdges(); }
 };
 Node.prototype.getEdges = function() {
@@ -91,33 +91,40 @@ Node.prototype.setGraph = function(graph) {
 Node.prototype.removeGraph = function() { this._graph = null; };
 Node.prototype.connectEdges = function() {
     if (!this._graph) { return; }
-    var self = this, graphImpl = this._graph._graphImpl;
-    self.getEdges().forEach(function(edge) {
+    var graph = this._graph;
+    this.getEdges().forEach(function(edge) {
         // Check if the edge exists before creating it.
-        if (graphImpl.edge(self.getId(), edge.getTargetId()) === edge.getEdgeType()) { return; }
-        self._connectEdgesSpanContainer();
-        self._connectEdgesSequence();
-        // console.log("LINK EDGE nodeId: " + self.getId() + ", targetId: " + edge.getTargetId() + ", type: " + edge.getEdgeType() + ".");
-        graphImpl.setEdge(self.getId(), edge.getTargetId(), edge.getEdgeType());
-    });
+        if (graph.getEdge(this.getId(), edge.getTargetId()) === edge.getEdgeType()) { return; }
+
+        this._connectEdgesSpanContainer();
+        this._connectEdgesSequence();
+        // console.log("LINK EDGE nodeId: " + this.getId() + ", targetId: " + edge.getTargetId() + ", type: " + edge.getEdgeType() + ".");
+        graph.setEdge(this.getId(), edge.getTargetId(), edge.getEdgeType());
+    }, this);
 };
 // If node is a span container create edges to all it's children.
 // This allows children to quickly reference their parent nodes.
 // Child nodes may not have edges in the graphImpl yet so create edges
 // based only on the edges array in the node.
 Node.prototype._connectEdgesSpanContainer = function() {
-    var graph = this._graph, graphImpl = graph._graphImpl;
+    var graph = this._graph;
     var firstEdge = this.getFirstEdgeByType('first');
     var lastEdge = this.getFirstEdgeByType('last');
+
     if (this.hasTraitSpanContainer() && firstEdge && lastEdge) {
         var linkNode = graph.getNodeById(firstEdge.getTargetId());
         var lastNode = graph.getNodeById(lastEdge.getTargetId());
         while (true) {
+            if (!linkNode) {
+                // node has dead-end edges and graph is invalid. abort linking
+                // nodes to parent
+                break;
+            }
             // console.log("Node._connectEdgesSpanContainer: Checking node '" + linkNode.getId() + "', type: '" + linkNode.getType() + "'.");
             // Don't create the edge if it already exists
-            if (!graphImpl.edge(this.getId(), linkNode.getId())) {
+            if (!graph.getEdge(this.getId(), linkNode.getId())) {
                 // console.log("LINK EDGE nodeId: " + this.getId() + ", targetId: " + linkNode.getId() + ", type: child.");
-                graphImpl.setEdge(this.getId(), linkNode.getId(), 'child');
+                graph.setEdge(this.getId(), linkNode.getId(), 'child');
             }
             if (linkNode === lastNode) {
                 // console.log("Node._connectEdgesSpanContainer: LinkNode === LastNode.");
@@ -161,7 +168,7 @@ Node.prototype._connectEdgesSequence = function() {
                 if (prevInEdgeImpl.v == nextInEdgeImpl.v) {
                     var prevParentNode = self._graph.getNodeById(prevInEdgeImpl.v);
                     // console.log("LINK EDGE nodeId: " + prevParentNode.getId() + ", targetId: " + self.getId() + ", type: child.");
-                    self._graph._graphImpl.setEdge(prevParentNode.getId(), self.getId(), 'child');
+                    self._graph.setEdge(prevParentNode.getId(), self.getId(), 'child');
                 }
             });
         });
@@ -174,17 +181,15 @@ Node.prototype.removeEdge = function(aEdge) {
         throw Error("`Node.removeEdge` only accepts an instance of Edge.");
     }
     // console.log("REMOVE EDGE nodeId: " + this.getId() + ", targetId: " + aEdge.getTargetId() + ", targetType: " + aEdge.getTargetType() + ", edgeType: " + aEdge.getEdgeType() + ".");
-    var self = this;
-    self._edges = self._edges.filter(function(edge) {
-        var matches = aEdge === edge;
-        var edgeNode = self._graph.getNodeById(edge.getTargetId());
+    this._edges = this._edges.filter(function(edge) {
+        var edgeNode = this._graph.getNodeById(edge.getTargetId());
 
         // Remove the edge from the graphImpl.
-        // console.log("UNLINK EDGE nodeId: " + self.getId() + ", targetId: " + edgeNode.getId() + ", type: " + edge.getEdgeType() + ".");
-        self._graph._graphImpl.removeEdge(self.getId(), edgeNode.getId(), edge.getEdgeType());
+        // console.log("UNLINK EDGE nodeId: " + this.getId() + ", targetId: " + edgeNode.getId() + ", type: " + edge.getEdgeType() + ".");
+        this._graph.removeEdge(this.getId(), edgeNode.getId(), edge.getEdgeType());
         // Only keep edges that don't match the one provided.
         return aEdge !== edge;
-    });
+    }, this);
 };
 Node.prototype.removeEdges = function() {
     var self = this;
@@ -221,13 +226,26 @@ Node.prototype.getText = function() {
     }
     return this._graph.getContent().slice(this.getStartIndex(), this.getEndIndex());
 };
+
+function getSpanContainerIndex(node, isStart) {
+    var childNode = isStart ? node.getFirst() : node.getLast();
+    var idx = -1;
+
+    if (childNode && isStart) {
+        idx = childNode.getStartIndex();
+    } else if (childNode) {
+        idx =  childNode.getEndIndex();
+    }
+
+    return idx;
+}
 Node.prototype._getIndex = function(isStart) {
     if (this.hasTraitSpan()) {
         var start = this.getFirstProp('start');
         return isStart ? start : start + this.getFirstProp('length');
     }
     if (this.hasTraitSpanContainer()) {
-        return isStart ? this.getFirst().getStartIndex() : this.getLast().getEndIndex();
+        return getSpanContainerIndex(this, isStart);
     } else {
         // Find all edges that are not the same type as the current node.
         // And determine which one has the proper index.
