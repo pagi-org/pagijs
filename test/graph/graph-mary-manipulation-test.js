@@ -109,6 +109,12 @@ describe('Graph manipulation for `mary` stream', function() {
             assert.equal(graph.getNodesByType(node.getType()).length, nodeTypeCnt - 1);
             assert.equal(graph.getNodeById(node.getId()), null);
         });
+        it('works when there are broken edges', function() {
+            var tokNode = graph.getNodeById('77');
+            graph.removeNode(tokNode);
+            var sbNode = graph.getNodeById('71');
+            assert.doesNotThrow(function() { graph.removeNode(sbNode); });
+        });
         it('node\'s edges are removed properly for sequences', function() {
             assert(nextNode.hasPrevious());
             assert(nextNode.previous() === prevNode);
