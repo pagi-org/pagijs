@@ -85,7 +85,6 @@ Graph.prototype.removeNode = function(node) {
     if (!(node instanceof Node)) {
         throw Error("Parameter must be an instance of Node when calling Graph.removeNode.");
     }
-    node.removeEdges();
     this._nodeTypes[node.getType()] = this._nodeTypes[node.getType()].filter(function(aNode) {
         return aNode.getId() !== node.getId();
     });
