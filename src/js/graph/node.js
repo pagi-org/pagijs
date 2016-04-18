@@ -183,10 +183,12 @@ Node.prototype.removeEdge = function(aEdge) {
     // console.log("REMOVE EDGE nodeId: " + this.getId() + ", targetId: " + aEdge.getTargetId() + ", targetType: " + aEdge.getTargetType() + ", edgeType: " + aEdge.getEdgeType() + ".");
     this._edges = this._edges.filter(function(edge) {
         var edgeNode = this._graph.getNodeById(edge.getTargetId());
+        if (edgeNode) {
+            // If the target node exists in the graph, remove the edge from the graphImpl.
+            // console.log("UNLINK EDGE nodeId: " + this.getId() + ", targetId: " + edgeNode.getId() + ", type: " + edge.getEdgeType() + ".");
+            this._graph.removeEdge(this.getId(), edgeNode.getId(), edge.getEdgeType());
+        }
 
-        // Remove the edge from the graphImpl.
-        // console.log("UNLINK EDGE nodeId: " + this.getId() + ", targetId: " + edgeNode.getId() + ", type: " + edge.getEdgeType() + ".");
-        this._graph.removeEdge(this.getId(), edgeNode.getId(), edge.getEdgeType());
         // Only keep edges that don't match the one provided.
         return aEdge !== edge;
     }, this);
