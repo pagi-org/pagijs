@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:document xmlns:p="http://pagi.org/stream" id="testDoc1" version="2.0"><p:schema uri="http://pagi.org/testSuite/simpleTok"></p:schema>
+	<p:asSequence nodeType="TOK"></p:asSequence>
+	<p:asSpan nodeType="TOK"></p:asSpan>
+	<p:content contentType="text/plain">Some random text that doesn't really matter. Really, it doesn't.
+</p:content>
+
+	<p:node id="0" type="TOK">
+		<p:intProp v="0" k="start"></p:intProp>
+		<p:intProp v="4" k="length"></p:intProp>
+		<p:edge toType="TOK" to="1" type="next"></p:edge>
+		<p:intFeat v="42" k="f1"></p:intFeat>
+	</p:node>
+	<p:node id="1" type="TOK">
+		<p:intProp v="6" k="start"></p:intProp>
+		<p:intProp v="3" k="length"></p:intProp>
+		<p:edge toType="TOK" to="2" type="next"></p:edge>
+		<p:intFeat v="42" k="f1"></p:intFeat>
+	</p:node>
+	<p:node id="2" type="TOK">
+		<p:intProp v="10" k="start"></p:intProp>
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:edge toType="TOK" to="3" type="next"></p:edge>
+		<p:intFeat v="42" k="f1"></p:intFeat>
+	</p:node>
+	<p:node id="3" type="TOK">
+		<p:intProp v="12" k="start"></p:intProp>
+		<p:intProp v="6" k="length"></p:intProp>
+		<p:edge toType="TOK" to="4" type="next"></p:edge>
+		<p:intFeat v="42" k="f1"></p:intFeat>
+	</p:node>
+	<p:node id="4" type="TOK">
+		<p:intProp v="19" k="start"></p:intProp>
+		<p:intProp v="4" k="length"></p:intProp>
+		<p:edge toType="TOK" to="5" type="next"></p:edge>
+		<p:intFeat v="42" k="f1"></p:intFeat>
+	</p:node>
+	<p:node id="5" type="TOK">
+		<p:intProp v="23" k="start"></p:intProp>
+		<p:intProp v="1" k="length"></p:intProp>
+		<p:intFeat v="42" k="f1"></p:intFeat>
+	</p:node>
+</p:document>

@@ -3,14 +3,15 @@ var propertySpec = require("./propertySpec.js");
 var edgeSpec = require("./edgeSpec.js");
 var constants = require("./constants.js");
 
-function NodeType(name, idGeneratorPattern, description, propertySpecMap, edgeSpecMap, traitSpan, traitSequence, traitSpanContainer, spanType) {
+function NodeType(name, readableName, description, propertySpecMap, edgeSpecMap, traitSpan, traitSequence, traitContiguousSequence, traitSpanContainer, spanType) {
 	this.name = name;
-	this.idGeneratorPattern = idGeneratorPattern;
+	this.readableName = readableName;
 	this.description = description;
 	this.propertySpecMap = propertySpecMap;
 	this.edgeSpecMap = edgeSpecMap;
 	this.traitSpan = traitSpan;
 	this.traitSequence = traitSequence;
+	this.traitContiguousSequence = traitContiguousSequence;
 	this.traitSpanContainer = traitSpanContainer;
 	this.spanType = spanType;
 	util.doFreeze(this);
@@ -21,12 +22,12 @@ function NodeTypeBuilder() {
 	this.edgeSpecMap = {};
 	this.traitSpan = false;
 	this.traitSequence = false;
+	this.traitContiguousSequence = false;
 	this.traitSpanContainer = false;
 }
 
 NodeTypeBuilder.prototype.withParent = function(parent) {
 	this.withName(parent.name);
-	this.withIdGeneratorPattern(parent.idGeneratorPattern);
 	this.withDescription(parent.description);
 	this.traitSpan = parent.traitSpan;
 	this.traitSequence = parent.traitSequence;
@@ -68,8 +69,9 @@ NodeTypeBuilder.prototype.withName = function(name) {
 	return this;
 };
 
-NodeTypeBuilder.prototype.withIdGeneratorPattern = function(pattern) {
-	this.idGeneratorPattern = pattern;
+NodeTypeBuilder.prototype.withReadableName = function(readableName) {
+	this.readableName = readableName;
+	return this;
 };
 
 NodeTypeBuilder.prototype.withDescription = function(description) {
@@ -108,8 +110,9 @@ NodeTypeBuilder.prototype.asSpan = function() {
 	return this;
 };
 
-NodeTypeBuilder.prototype.asSequence = function() {
+NodeTypeBuilder.prototype.asSequence = function(contiguous) {
 	this.traitSequence = true;
+	this.traitContiguousSequence = contiguous;
 	var nextEdgeSpec = this.createEdgeSpecBuilder()
 		.withName(constants.TRAIT_SEQUENCE_NEXT_EDGE)
 		.withMinArity(0)
@@ -147,8 +150,8 @@ NodeTypeBuilder.prototype.build = function() {
 	if (this.name === undefined) {
 		throw Error("No name supplied for NodeType.");
 	}
-	return new NodeType(this.name, this.idGeneratorPattern, this.description, Object.freeze(this.propertySpecMap), Object.freeze(this.edgeSpecMap),
-	                    this.traitSpan, this.traitSequence, this.traitSpanContainer, this.spanType);
+	return new NodeType(this.name, this.readableName, this.description, Object.freeze(this.propertySpecMap), Object.freeze(this.edgeSpecMap),
+	                    this.traitSpan, this.traitSequence, this.traitContiguousSequence, this.traitSpanContainer, this.spanType);
 };
 
 module.exports.createBuilder = function() {
@@ -164,10 +167,6 @@ module.exports.mergeNodes = function(node1, node2) {
 
 	var nodeTypeBuilder = new NodeTypeBuilder();
 	nodeTypeBuilder.withName(node1.name);
-	if (node1.idGeneratorPattern.toString() != node2.idGeneratorPattern.toString()) {
-		throw Error("Failed to merge nodeType " + node1 + " due to different idGeneratorPatterns.");
-	}
-	nodeTypeBuilder.withIdGeneratorPattern(node1.idGeneratorPattern);
 	nodeTypeBuilder.withDescription(node1.description);
 	nodeTypeBuilder.traitSpan = node1.traitSpan;
 	nodeTypeBuilder.traitSequence = node1.traitSequence;

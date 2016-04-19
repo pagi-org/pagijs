@@ -1,7 +1,6 @@
 var schema = require("./schema.js");
 var sax = require("sax");
-var print = require("util").print;
-var idGenerator = require("./idGenerator.js");
+// var print = require("util").print;
 var constants = require("./constants.js");
 var Q = require('q');
 
@@ -18,7 +17,11 @@ function parseMinArity(value) {
 }
 
 function parseMaxArity(value) {
-	return value === "unbounded" ? constants.UNBOUNDED_ARITY : looseParseInt(value);
+	return value === 'unbounded' ? constants.UNBOUNDED_ARITY : looseParseInt(value);
+}
+
+function parseContiguous(value) {
+	return value === 'true';
 }
 
 /**
@@ -44,39 +47,56 @@ function callLocator(id, locator) {
 function doParse(readableStream, locator) {
 	var deferred = Q.defer();
 	var schemaBuilder = schema.createBuilder();
-	var nodeBuilder = null;
-	var propSpecBuilder = null;
-	var edgeSpecBuilder = null;
+	var nodeBuilder, propSpecBuilder, edgeSpecBuilder, currentTag, valueType;
+	var textContent = '';
+	var inDescriptionTag = false;
 	var delegatePromises = [];
+	var isEffectiveSchema = false;
 
 	var streamParser = sax.createStream(true, {xmlns: true, position: true});
 	streamParser.on("opentag", function (tag) {
-		var valueType;
+    currentTag = tag;
 		switch(tag.name) {
 			case "pagis":
 				schemaBuilder.withId(tag.attributes.id.value);
 				break;
+			case "effectivePagis":
+				isEffectiveSchema = true;
+				schemaBuilder.withId(tag.attributes.id.value);
+				break;
 			case "extends":
-				var parentId = tag.attributes.id.value;
-				var p = callLocator(parentId, locator).then(function(schema) {
-					schemaBuilder.withParent(schema);
-				});
-				delegatePromises.push(p);
+				// if the schema is an effectiveSchema, it has already been merged and we
+				// shouldn't call the locator or attempt to merge the schemas again
+				if (!isEffectiveSchema) {
+					var parentId = tag.attributes.id.value;
+					var p = callLocator(parentId, locator).then(function(schema) {
+						schemaBuilder.withParent(schema);
+					});
+					delegatePromises.push(p);
+				}
 				break;
 			case "nodeTypeExtension":
 				nodeBuilder = schemaBuilder.createNodeTypeBuilder().withName(tag.attributes.extends.value);
+				if (tag.attributes.readableName) {
+					nodeBuilder.withReadableName(tag.attributes.readableName.value);
+				}
 				break;
 			case "nodeType":
 				nodeBuilder = schemaBuilder.createNodeTypeBuilder().withName(tag.attributes.name.value);
-				var pattern = tag.attributes.idGenerator.value;
-				var nodeIdGenerator = idGenerator.parse(pattern);
-				nodeBuilder.withIdGeneratorPattern(nodeIdGenerator);
+				if (tag.attributes.readableName) {
+					nodeBuilder.withReadableName(tag.attributes.readableName.value);
+				}
 				break;
 			case "span":
 				nodeBuilder.asSpan();
 				break;
 			case "sequence":
-				nodeBuilder.asSequence();
+				var contiguous = constants.DEFAULT_TRAIT_SEQUENCE_CONTIGUOUS;
+				if (tag.attributes.contiguous) {
+					contiguous = parseContiguous(tag.attributes.contiguous.value);
+				}
+
+				nodeBuilder.asSequence(contiguous);
 				break;
 			case "spanContainer":
 				var spanType = tag.attributes.spanType.value;
@@ -85,124 +105,139 @@ function doParse(readableStream, locator) {
 			case "enumProperty":
 			case "stringProperty":
 				valueType = valueType || schema.ValueType.STRING;
+				/* falls through */
 			case "floatProperty":
 				valueType = valueType || schema.ValueType.FLOAT;
+				/* falls through */
 			case "booleanProperty":
 				valueType = valueType || schema.ValueType.BOOLEAN;
+				/* falls through */
 			case "integerProperty":
 				valueType = valueType || schema.ValueType.INTEGER;
 
-				if (nodeBuilder)
-				{
+				if (nodeBuilder) {
 					propSpecBuilder = nodeBuilder.createPropertySpecBuilder().withName(tag.attributes.name.value).withValueType(valueType);
-					if (tag.attributes.minArity)
-					{
+					if (tag.attributes.readableName) {
+						propSpecBuilder.withReadableName(tag.attributes.readableName.value);
+					}
+					if (tag.attributes.minArity) {
 						propSpecBuilder.withMinArity(parseMinArity(tag.attributes.minArity.value));
 					}
-					if (tag.attributes.maxArity)
-					{
+					if (tag.attributes.maxArity) {
 						propSpecBuilder.withMaxArity(parseMaxArity(tag.attributes.maxArity.value));
 					}
-					if (valueType === schema.ValueType.INTEGER || valueType === schema.ValueType.FLOAT)
-					{
+					if (tag.attributes.priority) {
+						propSpecBuilder.withPriority(tag.attributes.priority.value);
+					}
+					if (valueType === schema.ValueType.INTEGER || valueType === schema.ValueType.FLOAT) {
 						var minRange;
 						var maxRange;
-						if (tag.attributes.minRange)
-						{
+						if (tag.attributes.minRange) {
 							minRange = tag.attributes.minRange.value;
 						}
-						if (tag.attributes.maxRange)
-						{
+						if (tag.attributes.maxRange) {
 							maxRange = tag.attributes.maxRange.value;
 						}
-						if (valueType === schema.ValueType.INTEGER)
-						{
+						if (valueType === schema.ValueType.INTEGER) {
 							propSpecBuilder.withIntegerRestrictions(looseParseInt(minRange), looseParseInt(maxRange));
 						}
-						else if (valueType === schema.ValueType.FLOAT)
-						{
+						else if (valueType === schema.ValueType.FLOAT) {
 							propSpecBuilder.withFloatRestrictions(looseParseFloat(minRange), looseParseFloat(maxRange));
 						}
 					}
 				}
 				break;
 			case "edgeType":
-				if (nodeBuilder)
-				{
+				if (nodeBuilder) {
 					edgeSpecBuilder = nodeBuilder.createEdgeSpecBuilder().withName(tag.attributes.name.value);
-					if (tag.attributes.minArity)
-					{
+					if (tag.attributes.readableName) {
+						edgeSpecBuilder.withReadableName(tag.attributes.readableName.value);
+					}
+					if (tag.attributes.minArity) {
 						edgeSpecBuilder.withMinArity(parseMinArity(tag.attributes.minArity.value));
 					}
-					if (tag.attributes.maxArity)
-					{
+					if (tag.attributes.maxArity) {
 						edgeSpecBuilder.withMaxArity(parseMaxArity(tag.attributes.maxArity.value));
 					}
-					if (tag.attributes.targetMinArity)
-					{
+					if (tag.attributes.targetMinArity) {
 						edgeSpecBuilder.withTargetMinArity(parseMinArity(tag.attributes.targetMinArity.value));
 					}
-					if (tag.attributes.targetMaxArity)
-					{
+					if (tag.attributes.targetMaxArity) {
 						edgeSpecBuilder.withTargetMaxArity(parseMaxArity(tag.attributes.targetMaxArity.value));
 					}
-					if (tag.attributes.targetNodeType)
-					{
+					if (tag.attributes.targetNodeType) {
 						edgeSpecBuilder.withTargetNodeType(tag.attributes.targetNodeType.value);
 					}
 				}
 				break;
 			case "item":
-				if (propSpecBuilder)
-				{
+				if (propSpecBuilder) {
 					propSpecBuilder.withEnumItem(tag.attributes.name.value);
 				}
 				break;
 			case "targetNodeType":
-				if (edgeSpecBuilder)
-				{
+				if (edgeSpecBuilder) {
 					edgeSpecBuilder.withTargetNodeType(tag.attributes.name.value);
 				}
 				break;
+			case "description":
+				inDescriptionTag = true;
+				textContent = '';
+				break;
+		}
+	});
+	streamParser.on("text", function(text) {
+		if (nodeBuilder && inDescriptionTag) {
+			textContent += text.toString();
 		}
 	});
 	streamParser.on("closetag", function(tagName) {
 		switch(tagName) {
 			case "pagis":
 				break;
+			case "effectivePagis":
+				break;
 			case "nodeTypeExtension":
-				if (nodeBuilder)
-				{
+				if (nodeBuilder) {
 					schemaBuilder.withNodeTypeExtension(nodeBuilder);
 					nodeBuilder = null;
 				}
 				break;
 			case "nodeType":
-				if (nodeBuilder)
-				{
+				if (nodeBuilder) {
 					schemaBuilder.withNodeType(nodeBuilder.build());
 					nodeBuilder = null;
 				}
+				break;
+			case "description":
+				if (propSpecBuilder) {
+					propSpecBuilder.withDescription(textContent);
+				} else if (edgeSpecBuilder) {
+					edgeSpecBuilder.withDescription(textContent);
+				} else if (nodeBuilder) {
+					nodeBuilder.withDescription(textContent);
+				}
+
+				inDescriptionTag = false;
 				break;
 			case "enumProperty":
 			case "stringProperty":
 			case "floatProperty":
 			case "booleanProperty":
 			case "integerProperty":
-				if (propSpecBuilder)
-				{
+				if (propSpecBuilder) {
 					nodeBuilder.withPropertySpec(propSpecBuilder.build());
 					propSpecBuilder = null;
 				}
 				break;
 			case "edgeType":
-				if (edgeSpecBuilder)
-				{
+				if (edgeSpecBuilder) {
 					nodeBuilder.withEdgeSpec(edgeSpecBuilder.build());
 					edgeSpecBuilder = null;
 				}
 				break;
 		}
+    valueType = null;
 	});
 	streamParser.on("end", function() {
 		Q.allSettled(delegatePromises).then(function() {
@@ -216,8 +251,7 @@ function doParse(readableStream, locator) {
 		readableStream.unpipe(streamParser);
 		deferred.reject(err);
 	});
-	try
-	{
+	try {
 		readableStream.pipe(streamParser);
 	} catch (e) {
 		throw Error("Could not parse stream " + readableStream.id + "..." + e);

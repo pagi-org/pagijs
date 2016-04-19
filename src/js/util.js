@@ -1,4 +1,3 @@
-
 function StringBuilder() {
 	var strings = [];
 
@@ -43,5 +42,10 @@ function doFreeze(o) {
 	Object.freeze(o);
 }
 
+function deepClone(o) {
+    return JSON.parse(JSON.stringify(o));
+}
+
 module.exports.StringBuilder = StringBuilder;
 module.exports.doFreeze = doFreeze;
+module.exports.deepClone = deepClone;

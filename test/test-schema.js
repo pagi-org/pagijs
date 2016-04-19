@@ -8,7 +8,7 @@ var sprintf = require('sprintf-js').sprintf;
 var q = require("q");
 
 
-var schemaTestRoot = 'build/test-suite/schema/';
+var schemaTestRoot = __dirname + '/test-suite/schema/';
 
 function TestSchema(id, simpleName) {
   var xmlTestRoot = schemaTestRoot + 'def/';
@@ -39,13 +39,11 @@ function TestSchema(id, simpleName) {
   };
 
 }
-function maxArityString(value)
-{
+function maxArityString(value) {
     return value < 0 ? "UNBOUNDED" : String(value);
 }
 
-function formatFloat(float)
-{
+function formatFloat(float) {
 	var result = sprintf("%.7e", float);
     result = result.replace(/e[+\-].$/, function(exp) {
 	    var s = exp.substring(0, 2) + "0" + exp.substring(2, 3);
@@ -54,74 +52,75 @@ function formatFloat(float)
     return result;
 }
 
-function toFlatString(schema)
-{
+function toFlatString(schema) {
     var sb = new util.StringBuilder();
     sb.append(schema.id).append("\n");
 
-    var forSorted = function (arr, appendCallback)
-    {
+    var forSorted = function (arr, appendCallback) {
         var newArr = arr.slice();
         newArr.sort().forEach(appendCallback);
     };
-    var forSortedKeys = function (map, appendCallback)
-    {
+    var forSortedKeys = function (map, appendCallback) {
         var keys = Object.getOwnPropertyNames(map);
         keys.sort().forEach(appendCallback);
     };
 
     // EXTENDS section
-    forSorted(schema.parentSchemas, function (parent)
-    {
+    forSorted(schema.parentSchemas, function (parent) {
         sb.append("EXTENDS ").append(parent.id).append("\n");
     });
 
 
     // NODETYPE sections
-    var appendNodeType = function (nodeTypeName)
-    {
+    var appendNodeType = function (nodeTypeName) {
         var nodeType = schema.nodeTypeMap[nodeTypeName];
-        sb.append("\n").append("NODETYPE ").append(nodeType.name).append(" ").append(nodeType.idGeneratorPattern);
-        if (nodeType.traitSequence)
-        {
+        sb.append("\n").append("NODETYPE ")
+            .append(nodeType.name)
+            .append(nodeType.readableName ? ' ' + nodeType.readableName : null)
+            .append(nodeType.description ? ' ' + nodeType.description : null);
+
+        if (nodeType.traitSequence) {
             sb.append(" SEQUENCE");
         }
-        if (nodeType.traitSpan)
-        {
+        if (nodeType.traitContiguousSequence) {
+            sb.append(" CONTIGUOUS");
+        }
+        if (nodeType.traitSpan) {
             sb.append(" SPAN");
         }
-        if (nodeType.traitSpanContainer)
-        {
-            sb.append(" SPAN_CONTAINER ").append(nodeType.spanType)
+        if (nodeType.traitSpanContainer) {
+            sb.append(" SPAN_CONTAINER ").append(nodeType.spanType);
         }
         sb.append("\n");
-        var appendPropSpec = function (propSpecName)
-        {
+        var appendPropSpec = function (propSpecName) {
             var propSpec = nodeType.propertySpecMap[propSpecName];
-            sb.append("PROP ")
-                .append(propSpecName).append(" ")
-                .append(propSpec.minArity).append(" ")
-                .append(maxArityString(propSpec.maxArity)).append(" ")
-                .append(propSpec.valueType.name);
-            switch (propSpec.valueType)
-            {
+            sb.append('PROP ')
+                .append(propSpecName)
+                .append(propSpec.readableName ? ' ' + propSpec.readableName : null)
+                .append(' ')
+                .append(propSpec.priority)
+                .append(' ')
+                .append(propSpec.minArity).append(' ')
+                .append(maxArityString(propSpec.maxArity)).append(' ')
+                .append(propSpec.valueType.name)
+                .append(propSpec.description ? ' ' + propSpec.description : null);
+            switch (propSpec.valueType) {
                 case pagi.schema.ValueType.INTEGER:
-                    sb.append(" ").append(propSpec.restrictions.minRange);
-                    sb.append(" ").append(propSpec.restrictions.maxRange);
+                    sb.append(' ').append(propSpec.restrictions.minRange);
+                    sb.append(' ').append(propSpec.restrictions.maxRange);
                     break;
                 case pagi.schema.ValueType.FLOAT:
-                    sb.append(" ").append(formatFloat(propSpec.restrictions.minRange));
-                    sb.append(" ").append(formatFloat(propSpec.restrictions.maxRange));
+                    sb.append(' ').append(formatFloat(propSpec.restrictions.minRange));
+                    sb.append(' ').append(formatFloat(propSpec.restrictions.maxRange));
                     break;
                 case pagi.schema.ValueType.BOOLEAN:
                     // nothing interesting to do here
                     break;
                 case pagi.schema.ValueType.STRING:
-                    if (propSpec.restrictions && propSpec.restrictions.items)
-                    {
+                    if (propSpec.restrictions && propSpec.restrictions.items) {
                         forSorted(propSpec.restrictions.items, function (item)
                         {
-                            sb.append(" ");
+                            sb.append(' ');
                             sb.append(item);
                         });
                     }
@@ -131,19 +130,20 @@ function toFlatString(schema)
         };
         forSortedKeys(nodeType.propertySpecMap, appendPropSpec);
 
-        var appendEdgeSpec = function (edgeSpecName)
-        {
+        var appendEdgeSpec = function (edgeSpecName) {
             var edgeSpec = nodeType.edgeSpecMap[edgeSpecName];
             sb.append("EDGE ");
-            sb.append(edgeSpecName).append(" ");
+            sb.append(edgeSpecName);
+            sb.append(edgeSpec.readableName ? ' ' + edgeSpec.readableName : null);
+            sb.append(" ");
             sb.append(edgeSpec.minArity).append(" ");
             sb.append(maxArityString(edgeSpec.maxArity)).append(" ");
             sb.append(edgeSpec.targetMinArity).append(" ");
             sb.append(maxArityString(edgeSpec.targetMaxArity));
-            forSorted(edgeSpec.targetNodeTypes, function (targetType)
-            {
+            forSorted(edgeSpec.targetNodeTypes, function (targetType) {
                 sb.append(" ").append(targetType);
             });
+            sb.append(edgeSpec.description ? ' ' + edgeSpec.description : null);
             sb.append("\n");
         };
         forSortedKeys(nodeType.edgeSpecMap, appendEdgeSpec);
@@ -157,16 +157,13 @@ var lines = fs.readFileSync(schemaTestRoot + "full.list", {encoding: 'utf8'}).sp
 
 var schemas = lines.map(function(line) {
     var parts = line.split(" ");
-    if (parts.length < 2)
-    {
+    if (parts.length < 2) {
         return undefined;
-    }
-    else
-    {
+    } else {
         return new TestSchema(parts[0], parts[1]);
     }
 }).filter(function(schema) {
-    return schema != undefined;
+    return schema !== undefined;
 });
 
 var schemaMap = {};
@@ -175,8 +172,7 @@ for (var i = 0; i < schemas.length; i++) {
     schemaMap[schemas[i].id] = schemas[i];
 }
 
-var locator = function (id, parser)
-{
+var locator = function (id, parser) {
     var testSchema = schemaMap[id];
     return testSchema ? parser(testSchema.getXmlStream()) : Q.reject("No schema with id " + id + " is available.");
 };

@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var streamTestRoot = 'build/test-suite/stream/';
+var streamTestRoot = __dirname + '/test-suite/stream/';
 
 function TestStream(name) {
   var xmlTestRoot = streamTestRoot + 'xml/';
@@ -48,14 +48,16 @@ function TestStream(name) {
     return fs.createReadStream(pbfFeaturesTestRoot + this.name + ".pbf");
   };
 
-  
+  this.getXml = function() {
+      return fs.readFileSync(xmlTestRoot + this.name + ".xml", { encoding: 'utf8' });
+  };
 
   /**
    * Returns a string containing the text of the file.
    */
   this.getText = function() {
     return fs.readFileSync(txtTestRoot + this.name + ".txt", {encoding: 'utf8'});
-  }
+  };
 }
 
 function getStreamsFromListFile(listFile)
@@ -75,7 +77,7 @@ function getStreamsFromListFile(listFile)
 	                        })
 		.filter(function (stream)
 	                        {
-		                        return stream != undefined;
+		                        return stream !== undefined;
 	                        });
 }
 module.exports.fullList = getStreamsFromListFile("full.list");

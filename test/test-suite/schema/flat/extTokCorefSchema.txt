@@ -1,0 +1,11 @@
+http://pagi.org/testSuite/extTokCoref
+EXTENDS http://pagi.org/testSuite/simpleTok
+
+NODETYPE COREF
+PROP name 0 0 UNBOUNDED STRING
+EDGE member 1 UNBOUNDED 0 1 TOK
+
+NODETYPE TOK SEQUENCE SPAN
+PROP length 0 1 1 INTEGER 0 2147483647
+PROP start 0 1 1 INTEGER 0 2147483647
+EDGE next 0 1 0 UNBOUNDED TOK

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pagis xmlns="http://pagi.org/schema" id="http://pagi.org/testSuite/simpleSpanSequence">
+
+	<nodeType name="type" />
+	<nodeType name="bool_type">
+		<booleanProperty name="bool_prop" minArity="1" maxArity="1"/>
+	</nodeType>
+	<nodeType name="span_type">
+		<span/>
+	</nodeType>
+	<nodeType name="seq_type">
+		<sequence/>
+	</nodeType>
+	<nodeType name="span_container_type">
+		<spanContainer spanType="span_seq_type"/>
+	</nodeType>
+	<nodeType name="span_seq_type">
+		<sequence/>
+		<span/>
+	</nodeType>
+
+</pagis>

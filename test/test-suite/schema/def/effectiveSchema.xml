@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<effectivePagis xmlns="http://pagi.org/schema" id="http://pagi.org/testSuite/effective">
+
+  <nodeType name="nt1" readableName="node type 1">
+    <description>The first node type.</description>
+  </nodeType>
+
+  <nodeType name="nt2" readableName="node type 2" />
+
+  <nodeType name="nt3" readableName="node type 3">
+      <stringProperty name="p1" readableName="property 1" minArity="1" maxArity="1">
+        <description>A simple string property.</description>
+      </stringProperty>
+  </nodeType>
+
+  <nodeType name="nt3e" readableName="node type 3e">
+    <edgeType name="e1" readableName="edge 1">
+      <description>The edge that links this to another doohicky.</description>
+      <targetNodeType name="nt3"/>
+    </edgeType>
+  </nodeType>
+
+</effectivePagis>
