@@ -347,11 +347,15 @@ Node.prototype.getParentsOfType = function(nodeType) {
 // SpanContainer trait functions
 Node.prototype.getFirst = function() {
     if (!this.hasTraitSpanContainer()) { throw Error("Calling `getFirst` on a Node that does not have the `span container` trait."); }
-    return this._graph.getNodeById(this.getFirstEdgeByType('first').getTargetId());
+    var firstEdge = this.getFirstEdgeByType('first');
+    if (!firstEdge) { return undefined; }
+    return this._graph.getNodeById(firstEdge.getTargetId());
 };
 Node.prototype.getLast = function() {
     if (!this.hasTraitSpanContainer()) { throw Error("Calling `getLast` on a Node that does not have the `span container` trait."); }
-    return this._graph.getNodeById(this.getFirstEdgeByType('last').getTargetId());
+    var lastEdge = this.getFirstEdgeByType('last');
+    if (!lastEdge) { return undefined; }
+    return this._graph.getNodeById(lastEdge.getTargetId());
 };
 
 module.exports = Node;
